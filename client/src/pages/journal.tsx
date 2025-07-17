@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import NewsletterSection from "@/components/newsletter-section";
 import type { Article } from "@shared/schema";
@@ -38,41 +39,43 @@ export default function Journal() {
         {currentArticles.length > 0 ? (
           <div className="space-y-20">
             {currentArticles.map((article, index) => (
-              <article key={article.id} className="group cursor-pointer">
-                <div className="border-b border-border pb-16">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                    {/* Content */}
-                    <div className="lg:col-span-8">
-                      <div className="mb-6">
-                        <p className="text-sm text-muted-foreground uppercase tracking-wider">
-                          {article.publishedAt}
+              <Link key={article.id} href={`/journal/${article.slug}`}>
+                <article className="group cursor-pointer">
+                  <div className="border-b border-border pb-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                      {/* Content */}
+                      <div className="lg:col-span-8">
+                        <div className="mb-6">
+                          <p className="text-sm text-muted-foreground uppercase tracking-wider">
+                            {article.publishedAt}
+                          </p>
+                        </div>
+                        
+                        <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-8 group-hover:text-primary transition-colors leading-tight">
+                          {article.title}
+                        </h2>
+                        
+                        <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                          {article.excerpt}
                         </p>
+                        
+                        <span className="text-primary font-medium hover:underline text-base">
+                          Read article
+                        </span>
                       </div>
                       
-                      <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-8 group-hover:text-primary transition-colors leading-tight">
-                        {article.title}
-                      </h2>
-                      
-                      <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                        {article.excerpt}
-                      </p>
-                      
-                      <button className="text-primary font-medium hover:underline text-base">
-                        Read article
-                      </button>
-                    </div>
-                    
-                    {/* Image */}
-                    <div className="lg:col-span-4">
-                      <img
-                        src={article.imageUrl}
-                        alt={article.title}
-                        className="w-full h-64 lg:h-80 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
-                      />
+                      {/* Image */}
+                      <div className="lg:col-span-4">
+                        <img
+                          src={article.imageUrl}
+                          alt={article.title}
+                          className="w-full h-64 lg:h-80 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             ))}
           </div>
         ) : (

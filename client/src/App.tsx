@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import Products from "@/pages/products";
 import About from "@/pages/about";
 import Journal from "@/pages/journal";
+import Article from "@/pages/article";
 import Contact from "@/pages/contact";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -22,6 +23,7 @@ function Router() {
           <Route path="/products" component={Products} />
           <Route path="/about" component={About} />
           <Route path="/journal" component={Journal} />
+          <Route path="/journal/:slug" component={Article} />
           <Route path="/contact" component={Contact} />
           <Route component={NotFound} />
         </Switch>
