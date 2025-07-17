@@ -192,6 +192,14 @@ export class MemStorage implements IStorage {
     // Seed articles
     const articleData = [
       {
+        title: "Peki Dikey Tarım Nedir?",
+        slug: "peki-dikey-tarim-nedir",
+        excerpt: "Dikey tarım basitçe bir binada ürün yetiştirmektir diyebiliriz. Üst üste konmuş havuzlar şeklinde ya da yan yana konmuş dikey duvarlar şeklinde olabilir ama en önemli özelliği üretim sürecinin tam kontrollü olmasıdır.",
+        content: "Dikey tarım basitçe bir binada ürün yetiştirmektir diyebiliriz. Üst üste konmuş havuzlar şeklinde ya da yan yana konmuş dikey duvarlar şeklinde olabilir ama en en önemli özelliği üretim sürecinin tam kontrollü olmasıdır. Yani dikey tarımda dış hava koşullarına bağlı değiliz. Verimli bir toprak olup olmadığına bağlı değiliz. Çok az su kullanımı, çok az gübre kullanımı onun önemli farklerındandır. Eğer üretim kurallara uygun bir şekilde yapılırsa hiçbir pestisit kullanmadan ürün yetiştirilebilir. Sağlıklı ürün yetiştirmek için verimli toprağa bağlı değildir. Büyük bir arazi alanına ihtiyaç duymaz. Bu da çok fazla arazi alanının olmadığı kentsel alanlarda da yapılabilmesini sağlar. Tüm bunlara bağlı olmamanın ve her şeyin kontrollü olmasının sonucu olarak ne kadar ve hangi kalitede üretim yaptığımız konusunda garanti vermesi diğer yetiştirme yöntemleriyle karşılaştırıldığında bize sunduğu en önemli özelliğidir.",
+        imageUrl: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Jul 17, 2025"
+      },
+      {
         title: "Dikey Tarıma Giriş",
         slug: "dikey-tarima-giris",
         excerpt: "Kontrollü ortam tarımı bugüne kadar seralarda yapılıyordu. Son yıllarda gelişen teknolojiyle beraber dikey tarım adını duymaya başladık. Gıda üretim sistemi konusunda yeni bir vizyon geliştirme zamanı.",
