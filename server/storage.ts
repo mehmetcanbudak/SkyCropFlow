@@ -194,26 +194,58 @@ export class MemStorage implements IStorage {
       {
         title: "Wageningen Üniversitesi Dikey Tarım Programı",
         slug: "wageningen-universitesi-dikey-tarim-programi",
-        excerpt: "Wageningen University vertical farming program participation and learnings...",
+        excerpt: "Wageningen University ve Araştırma Merkezi (WUR) tarafından düzenlenen Dikey Tarım programına katılan Kurucu Ortağımız Gamze Çapkınoğlu edindiği değerli bilgilerle dikey tarım alanındaki vizyonumuzu derinleştirdi.",
         content: "Our participation in the Wageningen University vertical farming program has provided valuable insights into advanced agricultural technologies and sustainable farming practices.",
         imageUrl: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        publishedAt: "2025-03-17"
-      },
-      {
-        title: "İl Tarım Müdürlüğü Kadınlar Günü",
-        slug: "il-tarim-mudurlugu-kadinlar-gunu",
-        excerpt: "Celebrating women in agriculture and sustainable farming initiatives...",
-        content: "Recognition from the Provincial Directorate of Agriculture on International Women's Day highlights our commitment to supporting women in agricultural innovation.",
-        imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        publishedAt: "2025-03-08"
+        publishedAt: "Mar 17, 2025"
       },
       {
         title: "Anadolu Ajansı Skycrops'ta",
         slug: "anadolu-ajansi-skycrops-ta",
-        excerpt: "Media coverage of our innovative vertical farming technology and processes...",
+        excerpt: "Tesisimizde bir araya geldiğimiz Anadolu Ajansı ekibi ile Skycrops'un hikayesini ve dikey tarım alanındaki çalışmalarımızı konuştuk. Kendilerine ziyaretleri ve ilgileri için teşekkür ederiz.",
         content: "Anadolu Agency's visit to our facility showcased our cutting-edge vertical farming technology and sustainable agricultural practices to a wider audience.",
         imageUrl: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        publishedAt: "2025-03-03"
+        publishedAt: "Mar 3, 2025"
+      },
+      {
+        title: "İl Tarım Müdürlüğü Kadınlar Günü Kutlaması",
+        slug: "il-tarim-mudurlugu-kadinlar-gunu",
+        excerpt: "Tekirdağ Valiliği İl Tarım ve Orman Müdürlüğü'ne tesisimize verdikleri destek ve 8 Mart Dünya Kadınlar Günü'nü kutlamaları için teşekkür ederiz.",
+        content: "Recognition from the Provincial Directorate of Agriculture on International Women's Day highlights our commitment to supporting women in agricultural innovation.",
+        imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Mar 8, 2025"
+      },
+      {
+        title: "Sustainable Vertical Farming: The Future of Agriculture",
+        slug: "sustainable-vertical-farming-future",
+        excerpt: "Exploring how vertical farming technology is revolutionizing food production while reducing environmental impact. Our innovative approach to growing fresh vegetables year-round.",
+        content: "Vertical farming represents a paradigm shift in agriculture, offering solutions to climate change, water scarcity, and urbanization challenges.",
+        imageUrl: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Feb 15, 2025"
+      },
+      {
+        title: "From Seed to Harvest: Our Growing Process",
+        slug: "seed-to-harvest-growing-process",
+        excerpt: "Take a behind-the-scenes look at how we grow our living vegetables using advanced hydroponic systems, LED lighting, and climate control technology.",
+        content: "Our state-of-the-art facility uses the latest in agricultural technology to create optimal growing conditions for our vegetables.",
+        imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Feb 1, 2025"
+      },
+      {
+        title: "The Science Behind Living Vegetables",
+        slug: "science-behind-living-vegetables",
+        excerpt: "Understanding the nutritional and freshness benefits of vegetables that continue growing until consumption. Why living vegetables are better for your health.",
+        content: "Living vegetables maintain their nutritional value and continue photosynthesis until the moment of consumption, providing superior freshness and taste.",
+        imageUrl: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Jan 20, 2025"
+      },
+      {
+        title: "Water Conservation in Modern Agriculture",
+        slug: "water-conservation-modern-agriculture",
+        excerpt: "How our vertical farming system uses 97% less water than traditional farming methods while maintaining optimal plant nutrition and growth.",
+        content: "Water conservation is crucial for sustainable agriculture. Our closed-loop hydroponic systems maximize efficiency while minimizing waste.",
+        imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Jan 5, 2025"
       }
     ];
 
@@ -249,7 +281,16 @@ export class MemStorage implements IStorage {
 
   async createProduct(insertProduct: InsertProduct): Promise<Product> {
     const id = this.currentProductId++;
-    const product: Product = { ...insertProduct, id };
+    const product: Product = { 
+      ...insertProduct, 
+      id,
+      originalPrice: insertProduct.originalPrice ?? null,
+      flavor: insertProduct.flavor ?? null,
+      isNewArrival: insertProduct.isNewArrival ?? false,
+      isBestseller: insertProduct.isBestseller ?? false,
+      inStock: insertProduct.inStock ?? true,
+      featured: insertProduct.featured ?? false
+    };
     this.products.set(id, product);
     return product;
   }

@@ -1,10 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import NewsletterSection from "@/components/newsletter-section";
 import type { Article } from "@shared/schema";
 
 export default function Journal() {
   const { data: articles = [], isLoading } = useQuery<Article[]>({
     queryKey: ["/api/articles"],
   });
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 6;
+  const totalPages = Math.ceil(articles.length / articlesPerPage);
+  const startIndex = (currentPage - 1) * articlesPerPage;
+  const currentArticles = articles.slice(startIndex, startIndex + articlesPerPage);
 
   if (isLoading) {
     return (
@@ -18,39 +27,53 @@ export default function Journal() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-foreground mb-6">basında biz!</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Stay updated with the latest news about Skycrops and our innovative vertical farming technology.
-          </p>
+        <div className="mb-16">
+          <h1 className="text-6xl lg:text-7xl font-bold text-foreground text-center mb-2">journal</h1>
         </div>
 
-        {/* Articles Grid */}
-        {articles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
-              <article key={article.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={article.imageUrl}
-                    alt={article.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <p className="text-sm text-muted-foreground mb-2">{article.publishedAt}</p>
-                  <h2 className="font-bold text-xl text-foreground mb-3 line-clamp-2">
+        {/* Articles List */}
+        {currentArticles.length > 0 ? (
+          <div className="space-y-16">
+            {currentArticles.map((article, index) => (
+              <article key={article.id} className="group cursor-pointer">
+                <div className="border-b border-border pb-12">
+                  <div className="mb-4">
+                    <p className="text-sm text-muted-foreground uppercase tracking-wider">
+                      {article.publishedAt}
+                    </p>
+                  </div>
+                  
+                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8 group-hover:text-primary transition-colors leading-tight">
                     {article.title}
                   </h2>
-                  <p className="text-muted-foreground text-sm line-clamp-3 mb-4">
-                    {article.excerpt}
-                  </p>
-                  <button className="text-primary font-medium hover:underline">
-                    Read more →
-                  </button>
+                  
+                  <div className="flex flex-col lg:flex-row gap-8 items-start">
+                    <div className="lg:flex-1">
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                        {article.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center gap-4">
+                        <button className="text-primary font-medium hover:underline">
+                          Read article
+                        </button>
+                        <button className="text-primary font-medium hover:underline">
+                          Read article
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div className="lg:w-80 w-full">
+                      <img
+                        src={article.imageUrl}
+                        alt={article.title}
+                        className="w-full h-48 lg:h-60 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
                 </div>
               </article>
             ))}
@@ -62,18 +85,37 @@ export default function Journal() {
           </div>
         )}
 
-        {/* Newsletter CTA */}
-        <div className="mt-20 bg-white rounded-3xl p-12 text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Stay in the loop</h2>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter to get the latest updates about our vertical farming innovations 
-            and sustainable agriculture practices.
-          </p>
-          <button className="bg-primary text-primary-foreground px-8 py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
-            Subscribe to Newsletter
-          </button>
-        </div>
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-16">
+            <div className="flex items-center gap-4">
+              {currentPage > 1 && (
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                  Previous page
+                </Button>
+              )}
+              
+              <span className="text-muted-foreground">
+                Page {currentPage} of {totalPages}
+              </span>
+              
+              {currentPage < totalPages && (
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                  Next page
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
+
+      <NewsletterSection />
     </div>
   );
 }
