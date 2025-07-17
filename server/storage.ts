@@ -192,6 +192,14 @@ export class MemStorage implements IStorage {
     // Seed articles
     const articleData = [
       {
+        title: "Dikey Tarıma Giriş",
+        slug: "dikey-tarima-giris",
+        excerpt: "Kontrollü ortam tarımı bugüne kadar seralarda yapılıyordu. Son yıllarda gelişen teknolojiyle beraber dikey tarım adını duymaya başladık. Gıda üretim sistemi konusunda yeni bir vizyon geliştirme zamanı.",
+        content: "Kontrollü ortam tarımı bugüne kadar seralarda yapılıyordu. Son yıllarda gelişen teknolojiyle beraber dikey tarım adını duymaya başladık. Dünyanın birçok yerinde iklim değişikliği var, su kıtlığı var. Hâlâ yiyeceklerimizi yetiştirmek için böcek ilacı kullanıyoruz ve bir taraftan da doğal kaynakları tüketiyoruz. Nüfus artıyor ve bu insanların giderek daha fazlası büyük şehirlerde yaşıyor. Tüm bunlara baktığınızda, \"Gıda üretim sistemi konusunda yeni bir vizyon ne olabilir?\" diye sorabilirsiniz. Şöyle bir şey düşünün; güvenli üretim ve güvenli gıdaya erişim mümkün. Yediğinizde kimyasallar olmayacak. İçinde istemediğiniz bakteriler olmayacak. Sağlıklı olacak. Belki daha fazla vitamin veya sağlığımız için iyi olan diğer bileşikler olacak. Elbette yediklerimiz lezzetli de olmalı. Tüm bunları sürdürülebilir bir şekilde üretebilir miyiz? Yerel olarak yetiştirebilir miyiz? Yiyecekleri uçakla taşımak yerine, insanların yaşadığı yerin yakınında yetiştirebilir miyiz? Tüm bu soruları karşılayacak üretim sistemi ne olabilir sorusunun cevabı belki de dikey tarım olabilir. \"Dikey tarım\" tek başına tüm sorunları çözecektir diyemeyiz ancak dikey tarım, bu hedeflerin birçoğunu karşılayan üretim sistemlerinden biridir.",
+        imageUrl: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        publishedAt: "Jul 17, 2025"
+      },
+      {
         title: "Wageningen Üniversitesi Dikey Tarım Programı",
         slug: "wageningen-universitesi-dikey-tarim-programi",
         excerpt: "Wageningen University ve Araştırma Merkezi (WUR) tarafından düzenlenen Dikey Tarım programına katılan Kurucu Ortağımız Gamze Çapkınoğlu edindiği değerli bilgilerle dikey tarım alanındaki vizyonumuzu derinleştirdi.",
