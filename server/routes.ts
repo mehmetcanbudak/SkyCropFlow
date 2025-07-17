@@ -1,7 +1,11 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertNewsletterSchema } from "@shared/schema";
+import { 
+  insertNewsletterSchema,
+  insertArticleSchema,
+  insertProductSchema 
+} from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -125,6 +129,93 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       res.status(500).json({ message: "Failed to subscribe to newsletter" });
+    }
+  });
+
+  // Admin routes for content management
+  app.post("/api/admin/articles", async (req, res) => {
+    try {
+      const validatedData = insertArticleSchema.parse(req.body);
+      const article = await storage.createArticle(validatedData);
+      res.json(article);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid article data",
+          errors: error.errors
+        });
+      }
+      res.status(500).json({ message: "Failed to create article" });
+    }
+  });
+
+  app.put("/api/admin/articles/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const validatedData = insertArticleSchema.partial().parse(req.body);
+      const article = await storage.updateArticle(id, validatedData);
+      res.json(article);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid article data",
+          errors: error.errors
+        });
+      }
+      res.status(500).json({ message: "Failed to update article" });
+    }
+  });
+
+  app.delete("/api/admin/articles/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteArticle(id);
+      res.json({ message: "Article deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete article" });
+    }
+  });
+
+  app.post("/api/admin/products", async (req, res) => {
+    try {
+      const validatedData = insertProductSchema.parse(req.body);
+      const product = await storage.createProduct(validatedData);
+      res.json(product);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid product data",
+          errors: error.errors
+        });
+      }
+      res.status(500).json({ message: "Failed to create product" });
+    }
+  });
+
+  app.put("/api/admin/products/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const validatedData = insertProductSchema.partial().parse(req.body);
+      const product = await storage.updateProduct(id, validatedData);
+      res.json(product);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid product data",
+          errors: error.errors
+        });
+      }
+      res.status(500).json({ message: "Failed to update product" });
+    }
+  });
+
+  app.delete("/api/admin/products/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteProduct(id);
+      res.json({ message: "Product deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete product" });
     }
   });
 

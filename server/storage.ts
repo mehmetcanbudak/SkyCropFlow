@@ -5,6 +5,8 @@ import {
   type Article, type InsertArticle,
   type Newsletter, type InsertNewsletter
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // Products
@@ -27,10 +29,123 @@ export interface IStorage {
   getArticle(id: number): Promise<Article | undefined>;
   getArticleBySlug(slug: string): Promise<Article | undefined>;
   createArticle(article: InsertArticle): Promise<Article>;
+  updateArticle(id: number, article: Partial<InsertArticle>): Promise<Article>;
+  deleteArticle(id: number): Promise<void>;
 
   // Newsletter
   subscribeNewsletter(newsletter: InsertNewsletter): Promise<Newsletter>;
   getNewsletterSubscribers(): Promise<Newsletter[]>;
+  
+  // Products management
+  updateProduct(id: number, product: Partial<InsertProduct>): Promise<Product>;
+  deleteProduct(id: number): Promise<void>;
+}
+
+export class DatabaseStorage implements IStorage {
+  async getProducts(): Promise<Product[]> {
+    return await db.select().from(products);
+  }
+
+  async getProduct(id: number): Promise<Product | undefined> {
+    const [product] = await db.select().from(products).where(eq(products.id, id));
+    return product || undefined;
+  }
+
+  async getProductBySlug(slug: string): Promise<Product | undefined> {
+    const [product] = await db.select().from(products).where(eq(products.slug, slug));
+    return product || undefined;
+  }
+
+  async getProductsByCategory(category: string): Promise<Product[]> {
+    return await db.select().from(products).where(eq(products.category, category));
+  }
+
+  async getFeaturedProducts(): Promise<Product[]> {
+    return await db.select().from(products).where(eq(products.featured, true));
+  }
+
+  async getTopSalesProducts(): Promise<Product[]> {
+    return await db.select().from(products).where(eq(products.isBestseller, true));
+  }
+
+  async createProduct(insertProduct: InsertProduct): Promise<Product> {
+    const [product] = await db.insert(products).values(insertProduct).returning();
+    return product;
+  }
+
+  async updateProduct(id: number, productData: Partial<InsertProduct>): Promise<Product> {
+    const [product] = await db.update(products)
+      .set(productData)
+      .where(eq(products.id, id))
+      .returning();
+    return product;
+  }
+
+  async deleteProduct(id: number): Promise<void> {
+    await db.delete(products).where(eq(products.id, id));
+  }
+
+  // Categories
+  async getCategories(): Promise<Category[]> {
+    return await db.select().from(categories);
+  }
+
+  async getCategory(id: number): Promise<Category | undefined> {
+    const [category] = await db.select().from(categories).where(eq(categories.id, id));
+    return category || undefined;
+  }
+
+  async getCategoryBySlug(slug: string): Promise<Category | undefined> {
+    const [category] = await db.select().from(categories).where(eq(categories.slug, slug));
+    return category || undefined;
+  }
+
+  async createCategory(insertCategory: InsertCategory): Promise<Category> {
+    const [category] = await db.insert(categories).values(insertCategory).returning();
+    return category;
+  }
+
+  // Articles
+  async getArticles(): Promise<Article[]> {
+    return await db.select().from(articles);
+  }
+
+  async getArticle(id: number): Promise<Article | undefined> {
+    const [article] = await db.select().from(articles).where(eq(articles.id, id));
+    return article || undefined;
+  }
+
+  async getArticleBySlug(slug: string): Promise<Article | undefined> {
+    const [article] = await db.select().from(articles).where(eq(articles.slug, slug));
+    return article || undefined;
+  }
+
+  async createArticle(insertArticle: InsertArticle): Promise<Article> {
+    const [article] = await db.insert(articles).values(insertArticle).returning();
+    return article;
+  }
+
+  async updateArticle(id: number, articleData: Partial<InsertArticle>): Promise<Article> {
+    const [article] = await db.update(articles)
+      .set(articleData)
+      .where(eq(articles.id, id))
+      .returning();
+    return article;
+  }
+
+  async deleteArticle(id: number): Promise<void> {
+    await db.delete(articles).where(eq(articles.id, id));
+  }
+
+  // Newsletter
+  async subscribeNewsletter(insertNewsletter: InsertNewsletter): Promise<Newsletter> {
+    const [newsletter] = await db.insert(newsletters).values(insertNewsletter).returning();
+    return newsletter;
+  }
+
+  async getNewsletterSubscribers(): Promise<Newsletter[]> {
+    return await db.select().from(newsletters);
+  }
 }
 
 export class MemStorage implements IStorage {
@@ -366,6 +481,34 @@ export class MemStorage implements IStorage {
   async getNewsletterSubscribers(): Promise<Newsletter[]> {
     return Array.from(this.newsletters.values());
   }
+
+  async updateArticle(id: number, articleData: Partial<InsertArticle>): Promise<Article> {
+    const article = this.articles.get(id);
+    if (!article) {
+      throw new Error('Article not found');
+    }
+    const updatedArticle = { ...article, ...articleData };
+    this.articles.set(id, updatedArticle);
+    return updatedArticle;
+  }
+
+  async deleteArticle(id: number): Promise<void> {
+    this.articles.delete(id);
+  }
+
+  async updateProduct(id: number, productData: Partial<InsertProduct>): Promise<Product> {
+    const product = this.products.get(id);
+    if (!product) {
+      throw new Error('Product not found');
+    }
+    const updatedProduct = { ...product, ...productData };
+    this.products.set(id, updatedProduct);
+    return updatedProduct;
+  }
+
+  async deleteProduct(id: number): Promise<void> {
+    this.products.delete(id);
+  }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

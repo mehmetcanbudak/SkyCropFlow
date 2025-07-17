@@ -54,7 +54,16 @@ The application uses four main entities:
 - `GET /api/products/:slug` - Get single product
 - `GET /api/categories` - Fetch all categories
 - `GET /api/articles` - Fetch all articles
+- `GET /api/articles/:slug` - Get single article
 - `POST /api/newsletter/subscribe` - Newsletter subscription
+
+### Admin API Endpoints (Content Management)
+- `POST /api/admin/articles` - Create new article
+- `PUT /api/admin/articles/:id` - Update existing article
+- `DELETE /api/admin/articles/:id` - Delete article
+- `POST /api/admin/products` - Create new product
+- `PUT /api/admin/products/:id` - Update existing product
+- `DELETE /api/admin/products/:id` - Delete product
 
 ### UI Components
 - **Navigation**: Responsive navbar with mobile menu
@@ -62,15 +71,17 @@ The application uses four main entities:
 - **Category Browser**: Visual category grid with color coding
 - **Newsletter Signup**: Email collection with form validation
 - **Social Integration**: Instagram feed display
+- **Journal System**: Article list and individual article pages with Teaflow-inspired design
+- **Admin Panel**: Complete content management system for articles and products (/admin)
 
 ## Data Flow
 
 1. **Client Requests**: React components use TanStack Query to fetch data
 2. **API Layer**: Express routes handle requests and call storage layer
-3. **Data Storage**: Currently uses in-memory storage (MemStorage class)
+3. **Data Storage**: PostgreSQL database with Drizzle ORM (DatabaseStorage class)
 4. **Response**: JSON data returned to client for rendering
 
-The application is designed to easily switch from memory storage to database storage using the IStorage interface.
+The application uses PostgreSQL for persistent data storage with automatic database seeding on startup.
 
 ## External Dependencies
 
@@ -104,4 +115,13 @@ The application is designed to easily switch from memory storage to database sto
 - `NODE_ENV`: Environment mode (development/production)
 - Development includes Replit-specific tooling and error overlays
 
-The application follows a monorepo structure with shared TypeScript types between frontend and backend, ensuring type safety across the full stack. The modular architecture allows for easy testing and future scalability.
+## Recent Changes (July 17, 2025)
+
+### Database Migration and Admin Panel
+- **Migration**: Switched from in-memory storage to PostgreSQL with Drizzle ORM
+- **Database Features**: Automatic seeding, persistent data storage, type-safe queries
+- **Admin Panel**: Added comprehensive content management system at `/admin` route
+- **Admin Features**: Create, edit, and delete articles and products with forms and validation
+- **Individual Articles**: Added individual article pages matching Teaflow design with breadcrumbs and full content display
+
+The application now provides a complete content management solution while maintaining the original Teaflow-inspired design aesthetic and full database persistence.
