@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Leaf, ShoppingCart } from "lucide-react";
+import { Menu, X, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CartButton } from "@/components/cart-button";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,10 +42,9 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              <ShoppingCart className="h-4 w-4 mr-2" />
-              <span>0</span>
-            </Button>
+            <div className="hidden md:block">
+              <CartButton />
+            </div>
             
             {/* Mobile menu button */}
             <Button
@@ -76,10 +76,9 @@ export default function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <Button variant="ghost" size="sm" className="w-full justify-start">
-                <ShoppingCart className="h-4 w-4 mr-2" />
-                <span>Cart (0)</span>
-              </Button>
+              <div className="px-3 py-2">
+                <CartButton />
+              </div>
             </div>
           </div>
         )}

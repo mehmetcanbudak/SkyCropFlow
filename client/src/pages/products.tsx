@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { Link } from "wouter";
 import type { Product, Category } from "@shared/schema";
 
 export default function Products() {
@@ -107,7 +108,7 @@ export default function Products() {
 
 function TeaflowProductCard({ product }: { product: Product }) {
   return (
-    <div className="group cursor-pointer">
+    <Link href={`/products/${product.slug}`} className="group cursor-pointer block">
       {/* Product Image */}
       <div className="aspect-square bg-gray-50 rounded-lg mb-6 overflow-hidden">
         <img
@@ -150,6 +151,6 @@ function TeaflowProductCard({ product }: { product: Product }) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
