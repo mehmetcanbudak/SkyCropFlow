@@ -7,8 +7,12 @@ import { DeliveryModal } from "@/components/delivery-modal";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import type { Product, Article } from "@shared/schema";
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
+import bundle1 from '@/assets/bundle1.png';
 
 export default function Home() {
+  const { t } = useTranslation();
   const { data: featuredProducts = [] } = useQuery<Product[]>({
     queryKey: ["/api/products/featured"],
   });
@@ -24,53 +28,62 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      <CategorySection />
+      {/* <CategorySection /> */}
       
       {/* Bundles Section */}
       <section className="py-20 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">VEGETABLE BUNDLES</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Curated collections of our freshest vegetables, perfectly paired for your healthy lifestyle
+            <h2 className="text-4xl font-bold text-foreground mb-6 text-center">{t('bundles_heading')}</h2>
+            <p className="text-base text-muted-foreground mb-6 text-center">
+              {t('bundles_subheading')}
             </p>
           </div>
 
           {/* Bundle Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 justify-items-center">
             {/* Fresh Greens Bundle */}
             <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1622312347509-ab50b0f75e30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+                  src={bundle1}
                   alt="Fresh Greens Bundle"
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Save 25%
+                  <span className="px-3 py-1 rounded-full text-sm font-medium" style={{ backgroundColor: '#B6D2DC', color: '#1e293b' }}>
+                    {t('save_percent', { percent: 25 })}
                   </span>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-2">Fresh Greens Bundle</h3>
-                <p className="text-muted-foreground mb-4">Living lettuce, spinach, and arugula</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">Taze Yeşillikler Paketi</h3>
+                <p className="text-base text-muted-foreground mb-4">Kıvırcık, roka ve tesisimizden taze ürünler.</p>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-primary">$24.99</span>
-                    <span className="text-lg text-muted-foreground line-through">$32.99</span>
+                    <span className="text-2xl font-bold text-primary">24,99 TL</span>
+                    <span className="text-lg text-muted-foreground line-through">32,99 TL</span>
                   </div>
                 </div>
                 <DeliveryModal 
-                  bundle={{
-                    name: "Fresh Greens Bundle",
+                  product={{
+                    id: 1001,
+                    name: "Taze Yeşillikler Paketi",
+                    slug: "taze-yesillikler-paketi",
                     price: 2499,
                     originalPrice: 3299,
-                    description: "Living lettuce, spinach, and arugula"
+                    description: "Kıvırcık, roka ve tesisimizden taze ürünler.",
+                    imageUrl: bundle1,
+                    category: "bundles",
+                    inStock: true,
+                    featured: true,
+                    isBestseller: false,
+                    flavor: null,
+                    isNewArrival: null
                   }}
                 >
                   <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
-                    Choose Delivery
+                    {t('choose_delivery')}
                   </button>
                 </DeliveryModal>
               </div>
@@ -80,73 +93,91 @@ export default function Home() {
             <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+                  src={bundle1}
                   alt="Garden Mix Bundle"
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Save 30%
+                  <span className="px-3 py-1 rounded-full text-sm font-medium" style={{ backgroundColor: '#B6D2DC', color: '#1e293b' }}>
+                    {t('save_percent', { percent: 30 })}
                   </span>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-2">Garden Mix Bundle</h3>
-                <p className="text-muted-foreground mb-4">Herbs, microgreens, and leafy vegetables</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">Küçük Aile Paketi</h3>
+                <p className="text-base text-muted-foreground mb-4">Kıvırcık, roka ve tesisimizden taze ürünler.</p>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-primary">$34.99</span>
-                    <span className="text-lg text-muted-foreground line-through">$49.99</span>
+                    <span className="text-2xl font-bold text-primary">34,99 TL</span>
+                    <span className="text-lg text-muted-foreground line-through">49,99 TL</span>
                   </div>
                 </div>
                 <DeliveryModal 
-                  bundle={{
-                    name: "Garden Mix Bundle",
-                    price: 3499,
-                    originalPrice: 4999,
-                    description: "Herbs, microgreens, and leafy vegetables"
+                  product={{
+                    id: 1002,
+                    name: "Küçük Aile Paketi",
+                    slug: "kucuk-aile-paketi",
+                    price: 3999,
+                    originalPrice: 5999,
+                    description: "Kıvırcık, roka ve tesisimizden taze ürünler.",
+                    imageUrl: bundle1,
+                    category: "bundles",
+                    inStock: true,
+                    featured: false,
+                    isBestseller: false,
+                    flavor: null,
+                    isNewArrival: null
                   }}
                 >
                   <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
-                    Choose Delivery
+                    {t('choose_delivery')}
                   </button>
                 </DeliveryModal>
               </div>
             </div>
 
             {/* Family Pack Bundle */}
-            <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+            <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group col-span-2 md:col-span-1 max-w-sm md:max-w-none">
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+                  src={bundle1}
                   alt="Family Pack Bundle"
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Save 35%
+                  <span className="px-3 py-1 rounded-full text-sm font-medium" style={{ backgroundColor: '#B6D2DC', color: '#1e293b' }}>
+                    {t('save_percent', { percent: 35 })}
                   </span>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-2">Family Pack Bundle</h3>
-                <p className="text-muted-foreground mb-4">Complete variety for the whole family</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">Büyük Aile Paketi</h3>
+                <p className="text-base text-muted-foreground mb-4">Kıvırcık, roka ve tesisimizden taze ürünler.</p>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-primary">$59.99</span>
-                    <span className="text-lg text-muted-foreground line-through">$89.99</span>
+                    <span className="text-2xl font-bold text-primary">59,99 TL</span>
+                    <span className="text-lg text-muted-foreground line-through">89,99 TL</span>
                   </div>
                 </div>
                 <DeliveryModal 
-                  bundle={{
-                    name: "Family Pack Bundle",
+                  product={{
+                    id: 1003,
+                    name: "Büyük Aile Paketi",
+                    slug: "buyuk-aile-paketi",
                     price: 5999,
                     originalPrice: 8999,
-                    description: "Complete variety for the whole family"
+                    description: "Kıvırcık, roka ve tesisimizden taze ürünler.",
+                    imageUrl: bundle1,
+                    category: "bundles",
+                    inStock: true,
+                    featured: false,
+                    isBestseller: false,
+                    flavor: null,
+                    isNewArrival: null
                   }}
                 >
                   <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
-                    Choose Delivery
+                    {t('choose_delivery')}
                   </button>
                 </DeliveryModal>
               </div>
@@ -161,9 +192,9 @@ export default function Home() {
       <section className="py-20 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground">Journal</h2>
-            <Link href="/journal" className="text-primary font-medium hover:underline">
-              Read all stories
+            <h2 className="text-4xl font-bold text-foreground mb-6 text-center">Blog - Basında Biz</h2>
+            <Link href="/blog" className="text-primary font-medium hover:underline" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              {t('read_all_stories')}
             </Link>
           </div>
 
@@ -176,9 +207,9 @@ export default function Home() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <p className="text-sm text-muted-foreground mb-2">{article.publishedAt}</p>
-                  <h3 className="font-bold text-lg text-foreground mb-3">{article.title}</h3>
-                  <p className="text-muted-foreground text-sm">{article.excerpt}</p>
+                  <p className="text-sm text-muted-foreground mb-2">{new Date(article.publishedAt).toLocaleDateString(i18n.language, { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{article.title}</h3>
+                  <p className="text-base text-muted-foreground mb-2">{article.excerpt}</p>
                 </div>
               </article>
             ))}

@@ -7,6 +7,26 @@ import {
   insertProductSchema 
 } from "@shared/schema";
 import { z } from "zod";
+import multer from "multer";
+import path from "path";
+import type { Request } from "express";
+import { fileURLToPath } from "url";
+// ESM-compatible __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req: Request, file: Express.Multer.File, cb) => {
+      cb(null, path.join(__dirname, "../attached_assets"));
+    },
+    filename: (req: Request, file: Express.Multer.File, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      const ext = path.extname(file.originalname);
+      cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+    }
+  })
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Products routes
@@ -217,6 +237,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       res.status(500).json({ message: "Failed to delete product" });
     }
+  });
+
+  // Image upload route
+  app.post("/api/upload", upload.single("file"), (req: Request, res) => {
+    const file = req.file as Express.Multer.File | undefined;
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    // Return the public URL for the uploaded file
+    const fileUrl = `/attached_assets/${file.filename}`;
+    res.json({ url: fileUrl });
   });
 
   const httpServer = createServer(app);

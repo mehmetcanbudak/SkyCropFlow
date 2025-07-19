@@ -1,51 +1,58 @@
+import { Instagram, Youtube, Linkedin } from 'lucide-react';
+
 export default function SocialSection() {
-  const socialPosts = [
+  const socialPlatforms = [
     {
       id: 1,
-      imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
-      alt: "Fresh vegetables growing in vertical farming system"
+      name: "Instagram",
+      icon: Instagram,
+      url: "https://www.instagram.com/skycrops/",
+      username: "@skycrops",
+      bgColor: "bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500"
     },
     {
       id: 2,
-      imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
-      alt: "Hydroponic lettuce growing under LED lights"
+      name: "YouTube",
+      icon: Youtube,
+      url: "https://www.youtube.com/@SkycropsT%C3%BCrkiye",
+      username: "@SkycropsTürkiye",
+      bgColor: "bg-red-600"
     },
     {
       id: 3,
-      imageUrl: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
-      alt: "Fresh harvest collection of leafy greens"
-    },
-    {
-      id: 4,
-      imageUrl: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
-      alt: "Modern vertical farming technology and automation"
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://www.linkedin.com/company/skycrops-vertical-farms/?viewAsMember=true",
+      username: "Skycrops Vertical Farms",
+      bgColor: "bg-blue-600"
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-foreground text-center mb-16">follow us</h2>
+        <h2 className="text-4xl font-bold text-foreground text-center mb-8">Bizi Takip Edin</h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {socialPosts.map((post) => (
-            <a
-              key={post.id}
-              href="https://www.instagram.com/skycrops_farm/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl aspect-square"
-            >
-              <img
-                src={post.imageUrl}
-                alt={post.alt}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-end p-4">
-                <span className="text-white font-medium">@skycrops_farm</span>
-              </div>
-            </a>
-          ))}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
+            {socialPlatforms.map((platform) => {
+              const IconComponent = platform.icon;
+              return (
+                <a
+                  key={platform.id}
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden rounded-xl p-4 text-center hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg bg-white"
+                >
+                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${platform.bgColor} mb-3 group-hover:scale-110 transition-transform`}>
+                    <IconComponent className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">{platform.name}</h3>
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

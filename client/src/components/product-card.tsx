@@ -5,6 +5,7 @@ import { Link } from "wouter";
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@shared/schema";
+import { useTranslation } from 'react-i18next';
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +15,7 @@ interface ProductCardProps {
 export default function ProductCard({ product, featured = false }: ProductCardProps) {
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const { t } = useTranslation();
   
   const formatPrice = (price: number) => {
     return `$${(price / 100).toFixed(2)}`;
@@ -50,11 +52,11 @@ export default function ProductCard({ product, featured = false }: ProductCardPr
             </p>
             <div className="flex gap-4">
               <Link href={`/products/${product.slug}`}>
-                <Button size="lg">View Details</Button>
+                <Button size="lg">{t('view_details')}</Button>
               </Link>
               <Button size="lg" variant="outline" onClick={handleAddToCart} disabled={!product.inStock}>
                 <ShoppingCart className="h-4 w-4 mr-2" />
-                Add to Cart
+                {t('add_to_cart')}
               </Button>
             </div>
           </div>

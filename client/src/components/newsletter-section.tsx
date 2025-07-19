@@ -4,11 +4,13 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useTranslation } from 'react-i18next';
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const subscribeMutation = useMutation({
     mutationFn: async (email: string) => {
@@ -16,16 +18,16 @@ export default function NewsletterSection() {
     },
     onSuccess: () => {
       toast({
-        title: "Success!",
-        description: "You've been subscribed to our newsletter. Check your email for a discount code!",
+        title: t('newsletter_success_title'),
+        description: t('newsletter_success_description'),
       });
       setEmail("");
       queryClient.invalidateQueries({ queryKey: ["/api/newsletter"] });
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error.message || "Failed to subscribe. Please try again.",
+        title: t('newsletter_error_title'),
+        description: error.message || t('newsletter_error_description'),
         variant: "destructive",
       });
     },
@@ -40,15 +42,15 @@ export default function NewsletterSection() {
   return (
     <section className="py-20 bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl font-bold mb-4">GET 20% OFF</h2>
+        <h2 className="text-4xl font-bold mb-4">{t('newsletter_heading')}</h2>
         <p className="text-xl mb-8 opacity-90">
-          Your first order + future harvest updates. You can safely unsubscribe anytime.
+          {t('newsletter_subtitle')}
         </p>
 
         <form onSubmit={handleSubmit} className="max-w-md mx-auto flex gap-4">
           <Input
             type="email"
-            placeholder="Enter your email"
+            placeholder={t('newsletter_email_placeholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="flex-1 bg-white text-foreground"
@@ -59,14 +61,14 @@ export default function NewsletterSection() {
             className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
             disabled={subscribeMutation.isPending}
           >
-            {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
+            {subscribeMutation.isPending ? t('newsletter_subscribing') : t('newsletter_subscribe')}
           </Button>
         </form>
 
         <p className="text-sm mt-4 opacity-70">
-          Here is our{" "}
+          {t('newsletter_privacy_prefix')}{" "}
           <a href="#" className="underline hover:no-underline">
-            privacy policy
+            {t('privacy_policy')}
           </a>
         </p>
       </div>

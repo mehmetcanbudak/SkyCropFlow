@@ -1,87 +1,162 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/cart-button";
+import { useTranslation } from 'react-i18next';
+import skycropsLogo from '@/assets/skycrops.svg';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showLangMenu, setShowLangMenu] = useState(false);
   const [location] = useLocation();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setShowHeader(true);
+      } else {
+        setShowHeader(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
-    { href: "/products", label: "shop" },
-    { href: "/about", label: "about us" },
-    { href: "/journal", label: "journal" },
-    { href: "/contact", label: "contacts" },
+    { href: "/shop", label: t("shop") },
+    { href: "/about", label: t("about_us") },
+    { href: "/uretim", label: "Üretim" },
+    { href: "/blog", label: t("blog") },
+    { href: "/contact", label: t("contacts") },
   ];
 
-  return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center space-x-2">
-            <Leaf className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl text-foreground">SKYCROPS</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }`}
+  // Minimal menu button at top left when header is hidden
+  if (!showHeader) {
+    return (
+      <>
+        <button
+          className="fixed top-4 left-4 z-50 bg-white/80 rounded-full p-2 shadow-md border border-gray-200 hover:bg-white transition-all"
+          onClick={() => setShowMenu(true)}
+          aria-label="Open menu"
+        >
+          <Menu className="h-6 w-6 text-primary" />
+        </button>
+        {showMenu && (
+          <div className="fixed inset-0 z-50 flex">
+            <div className="bg-white min-w-[160px] max-w-[200px] h-full shadow-lg p-6 flex flex-col">
+              <button
+                className="self-end mb-4"
+                onClick={() => setShowMenu(false)}
+                aria-label="Close menu"
               >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
-              <CartButton />
+                <X className="h-6 w-6 text-primary" />
+              </button>
+              {/* Nav links */}
+              <nav className="flex flex-col gap-4 mb-8">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`text-lg font-medium hover:text-primary transition-colors ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}
+                    onClick={() => setShowMenu(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+              <div className="mt-auto flex flex-col gap-2">
+                {/* Language selector stacked above cart */}
+                <div className="flex flex-col gap-2 mb-2">
+                  <button
+                    className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === 'tr' ? 'bg-primary text-white' : 'bg-white text-foreground'}`}
+                    onClick={() => i18n.changeLanguage('tr')}
+                    disabled={i18n.language === 'tr'}
+                  >
+                    TR
+                  </button>
+                  <button
+                    className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === 'en' ? 'bg-primary text-white' : 'bg-white text-foreground'}`}
+                    onClick={() => i18n.changeLanguage('en')}
+                    disabled={i18n.language === 'en'}
+                  >
+                    EN
+                  </button>
+                </div>
+                <CartButton />
+              </div>
             </div>
-            
-            {/* Mobile menu button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+            <div className="flex-1" onClick={() => setShowMenu(false)} />
           </div>
-        </div>
+        )}
+      </>
+    );
+  }
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+  // Full header when at the top
+  return (
+    <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center h-16 w-full">
+          {/* Logo on the left */}
+          <div className="flex-shrink-0 flex items-center min-w-[120px]">
+            <Link href="/" className="flex items-center space-x-2">
+              <img src={skycropsLogo} alt="SKYCROPS" className="h-10 w-auto" />
+            </Link>
+          </div>
+          {/* Centered nav links */}
+          <div className="flex-1 flex justify-center">
+            <div className="flex items-center space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    location === item.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                  }`}
-                  onClick={() => setIsOpen(false)}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${location === item.href ? "text-primary" : "text-muted-foreground"}`}
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="px-3 py-2">
-                <CartButton />
-              </div>
             </div>
           </div>
-        )}
+          {/* Right: language selector and cart */}
+          <div className="flex items-center gap-2">
+            {/* Language selector dropdown */}
+            <div className="relative">
+              <button
+                className="flex items-center gap-1 px-3 py-2 rounded-md border bg-white text-foreground hover:bg-gray-50 transition-all"
+                id="lang-menu-btn"
+                aria-haspopup="listbox"
+                aria-expanded={showLangMenu ? 'true' : 'false'}
+                onClick={() => setShowLangMenu((v: boolean) => !v)}
+              >
+                {i18n.language === 'tr' ? 'TR' : 'EN'}
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              {showLangMenu && (
+                <div className="absolute right-0 mt-2 w-24 bg-white border rounded shadow z-10">
+                  <button
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    onClick={() => { i18n.changeLanguage('tr'); setShowLangMenu(false); }}
+                    disabled={i18n.language === 'tr'}
+                  >
+                    TR
+                  </button>
+                  <button
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    onClick={() => { i18n.changeLanguage('en'); setShowLangMenu(false); }}
+                    disabled={i18n.language === 'en'}
+                  >
+                    EN
+                  </button>
+                </div>
+              )}
+            </div>
+            {/* Cart button */}
+            <CartButton />
+          </div>
+        </div>
       </div>
     </nav>
   );

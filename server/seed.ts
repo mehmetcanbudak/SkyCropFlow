@@ -3,122 +3,155 @@ import { products, categories, articles } from "@shared/schema";
 
 export async function seedDatabase() {
   try {
-    // Check if data already exists
-    const existingProducts = await db.select().from(products).limit(1);
-    if (existingProducts.length > 0) {
-      console.log('Database already seeded');
-      return;
-    }
-
+    // Remove the check for existing products to always seed
     console.log('Seeding database...');
 
-    // Seed categories
+    // Seed categories with upsert logic
     const categoryData = [
       {
-        name: "leafy greens",
-        slug: "leafy-greens",
+        name: "Paketler",
+        slug: "paketler",
+        description: "Farklı ürünlerin bir arada sunulduğu özel paketler",
+        color: "#22c55e"
+      },
+      {
+        name: "Yeşillikler",
+        slug: "yesillikler",
         description: "Fresh, crisp leafy vegetables grown in our vertical farms",
         color: "#22c55e"
       },
       {
-        name: "herbs",
-        slug: "herbs",
+        name: "Baharatlar",
+        slug: "baharatlar",
         description: "Aromatic herbs perfect for cooking and garnishing",
         color: "#059669"
       },
       {
-        name: "microgreens",
-        slug: "microgreens",
+        name: "Fideler",
+        slug: "fideler",
         description: "Nutrient-dense microgreens with intense flavors",
         color: "#16a34a"
       }
     ];
 
     for (const cat of categoryData) {
-      await db.insert(categories).values(cat);
+      await db.insert(categories).values(cat).onConflictDoNothing();
     }
 
-    // Seed products
+    // Seed products with upsert logic
     const productData = [
       {
         name: "Living Lettuce #2",
         slug: "living-lettuce-2",
         price: 450,
-        description: "Fresh, crisp lettuce grown in our controlled environment. Perfect for salads and sandwiches.",
-        category: "leafy greens",
+        originalPrice: null,
+        description: "Skycrops, sağlıklı yaşamın ve taze lezzetlerin kapılarını aralayan bir dikey tarım tesisi. Doğallıktan uzaklaşmadan, kapalı ortamda, dış dünyanın negatif etkilerinden uzakta üretilen besleyici yeşilliklerimiz, sofralarınıza lezzet ve tazelik getiriyor. Skycrops, geleceğin tarım yöntemlerini bugün uygulayarak, sizleri sağlıklı bir yaşam için doğal ve taze alternatiflerle buluşturmayı hedefliyor. Sağlıklı yaşamın anahtarı, Skycrops'un yeşilliklerinde gizli.",
+        flavor: null,
+        category: "yesillikler",
         imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         featured: true,
         isBestseller: true,
-        inStock: true
+        inStock: true,
+        isNewArrival: false
       },
       {
         name: "Hydroponic Basil",
         slug: "hydroponic-basil",
         price: 350,
+        originalPrice: null,
         description: "Aromatic basil leaves with intense flavor, grown without soil using advanced hydroponic systems.",
-        category: "herbs",
+        flavor: null,
+        category: "baharatlar",
         imageUrl: "https://images.unsplash.com/photo-1618164436241-4473940d1f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         featured: true,
         isBestseller: false,
-        inStock: true
+        inStock: true,
+        isNewArrival: false
       },
       {
         name: "Vertical Spinach",
         slug: "vertical-spinach",
         price: 400,
+        originalPrice: null,
         description: "Nutrient-rich spinach leaves grown in our vertical farming towers, perfect for healthy meals.",
-        category: "leafy greens",
+        flavor: null,
+        category: "yesillikler",
         imageUrl: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         featured: false,
         isBestseller: true,
-        inStock: true
+        inStock: true,
+        isNewArrival: false
       },
       {
         name: "Living Arugula",
         slug: "living-arugula",
         price: 380,
+        originalPrice: null,
         description: "Peppery arugula with a distinctive taste, grown using sustainable vertical farming methods.",
-        category: "leafy greens",
+        flavor: null,
+        category: "yesillikler",
         imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         featured: false,
         isBestseller: false,
-        inStock: true
+        inStock: true,
+        isNewArrival: false
       },
       {
         name: "Microgreen Mix",
         slug: "microgreen-mix",
         price: 280,
+        originalPrice: null,
         description: "A colorful mix of microgreens including radish, mustard, and pea shoots.",
-        category: "microgreens",
+        flavor: null,
+        category: "fideler",
         imageUrl: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         featured: true,
         isBestseller: false,
-        inStock: true
+        inStock: true,
+        isNewArrival: false
       },
       {
         name: "Fresh Cilantro",
         slug: "fresh-cilantro",
         price: 320,
+        originalPrice: null,
         description: "Fresh cilantro leaves with bright, citrusy flavor, grown in our controlled environment facility.",
-        category: "herbs",
+        flavor: null,
+        category: "baharatlar",
         imageUrl: "https://images.unsplash.com/photo-1584279186917-7dc15fc75e26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         featured: false,
         isBestseller: true,
-        inStock: true
+        inStock: true,
+        isNewArrival: false
       }
     ];
 
-    for (const prod of productData) {
-      await db.insert(products).values(prod);
+    for (const product of productData) {
+      await db.insert(products).values(product).onConflictDoUpdate({
+        target: products.slug,
+        set: {
+          name: product.name,
+          price: product.price,
+          originalPrice: product.originalPrice,
+          description: product.description,
+          flavor: product.flavor,
+          category: product.category,
+          imageUrl: product.imageUrl,
+          featured: product.featured,
+          isBestseller: product.isBestseller,
+          inStock: product.inStock,
+          isNewArrival: product.isNewArrival
+        }
+      });
     }
 
-    // Seed articles
+    // Seed articles with upsert logic
     const articleData = [
       {
         title: "Peki Dikey Tarım Nedir?",
         slug: "peki-dikey-tarim-nedir",
         excerpt: "Dikey tarım basitçe bir binada ürün yetiştirmektir diyebiliriz. Üst üste konmuş havuzlar şeklinde ya da yan yana konmuş dikey duvarlar şeklinde olabilir ama en önemli özelliği üretim sürecinin tam kontrollü olmasıdır.",
-        content: "Dikey tarım basitçe bir binada ürün yetiştirmektir diyebiliriz. Üst üste konmuş havuzlar şeklinde ya da yan yana konmuş dikey duvarlar şeklinde olabilir ama en en önemli özelliği üretim sürecinin tam kontrollü olmasıdır. Yani dikey tarımda dış hava koşullarına bağlı değiliz. Verimli bir toprak olup olmadığına bağlı değiliz. Çok az su kullanımı, çok az gübre kullanımı onun önemli farklerındandır. Eğer üretim kurallara uygun bir şekilde yapılırsa hiçbir pestisit kullanmadan ürün yetiştirilebilir. Sağlıklı ürün yetiştirmek için verimli toprağa bağlı değildir. Büyük bir arazi alanına ihtiyaç duymaz. Bu da çok fazla arazi alanının olmadığı kentsel alanlarda da yapılabilmesini sağlar. Tüm bunlara bağlı olmamanın ve her şeyin kontrollü olmasının sonucu olarak ne kadar ve hangi kalitede üretim yaptığımız konusunda garanti vermesi diğer yetiştirme yöntemleriyle karşılaştırıldığında bize sunduğu en önemli özelliğidir.",
+        content: "Dikey tarım basitçe bir binada ürün yetiştirmektir diyebiliriz. Üst üste konmuş havuzlar şeklinde ya da yan yana konmuş dikey duvarlar şeklinde olabilir ama en en önemli özelliği üretim sürecinin tam kontrollü olmasıdır. Yani dikey tarımda dış hava koşullarına bağlı değiliz. Verimli bir toprak olup olmadığına bağlı değiliz. Çok az su kullanımı, çok az gübre kullanımı onun önemli farklarındandır. Eğer üretim kurallara uygun bir şekilde yapılırsa hiçbir pestisit kullanmadan ürün yetiştirilebilir. Sağlıklı ürün yetiştirmek için verimli toprağa bağlı değildir. Büyük bir arazi alanına ihtiyaç duymaz. Bu da çok fazla arazi alanının olmadığı kentsel alanlarda da yapılabilmesini sağlar. Tüm bunlara bağlı olmamanın ve her şeyin kontrollü olmasının sonucu olarak ne kadar ve hangi kalitede üretim yaptığımız konusunda garanti vermesi diğer yetiştirme yöntemleriyle karşılaştırıldığında bize sunduğu en önemli özelliğidir.",
         imageUrl: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         publishedAt: "Jul 17, 2025"
       },
@@ -149,7 +182,7 @@ export async function seedDatabase() {
     ];
 
     for (const article of articleData) {
-      await db.insert(articles).values(article);
+      await db.insert(articles).values(article).onConflictDoNothing();
     }
 
     console.log('Database seeded successfully!');

@@ -15,19 +15,25 @@ import { CalendarDays, Clock, Package, Truck } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@shared/schema";
+import { useTranslation } from 'react-i18next';
 
 interface DeliveryModalProps {
   product?: Product;
   bundle?: {
+    id: string;
+    type: string;
+    slug: string;
     name: string;
     price: number;
     originalPrice?: number;
     description: string;
+    imageUrl: string;
   };
   children: React.ReactNode;
 }
 
 export function DeliveryModal({ product, bundle, children }: DeliveryModalProps) {
+  const { t } = useTranslation();
   const [selectedPlan, setSelectedPlan] = useState<string>("one-time");
   const [selectedSchedule, setSelectedSchedule] = useState<string>("standard");
   const [open, setOpen] = useState(false);
@@ -40,30 +46,30 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
   const subscriptionPlans = [
     {
       id: "one-time",
-      name: "One-time Purchase",
-      description: "Single delivery",
+      name: t('plan_one_time'),
+      description: t('plan_one_time_desc'),
       discount: 0,
       icon: <Package className="h-4 w-4" />,
     },
     {
       id: "weekly",
-      name: "Weekly Subscription",
-      description: "Delivered every week",
+      name: t('plan_weekly'),
+      description: t('plan_weekly_desc'),
       discount: 10,
       icon: <CalendarDays className="h-4 w-4" />,
     },
     {
-      id: "monthly",
-      name: "Monthly Subscription", 
-      description: "Delivered every month",
+      id: "twice-weekly",
+      name: "Haftada 2 Abonelik",
+      description: "Her hafta 2 kez teslimat",
       discount: 15,
       icon: <CalendarDays className="h-4 w-4" />,
     },
     {
-      id: "yearly",
-      name: "Yearly Subscription",
-      description: "Delivered every year",
-      discount: 25,
+      id: "monthly",
+      name: t('plan_monthly'),
+      description: t('plan_monthly_desc'),
+      discount: 15,
       icon: <CalendarDays className="h-4 w-4" />,
     },
   ];
@@ -71,25 +77,25 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
   const deliverySchedules = [
     {
       id: "express",
-      name: "Express Delivery",
-      description: "Same day delivery",
-      time: "Within 6 hours",
+      name: t('delivery_express'),
+      description: t('delivery_express_desc'),
+      time: t('delivery_express_time'),
       price: 999, // $9.99
       icon: <Truck className="h-4 w-4" />,
     },
     {
       id: "standard",
-      name: "Standard Delivery",
-      description: "Next day delivery",
-      time: "1-2 business days",
+      name: t('delivery_standard'),
+      description: t('delivery_standard_desc'),
+      time: t('delivery_standard_time'),
       price: 299, // $2.99
       icon: <Clock className="h-4 w-4" />,
     },
     {
       id: "scheduled",
-      name: "Scheduled Delivery",
-      description: "Choose your preferred day",
-      time: "3-5 business days",
+      name: t('delivery_scheduled'),
+      description: t('delivery_scheduled_desc'),
+      time: t('delivery_scheduled_time'),
       price: 0, // Free
       icon: <CalendarDays className="h-4 w-4" />,
     },
@@ -136,10 +142,6 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Choose Your Delivery Plan</DialogTitle>
-          <DialogDescription>
-            Select how often you'd like to receive {item.name} and when you'd like it delivered.
-          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -150,7 +152,7 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
               <p className="text-sm text-muted-foreground">{item.description || (product?.description)}</p>
             </div>
             <div className="text-right">
-              <p className="font-semibold">${(calculatePrice() / 100).toFixed(2)}</p>
+              <p className="font-semibold">{Number(calculatePrice() / 100).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY', minimumFractionDigits: 2 })}</p>
               {selectedPlan !== "one-time" && (
                 <p className="text-xs text-green-600">
                   Save {subscriptionPlans.find(p => p.id === selectedPlan)?.discount}%
@@ -161,7 +163,7 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
 
           {/* Subscription Plans */}
           <div>
-            <Label className="text-base font-medium">Subscription Plan</Label>
+            <Label className="text-base font-medium">Abonelik</Label>
             <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="mt-3">
               {subscriptionPlans.map((plan) => (
                 <div key={plan.id} className="flex items-center space-x-3">
@@ -189,7 +191,7 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
 
           {/* Delivery Schedule */}
           <div>
-            <Label className="text-base font-medium">Delivery Schedule</Label>
+            <Label className="text-base font-medium">Teslimat</Label>
             <RadioGroup value={selectedSchedule} onValueChange={setSelectedSchedule} className="mt-3">
               {deliverySchedules.map((schedule) => (
                 <div key={schedule.id} className="flex items-center space-x-3">
@@ -206,7 +208,7 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
                         </div>
                       </div>
                       <p className="font-medium">
-                        {schedule.price === 0 ? "Free" : `$${(schedule.price / 100).toFixed(2)}`}
+                        {schedule.price === 0 ? t('free') : Number(schedule.price / 100).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY', minimumFractionDigits: 2 })}
                       </p>
                     </div>
                   </Label>
@@ -218,19 +220,19 @@ export function DeliveryModal({ product, bundle, children }: DeliveryModalProps)
           {/* Total */}
           <div className="border-t pt-4">
             <div className="flex justify-between items-center text-lg font-semibold">
-              <span>Total:</span>
-              <span>${(calculateTotal() / 100).toFixed(2)}</span>
+              <span>{t('total')}</span>
+              <span>{Number(calculateTotal() / 100).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY', minimumFractionDigits: 2 })}</span>
             </div>
             {selectedPlan !== "one-time" && (
               <p className="text-sm text-muted-foreground mt-1">
-                Recurring {selectedPlan} • Cancel anytime
+                {t('recurring_plan', { plan: t(`plan_${selectedPlan}`) })}
               </p>
             )}
           </div>
 
           {/* Action Button */}
           <Button onClick={handleAddToCart} className="w-full" size="lg">
-            Add to Cart
+            {t('add_to_cart')}
           </Button>
         </div>
       </DialogContent>

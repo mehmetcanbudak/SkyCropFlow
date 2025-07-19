@@ -11,8 +11,18 @@ export const siteConfig = {
 };
 
 export const navItems = [
-  { href: "/products", label: "shop" },
+  { href: "/shop", label: "shop" },
   { href: "/about", label: "about us" },
-  { href: "/journal", label: "journal" },
+  { href: "/tech", label: "tech" },
+  { href: "/uretim", label: "üretim" },
+  { href: "/skycrops", label: "skycrops" },
+  { href: "/blog", label: "blog" },
   { href: "/contact", label: "contacts" },
 ];
+
+export const categories = [
+  { key: 'category_paketler', name: 'Paketler' },
+  { key: 'category_yesillikler', name: 'Yeşillikler' },
+  { key: 'category_baharatlar', name: 'Baharatlar' },
+  { key: 'category_fideler', name: 'Fideler' },
+]

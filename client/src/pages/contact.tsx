@@ -5,8 +5,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 export default function Contact() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,29 +40,28 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-muted/50">
+    <div className="min-h-screen bg-muted/50 pt-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-foreground mb-6">bize ulaşın!</h1>
+          <h1 className="text-5xl font-bold text-foreground mb-6">{t('contacts')}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have questions about our vertical farming technology or want to learn more about our fresh vegetables? 
-            We'd love to hear from you.
+            {t('contact_subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Send us a message</CardTitle>
+              <CardTitle className="text-2xl">Bize Mesaj Gönderin</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Name *
+                      {t('name')} *
                     </label>
                     <Input
                       id="name"
@@ -69,12 +70,12 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="Your name"
+                      placeholder={t('your_name')}
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email *
+                      {t('email')} *
                     </label>
                     <Input
                       id="email"
@@ -83,14 +84,14 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="your@email.com"
+                      placeholder={t('your_email')}
                     />
                   </div>
                 </div>
                 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                    Subject *
+                    {t('subject')} *
                   </label>
                   <Input
                     id="subject"
@@ -99,13 +100,13 @@ export default function Contact() {
                     required
                     value={formData.subject}
                     onChange={handleInputChange}
-                    placeholder="How can we help you?"
+                    placeholder={t('how_can_we_help')}
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message *
+                    {t('message')} *
                   </label>
                   <Textarea
                     id="message"
@@ -113,8 +114,8 @@ export default function Contact() {
                     required
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Tell us more about your inquiry..."
-                    rows={6}
+                    placeholder={t('tell_us_more')}
+                    rows={3}
                   />
                 </div>
                 
@@ -123,23 +124,23 @@ export default function Contact() {
                   className="w-full"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? t('sending') : t('send_message')}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div>
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl">Contact Information</CardTitle>
+                <CardTitle className="text-2xl">{t('contact_information')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">Address</h3>
+                    <h3 className="font-semibold mb-1">{t('address')}</h3>
                     <p className="text-muted-foreground">
                       Çorlu 1 OSB Bülent Ecevit Caddesi No:13/1<br />
                       PK: 59860 Çorlu – Tekirdağ<br />
@@ -151,7 +152,7 @@ export default function Contact() {
                 <div className="flex items-start space-x-4">
                   <Phone className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <h3 className="font-semibold mb-1">{t('phone')}</h3>
                     <p className="text-muted-foreground">+90 282 685 43 83</p>
                   </div>
                 </div>
@@ -159,7 +160,7 @@ export default function Contact() {
                 <div className="flex items-start space-x-4">
                   <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
+                    <h3 className="font-semibold mb-1">{t('email')}</h3>
                     <p className="text-muted-foreground">info@skycrops.farm</p>
                   </div>
                 </div>
@@ -167,45 +168,46 @@ export default function Contact() {
                 <div className="flex items-start space-x-4">
                   <Clock className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">Business Hours</h3>
+                    <h3 className="font-semibold mb-1">{t('business_hours')}</h3>
                     <p className="text-muted-foreground">
-                      Monday - Friday: 9:00 AM - 6:00 PM<br />
-                      Saturday: 9:00 AM - 4:00 PM<br />
-                      Sunday: Closed
+                      {t('monday_to_friday')}: 9:00 AM - 6:00 PM<br />
+                      {t('saturday')}: 9:00 AM - 4:00 PM<br />
+                      {t('sunday')}: {t('closed')}
                     </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Facility Tours</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Interested in seeing our vertical farming technology in action? 
-                  We offer guided tours of our facility to showcase our sustainable 
-                  agriculture practices.
-                </p>
-                <Button variant="outline" className="w-full">
-                  Schedule a Tour
-                </Button>
-              </CardContent>
-            </Card>
           </div>
+        </div>
+
+        {/* Facility Tours - Full Width */}
+        <div className="mt-16">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl text-center">{t('facility_tours')}</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Dikey tarım teknolojimizi yerinde görmek ister misiniz?
+              </p>
+              <Button variant="outline" size="lg">
+                {t('schedule_tour')}
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Quality Policy */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground">
             <a 
-              href="/quality-policy" 
+              href="/attached_assets/gida-guvenligi.pdf" 
               className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Kalite ve Gıda Güvenliği Politikası
+              {t('quality_policy')}
             </a>
           </p>
         </div>

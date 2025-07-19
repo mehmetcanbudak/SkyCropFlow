@@ -5,9 +5,12 @@ import { ChevronRight } from "lucide-react";
 import NewsletterSection from "@/components/newsletter-section";
 import SocialSection from "@/components/social-section";
 import type { Article } from "@shared/schema";
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 export default function ArticlePage() {
-  const [match, params] = useRoute("/journal/:slug");
+  const { t } = useTranslation();
+  const [match, params] = useRoute("/blog/:slug");
   const slug = params?.slug;
 
   const { data: article, isLoading } = useQuery<Article>({
@@ -24,7 +27,7 @@ export default function ArticlePage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading article...</p>
+          <p className="text-muted-foreground">{t('loading')}</p>
         </div>
       </div>
     );
@@ -34,9 +37,9 @@ export default function ArticlePage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Article not found</h1>
-          <Link href="/journal" className="text-primary hover:underline">
-            Back to Journal
+          <h1 className="text-2xl font-bold text-foreground mb-4">{t('not_found')}</h1>
+          <Link href="/blog" className="text-primary hover:underline">
+            {t('blog')}
           </Link>
         </div>
       </div>
@@ -51,11 +54,11 @@ export default function ArticlePage() {
         {/* Breadcrumbs */}
         <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-12">
           <Link href="/" className="hover:text-primary transition-colors">
-            Home
+            {t('home')}
           </Link>
           <ChevronRight className="h-4 w-4" />
-          <Link href="/journal" className="hover:text-primary transition-colors">
-            Journal
+          <Link href="/blog" className="hover:text-primary transition-colors">
+            {t('blog')}
           </Link>
           <ChevronRight className="h-4 w-4" />
           <span className="text-foreground">{article.title}</span>
@@ -68,7 +71,7 @@ export default function ArticlePage() {
           </h1>
           
           <div className="flex items-center space-x-4 text-muted-foreground">
-            <time className="text-sm">{article.publishedAt}</time>
+            <time className="text-sm">{new Date(article.publishedAt).toLocaleDateString(i18n.language, { year: 'numeric', month: 'short', day: 'numeric' })}</time>
             <span className="text-sm">•</span>
             <span className="text-sm">Skycrops Team</span>
           </div>
@@ -90,40 +93,8 @@ export default function ArticlePage() {
           </div>
 
           <div className="space-y-6 text-foreground leading-relaxed">
-            {/* Simulated article content based on the original content */}
             <p>
               {article.content}
-            </p>
-
-            <blockquote className="border-l-4 border-primary pl-6 italic text-lg my-8">
-              "Sustainability in agriculture is not just about the environment - it's about creating a 
-              healthier future for all of us through innovation and dedication."
-              <br />
-              <span className="text-muted-foreground font-normal">— Skycrops Philosophy</span>
-            </blockquote>
-
-            <p>
-              Our commitment to sustainable farming practices drives every decision we make. From our 
-              water-efficient hydroponic systems to our renewable energy sources, we're constantly 
-              working to minimize our environmental impact while maximizing the nutritional value 
-              of our vegetables.
-            </p>
-
-            <h2 className="text-2xl font-bold text-foreground mt-12 mb-6">
-              The Future of Agriculture
-            </h2>
-
-            <p>
-              Vertical farming represents more than just a technological advancement - it's a paradigm 
-              shift that addresses the challenges of modern agriculture. By growing indoors, we can 
-              control every aspect of the growing environment, ensuring optimal conditions for plant 
-              growth while using significantly fewer resources than traditional farming methods.
-            </p>
-
-            <p>
-              Our facility demonstrates that sustainable agriculture isn't just possible - it's the 
-              future. With 97% less water usage, zero pesticides, and year-round production capability, 
-              we're proving that innovation and environmental responsibility can go hand in hand.
             </p>
           </div>
         </article>
@@ -131,19 +102,19 @@ export default function ArticlePage() {
         {/* Related Articles */}
         <section className="border-t border-border pt-16">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground">More articles</h2>
-            <Link href="/journal" className="text-primary font-medium hover:underline">
-              Read all stories
+            <h2 className="text-3xl font-bold text-foreground">{t('more_articles')}</h2>
+            <Link href="/blog" className="text-primary font-medium hover:underline">
+              {t('read_all_stories')}
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherArticles.map((relatedArticle) => (
-              <Link key={relatedArticle.id} href={`/journal/${relatedArticle.slug}`}>
+              <Link key={relatedArticle.id} href={`/blog/${relatedArticle.slug}`}>
                 <article className="group cursor-pointer">
                   <div className="mb-4">
                     <p className="text-sm text-muted-foreground">
-                      {relatedArticle.publishedAt}
+                      {new Date(relatedArticle.publishedAt).toLocaleDateString(i18n.language, { year: 'numeric', month: 'short', day: 'numeric' })}
                     </p>
                   </div>
                   <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors leading-tight">

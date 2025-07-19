@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Article, Product, InsertArticle, InsertProduct } from "@shared/schema";
+import { useTranslation } from 'react-i18next';
+import { useRef } from "react";
 
 interface ArticleFormData {
   title: string;
@@ -17,6 +19,7 @@ interface ArticleFormData {
   content: string;
   imageUrl: string;
   publishedAt: string;
+  type: string;
 }
 
 interface ProductFormData {
@@ -32,6 +35,7 @@ interface ProductFormData {
 }
 
 export default function AdminPage() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -47,96 +51,80 @@ export default function AdminPage() {
 
   // Article mutations
   const createArticleMutation = useMutation({
-    mutationFn: (data: InsertArticle) => apiRequest("/api/admin/articles", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
+    mutationFn: (data: InsertArticle) => apiRequest("POST", "/api/admin/articles", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/articles"] });
-      toast({ title: "Article created successfully" });
+      toast({ title: t("article_created_successfully") });
       setEditingArticle(null);
     },
     onError: () => {
-      toast({ title: "Failed to create article", variant: "destructive" });
+      toast({ title: t("failed_to_create_article"), variant: "destructive" });
     },
   });
 
   const updateArticleMutation = useMutation({
     mutationFn: ({ id, data }: { id: number; data: Partial<InsertArticle> }) => 
-      apiRequest(`/api/admin/articles/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
-      }),
+      apiRequest("PUT", `/api/admin/articles/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/articles"] });
-      toast({ title: "Article updated successfully" });
+      toast({ title: t("article_updated_successfully") });
       setEditingArticle(null);
     },
     onError: () => {
-      toast({ title: "Failed to update article", variant: "destructive" });
+      toast({ title: t("failed_to_update_article"), variant: "destructive" });
     },
   });
 
   const deleteArticleMutation = useMutation({
-    mutationFn: (id: number) => apiRequest(`/api/admin/articles/${id}`, {
-      method: "DELETE",
-    }),
+    mutationFn: (id: number) => apiRequest("DELETE", `/api/admin/articles/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/articles"] });
-      toast({ title: "Article deleted successfully" });
+      toast({ title: t("article_deleted_successfully") });
     },
     onError: () => {
-      toast({ title: "Failed to delete article", variant: "destructive" });
+      toast({ title: t("failed_to_delete_article"), variant: "destructive" });
     },
   });
 
   // Product mutations
   const createProductMutation = useMutation({
-    mutationFn: (data: InsertProduct) => apiRequest("/api/admin/products", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
+    mutationFn: (data: InsertProduct) => apiRequest("POST", "/api/admin/products", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/products"] });
-      toast({ title: "Product created successfully" });
+      toast({ title: t("product_created_successfully") });
       setEditingProduct(null);
     },
     onError: () => {
-      toast({ title: "Failed to create product", variant: "destructive" });
+      toast({ title: t("failed_to_create_product"), variant: "destructive" });
     },
   });
 
   const updateProductMutation = useMutation({
     mutationFn: ({ id, data }: { id: number; data: Partial<InsertProduct> }) => 
-      apiRequest(`/api/admin/products/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
-      }),
+      apiRequest("PUT", `/api/admin/products/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/products"] });
-      toast({ title: "Product updated successfully" });
+      toast({ title: t("product_updated_successfully") });
       setEditingProduct(null);
     },
     onError: () => {
-      toast({ title: "Failed to update product", variant: "destructive" });
+      toast({ title: t("failed_to_update_product"), variant: "destructive" });
     },
   });
 
   const deleteProductMutation = useMutation({
-    mutationFn: (id: number) => apiRequest(`/api/admin/products/${id}`, {
-      method: "DELETE",
-    }),
+    mutationFn: (id: number) => apiRequest("DELETE", `/api/admin/products/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/products"] });
-      toast({ title: "Product deleted successfully" });
+      toast({ title: t("product_deleted_successfully") });
     },
     onError: () => {
-      toast({ title: "Failed to delete product", variant: "destructive" });
+      toast({ title: t("failed_to_delete_product"), variant: "destructive" });
     },
   });
 
   const handleArticleSubmit = (formData: ArticleFormData) => {
-    if (editingArticle) {
+    if (editingArticle && editingArticle.id != null) {
       updateArticleMutation.mutate({
         id: editingArticle.id,
         data: formData,
@@ -147,7 +135,7 @@ export default function AdminPage() {
   };
 
   const handleProductSubmit = (formData: ProductFormData) => {
-    if (editingProduct) {
+    if (editingProduct && editingProduct.id != null) {
       updateProductMutation.mutate({
         id: editingProduct.id,
         data: formData,
@@ -158,21 +146,29 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
+    <div className="container mx-auto p-6 pt-32">
+      <h1 className="text-3xl font-bold mb-6">{t("admin_panel_title")}</h1>
       
       <Tabs defaultValue="articles" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="articles">Articles</TabsTrigger>
-          <TabsTrigger value="products">Products</TabsTrigger>
+          <TabsTrigger value="articles">{t("articles_tab")}</TabsTrigger>
+          <TabsTrigger value="products">{t("products_tab")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="articles" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">Manage Articles</h2>
-            <Button onClick={() => setEditingArticle({} as Article)}>
+            <h2 className="text-2xl font-semibold">{t("manage_articles_title")}</h2>
+            <Button onClick={() => setEditingArticle({
+              title: "",
+              slug: "",
+              excerpt: "",
+              content: "",
+              imageUrl: "",
+              publishedAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+              type: "blog"
+            } as Article)}>
               <Plus className="h-4 w-4 mr-2" />
-              New Article
+              {t("new_article_button")}
             </Button>
           </div>
 
@@ -202,7 +198,11 @@ export default function AdminPage() {
                       <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => deleteArticleMutation.mutate(article.id)}
+                        onClick={() => {
+                          if (window.confirm('Bu yazıyı silmek istediğinize emin misiniz?')) {
+                            deleteArticleMutation.mutate(article.id);
+                          }
+                        }}
                         disabled={deleteArticleMutation.isPending}
                       >
                         <Trash2 className="h-4 w-4" />
@@ -213,7 +213,7 @@ export default function AdminPage() {
                 <CardContent>
                   <p className="text-muted-foreground">{article.excerpt}</p>
                   <p className="text-sm text-muted-foreground mt-2">
-                    Published: {article.publishedAt}
+                    {t("published_date")}: {article.publishedAt}
                   </p>
                 </CardContent>
               </Card>
@@ -223,10 +223,23 @@ export default function AdminPage() {
 
         <TabsContent value="products" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">Manage Products</h2>
-            <Button onClick={() => setEditingProduct({} as Product)}>
+            <h2 className="text-2xl font-semibold">{t("manage_products_title")}</h2>
+            <Button onClick={() => setEditingProduct({
+              name: "",
+              slug: "",
+              price: 0,
+              description: "",
+              category: "",
+              imageUrl: "",
+              originalPrice: null,
+              flavor: null,
+              isNewArrival: null,
+              isBestseller: null,
+              inStock: null,
+              featured: null
+            } as Product)}>
               <Plus className="h-4 w-4 mr-2" />
-              New Product
+              {t("new_product_button")}
             </Button>
           </div>
 
@@ -267,7 +280,7 @@ export default function AdminPage() {
                 <CardContent>
                   <p className="text-muted-foreground">{product.description}</p>
                   <p className="text-sm text-muted-foreground mt-2">
-                    Price: ${(product.price / 100).toFixed(2)} | Category: {product.category}
+                    {t("price")}: ${(product.price / 100).toFixed(2)} | {t("category")}: {product.category}
                   </p>
                 </CardContent>
               </Card>
@@ -290,6 +303,7 @@ function ArticleForm({
   onCancel: () => void;
   isLoading: boolean;
 }) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<ArticleFormData>({
     title: article?.title || "",
     slug: article?.slug || "",
@@ -301,23 +315,46 @@ function ArticleForm({
       month: 'short', 
       day: 'numeric' 
     }),
+    type: article?.type || 'blog',
   });
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    const form = new FormData();
+    form.append("file", file);
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: form,
+      });
+      const data = await res.json();
+      setFormData((prev) => ({ ...prev, imageUrl: data.url }));
+    } catch (err) {
+      alert("Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit({ ...formData, type: formData.type as 'blog' | 'press' });
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{article?.id ? "Edit Article" : "Create New Article"}</CardTitle>
+        <CardTitle>{article?.id ? t("edit_article_title") : t("create_new_article_title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Title</label>
+              <label className="block text-sm font-medium mb-1">{t("title_label")}</label>
               <Input
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -325,7 +362,7 @@ function ArticleForm({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Slug</label>
+              <label className="block text-sm font-medium mb-1">{t("slug_label")}</label>
               <Input
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
@@ -333,9 +370,21 @@ function ArticleForm({
               />
             </div>
           </div>
+          {/* Post Type Selector */}
+          <div>
+            <label className="block text-sm font-medium mb-1">Gönderi Türü</label>
+            <select
+              className="w-full border rounded px-3 py-2"
+              value={formData.type}
+              onChange={e => setFormData({ ...formData, type: e.target.value })}
+            >
+              <option value="blog">Blog Post</option>
+              <option value="press">Basında Biz</option>
+            </select>
+          </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Excerpt</label>
+            <label className="block text-sm font-medium mb-1">{t("excerpt_label")}</label>
             <Textarea
               value={formData.excerpt}
               onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
@@ -344,7 +393,7 @@ function ArticleForm({
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Content</label>
+            <label className="block text-sm font-medium mb-1">{t("content_label")}</label>
             <Textarea
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
@@ -355,15 +404,26 @@ function ArticleForm({
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Image URL</label>
+              <label className="block text-sm font-medium mb-1">{t("image_url_label")}</label>
               <Input
                 value={formData.imageUrl}
                 onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                 required
               />
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="mt-2"
+              />
+              {uploading && <div>{t("uploading_text") || "Uploading..."}</div>}
+              {formData.imageUrl && (
+                <img src={formData.imageUrl} alt="Preview" className="mt-2 max-h-32" />
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Published Date</label>
+              <label className="block text-sm font-medium mb-1">{t("published_date_label")}</label>
               <Input
                 value={formData.publishedAt}
                 onChange={(e) => setFormData({ ...formData, publishedAt: e.target.value })}
@@ -374,10 +434,10 @@ function ArticleForm({
           
           <div className="flex gap-2">
             <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Saving..." : article?.id ? "Update" : "Create"}
+              {isLoading ? t("saving_text") : article?.id ? t("update_button") : t("create_button")}
             </Button>
             <Button type="button" variant="outline" onClick={onCancel}>
-              Cancel
+              {t("cancel_button")}
             </Button>
           </div>
         </form>
@@ -397,6 +457,7 @@ function ProductForm({
   onCancel: () => void;
   isLoading: boolean;
 }) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<ProductFormData>({
     name: product?.name || "",
     slug: product?.slug || "",
@@ -408,6 +469,28 @@ function ProductForm({
     isBestseller: product?.isBestseller || false,
     inStock: product?.inStock ?? true,
   });
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    const form = new FormData();
+    form.append("file", file);
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: form,
+      });
+      const data = await res.json();
+      setFormData((prev) => ({ ...prev, imageUrl: data.url }));
+    } catch (err) {
+      alert("Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -417,13 +500,13 @@ function ProductForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{product?.id ? "Edit Product" : "Create New Product"}</CardTitle>
+        <CardTitle>{product?.id ? t("edit_product_title") : t("create_new_product_title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Name</label>
+              <label className="block text-sm font-medium mb-1">{t("name_label")}</label>
               <Input
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -431,7 +514,7 @@ function ProductForm({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Slug</label>
+              <label className="block text-sm font-medium mb-1">{t("slug_label")}</label>
               <Input
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
@@ -442,7 +525,7 @@ function ProductForm({
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Price (cents)</label>
+              <label className="block text-sm font-medium mb-1">{t("price_label")}</label>
               <Input
                 type="number"
                 value={formData.price}
@@ -451,7 +534,7 @@ function ProductForm({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Category</label>
+              <label className="block text-sm font-medium mb-1">{t("category_label")}</label>
               <Input
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
@@ -461,7 +544,7 @@ function ProductForm({
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Description</label>
+            <label className="block text-sm font-medium mb-1">{t("description_label")}</label>
             <Textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -470,12 +553,23 @@ function ProductForm({
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Image URL</label>
+            <label className="block text-sm font-medium mb-1">{t("image_url_label")}</label>
             <Input
               value={formData.imageUrl}
               onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
               required
             />
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="mt-2"
+            />
+            {uploading && <div>{t("uploading_text") || "Uploading..."}</div>}
+            {formData.imageUrl && (
+              <img src={formData.imageUrl} alt="Preview" className="mt-2 max-h-32" />
+            )}
           </div>
           
           <div className="flex gap-4">
@@ -485,7 +579,7 @@ function ProductForm({
                 checked={formData.featured}
                 onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
               />
-              <span>Featured</span>
+              <span>{t("featured_label")}</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -493,7 +587,7 @@ function ProductForm({
                 checked={formData.isBestseller}
                 onChange={(e) => setFormData({ ...formData, isBestseller: e.target.checked })}
               />
-              <span>Bestseller</span>
+              <span>{t("bestseller_label")}</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -501,16 +595,16 @@ function ProductForm({
                 checked={formData.inStock}
                 onChange={(e) => setFormData({ ...formData, inStock: e.target.checked })}
               />
-              <span>In Stock</span>
+              <span>{t("in_stock_label")}</span>
             </label>
           </div>
           
           <div className="flex gap-2">
             <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Saving..." : product?.id ? "Update" : "Create"}
+              {isLoading ? t("saving_text") : product?.id ? t("update_button") : t("create_button")}
             </Button>
             <Button type="button" variant="outline" onClick={onCancel}>
-              Cancel
+              {t("cancel_button")}
             </Button>
           </div>
         </form>

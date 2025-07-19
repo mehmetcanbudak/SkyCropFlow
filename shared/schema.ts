@@ -34,6 +34,7 @@ export const articles = pgTable("articles", {
   content: text("content").notNull(),
   imageUrl: text("image_url").notNull(),
   publishedAt: text("published_at").notNull(), // ISO date string
+  type: text("type").notNull().default('blog'), // 'blog' or 'press'
 });
 
 export const newsletters = pgTable("newsletters", {

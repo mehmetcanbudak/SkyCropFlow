@@ -1,88 +1,71 @@
 import { Link } from "wouter";
-import { Leaf } from "lucide-react";
+import { useTranslation } from 'react-i18next';
+import skycropsLogo from '@/assets/skycrops.svg';
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="bg-card border-t">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
           <div>
-            <div className="flex items-center space-x-2 mb-6">
-              <Leaf className="h-6 w-6 text-primary" />
-              <span className="font-bold text-xl">SKYCROPS</span>
+            <div className="flex items-center space-x-2 mb-1">
+              <img src={skycropsLogo} alt="SKYCROPS" className="h-8 w-auto" />
             </div>
-            <p className="text-muted-foreground mb-4">
-              Fresh living vegetables from vertical farming technology
+            <p className="text-muted-foreground mb-1">
+              {t('footer_tagline')}
             </p>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Shop</h4>
-            <ul className="space-y-2 text-muted-foreground">
+            <h4 className="font-semibold mb-1">{t('products')}</h4>
+            <ul className="space-y-1 text-muted-foreground">
               <li>
-                <Link href="/products" className="hover:text-primary transition-colors">
-                  products
+                <Link href="/shop" className="hover:text-primary transition-colors">
+                  Tüm Ürünler
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  top sales
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  delivery
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  returns
-                </a>
+                <Link href="/shop?category=paketler" className="hover:text-primary transition-colors">
+                  Paketler
+                </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-muted-foreground">
+            <h4 className="font-semibold mb-1">{t('company')}</h4>
+            <ul className="space-y-1 text-muted-foreground">
               <li>
                 <Link href="/about" className="hover:text-primary transition-colors">
-                  about us
+                  {t('about_us')}
                 </Link>
               </li>
               <li>
-                <Link href="/journal" className="hover:text-primary transition-colors">
-                  journal
+                <Link href="/blog" className="hover:text-primary transition-colors">
+                  {t('blog')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-primary transition-colors">
-                  contacts
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  privacy policy
+                <a href="https://sartlar.com/gizlilik-politikasi-ornegi/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  {t('privacy_policy')}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <div className="space-y-3 text-muted-foreground text-sm">
-              <p>
-                Çorlu 1 OSB Bülent Ecevit Caddesi No:13/1<br />
-                PK: 59860 Çorlu – Tekirdağ
-              </p>
-              <p>90 282 685 43 83</p>
-              <p>info@skycrops.farm</p>
+            <h4 className="font-semibold mb-1">{t('contact')}</h4>
+            <div className="space-y-1 text-muted-foreground text-sm">
+              <p>{t('footer_address')}</p>
+              <p>{t('footer_phone')}</p>
+              <p>{t('footer_email')}</p>
             </div>
           </div>
         </div>
 
-        <div className="border-t mt-12 pt-8 text-center text-muted-foreground">
-          <p>&copy; 2025 Skycrops. All rights reserved.</p>
+        <div className="border-t mt-2 pt-2 text-center text-muted-foreground text-sm">
+          <p>&copy; 2025 Skycrops. {t('all_rights_reserved')}</p>
         </div>
       </div>
     </footer>
