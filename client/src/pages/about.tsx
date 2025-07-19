@@ -42,6 +42,49 @@ export default function About() {
         </div>
       </section>
 
+      {/* Philosophy Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+                alt="Modern vertical farming facility"
+                className="rounded-3xl shadow-2xl w-full h-auto"
+              />
+            </div>
+
+            <div className="space-y-8">
+              <h2 className="text-4xl font-bold text-foreground">philosophy</h2>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Let's make the world healthier together. At Skycrops, we believe it's our responsibility
+                to provide fresh, living vegetables while protecting our environment. That's why we're proud
+                to introduce our revolutionary vertical farming technology - every time you buy our premium
+                vegetables, you help create a more sustainable future!
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-primary">taze, sağlıklı</h4>
+                  <p className="text-sm text-muted-foreground">Fresh harvest daily</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-primary">pestisit free</h4>
+                  <p className="text-sm text-muted-foreground">No chemicals or hormones</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-primary">çevre dostu</h4>
+                  <p className="text-sm text-muted-foreground">97% less water usage</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-primary">yaşayan sebzeler</h4>
+                  <p className="text-sm text-muted-foreground">Living until consumption</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Grid */}
       <section className="py-20 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

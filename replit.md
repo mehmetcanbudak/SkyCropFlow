@@ -115,13 +115,23 @@ The application uses PostgreSQL for persistent data storage with automatic datab
 - `NODE_ENV`: Environment mode (development/production)
 - Development includes Replit-specific tooling and error overlays
 
-## Recent Changes (July 17, 2025)
+## Recent Changes (July 19, 2025)
 
-### Database Migration and Admin Panel
-- **Migration**: Switched from in-memory storage to PostgreSQL with Drizzle ORM
-- **Database Features**: Automatic seeding, persistent data storage, type-safe queries
-- **Admin Panel**: Added comprehensive content management system at `/admin` route
-- **Admin Features**: Create, edit, and delete articles and products with forms and validation
-- **Individual Articles**: Added individual article pages matching Teaflow design with breadcrumbs and full content display
+### Philosophy Section & Bundles Update  
+- **Philosophy Migration**: Moved philosophy section from home page to about us page
+- **Bundles Section**: Replaced "top sales" section with 3 curated vegetable bundles (Fresh Greens, Garden Mix, Family Pack)
+- **Bundle Features**: Each bundle includes savings badges, detailed descriptions, and pricing
 
-The application now provides a complete content management solution while maintaining the original Teaflow-inspired design aesthetic and full database persistence.
+### Subscription & Delivery System
+- **Delivery Modal**: Advanced subscription and delivery timing system for all products and bundles
+- **Subscription Plans**: One-time, weekly (10% off), monthly (15% off), yearly (25% off) options
+- **Delivery Options**: Express (same day), Standard (1-2 days), Scheduled (3-5 days, free)
+- **Cart Integration**: Enhanced shopping cart with subscription metadata support
+- **Product Integration**: All product pages and bundle cards use the new delivery selection system
+
+### Database Schema Updates
+- **Bundles Table**: Added bundles schema with products array, savings, and pricing
+- **Cart Metadata**: Enhanced cart system to store subscription and delivery preferences
+- **Database Migration**: Successfully pushed schema changes to PostgreSQL
+
+The application now offers a complete subscription-based e-commerce experience with flexible delivery options, matching modern subscription box services while maintaining the clean Teaflow aesthetic.

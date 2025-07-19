@@ -5,6 +5,7 @@ import { Minus, Plus, ShoppingCart, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
+import { DeliveryModal } from "@/components/delivery-modal";
 import type { Product } from "@shared/schema";
 
 export default function ProductPage() {
@@ -141,14 +142,15 @@ export default function ProductPage() {
               </div>
 
               <div className="flex space-x-4">
-                <Button
-                  onClick={handleAddToCart}
-                  disabled={!product.inStock}
-                  className="flex-1 bg-gray-900 hover:bg-gray-800 text-white h-12"
-                >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  Add to Cart
-                </Button>
+                <DeliveryModal product={product}>
+                  <Button
+                    disabled={!product.inStock}
+                    className="flex-1 bg-gray-900 hover:bg-gray-800 text-white h-12"
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Choose Delivery & Add to Cart
+                  </Button>
+                </DeliveryModal>
                 <Link href="/products">
                   <Button 
                     variant="outline" 

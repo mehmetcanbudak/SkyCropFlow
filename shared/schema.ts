@@ -42,6 +42,19 @@ export const newsletters = pgTable("newsletters", {
   subscribedAt: timestamp("subscribed_at").defaultNow(),
 });
 
+export const bundles = pgTable("bundles", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  description: text("description").notNull(),
+  price: integer("price").notNull(), // price in cents
+  originalPrice: integer("original_price"),
+  imageUrl: text("image_url").notNull(),
+  products: text("products").array(), // array of product IDs or names
+  savings: text("savings"), // e.g., "Save 20%"
+  inStock: boolean("in_stock").default(true),
+});
+
 export const insertProductSchema = createInsertSchema(products).omit({
   id: true,
 });
@@ -59,6 +72,10 @@ export const insertNewsletterSchema = createInsertSchema(newsletters).omit({
   subscribedAt: true,
 });
 
+export const insertBundleSchema = createInsertSchema(bundles).omit({
+  id: true,
+});
+
 export type Product = typeof products.$inferSelect;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
 
@@ -70,3 +87,6 @@ export type InsertArticle = z.infer<typeof insertArticleSchema>;
 
 export type Newsletter = typeof newsletters.$inferSelect;
 export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;
+
+export type Bundle = typeof bundles.$inferSelect;
+export type InsertBundle = z.infer<typeof insertBundleSchema>;

@@ -1,14 +1,18 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import type { Product } from "@shared/schema";
 
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity: number;
+  metadata?: {
+    subscriptionPlan?: string;
+    deliverySchedule?: string;
+  };
 }
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (product: Product, quantity: number, metadata?: any) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
@@ -21,17 +25,17 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Product, quantity: number) => {
+  const addToCart = (product: Product, quantity: number, metadata?: any) => {
     setItems(prev => {
       const existingItem = prev.find(item => item.product.id === product.id);
       if (existingItem) {
         return prev.map(item =>
           item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity + quantity, metadata: metadata || item.metadata }
             : item
         );
       }
-      return [...prev, { product, quantity }];
+      return [...prev, { product, quantity, metadata }];
     });
   };
 
