@@ -8,13 +8,8 @@ export default function About() {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-foreground mb-6">Hakkımızda</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Skycrops, sağlıklı yaşamın ve taze lezzetlerin kapılarını aralayan bir dikey tarım tesisi.<br />
-            Doğallıktan uzaklaşmadan, kapalı ortamda, dış dünyanın negatif etkilerinden uzakta üretilen besleyici yeşilliklerimiz, sofralarınıza lezzet ve tazelik getiriyor.<br />
-            Skycrops, geleceğin tarım yöntemlerini bugün uygulayarak, sizleri sağlıklı bir yaşam için doğal ve taze alternatiflerle buluşturmayı hedefliyor.<br />
-            Sağlıklı yaşamın anahtarı, Skycrops'un yeşilliklerinde gizli.
-          </p>
+          <h1 className="text-5xl font-bold text-foreground mb-6">{t('about_header')}</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t('about_hero')}</p>
         </div>
       </div>
       {/* Hero Section */}
@@ -22,27 +17,21 @@ export default function About() {
         {/* Image */}
         <img
           src={skycropsImg}
-          alt="Skycrops dikey tarım tesisi"
+          alt={t('about_hero_image_alt')}
           className="w-full h-[400px] md:h-[500px] object-cover object-center"
         />
         {/* Desktop: Text over image */}
         <div className="hidden md:flex absolute inset-0 items-center justify-end px-4 md:px-16 mt-12">
           <div className="max-w-2xl text-right text-black ml-auto">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">Yaşayan<br />Sebzeler!</h1>
-            <p className="text-base text-muted-foreground">
-              Skycrops, sağlıklı yaşamın ve taze lezzetlerin kapılarını aralayan bir dikey tarım tesisi. Doğallıktan uzaklaşmadan, kapalı ortamda, dış dünyanın negatif etkilerinden uzakta üretilen besleyici yeşilliklerimiz, sofralarınıza lezzet ve tazelik getiriyor.<br /><br />
-              Skycrops, geleceğin tarım yöntemlerini bugün uygulayarak, sizleri sağlıklı bir yaşam için doğal ve taze alternatiflerle buluşturmayı hedefliyor. Sağlıklı yaşamın anahtarı, Skycrops'un yeşilliklerinde gizli.
-            </p>
+            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">{t('about_fresh_veggies_title')}</h1>
+            <p className="text-base text-muted-foreground">{t('about_fresh_veggies_desc1')}<br /><br />{t('about_fresh_veggies_desc2')}</p>
           </div>
         </div>
         {/* Mobile: Text below image */}
         <div className="block md:hidden w-full px-4 py-8 bg-white/80">
           <div className="max-w-2xl mx-auto text-center text-black">
-            <h1 className="text-4xl font-extrabold mb-4 leading-tight">Yaşayan<br />Sebzeler!</h1>
-            <p className="text-base text-muted-foreground">
-              Skycrops, sağlıklı yaşamın ve taze lezzetlerin kapılarını aralayan bir dikey tarım tesisi. Doğallıktan uzaklaşmadan, kapalı ortamda, dış dünyanın negatif etkilerinden uzakta üretilen besleyici yeşilliklerimiz, sofralarınıza lezzet ve tazelik getiriyor.<br /><br />
-              Skycrops, geleceğin tarım yöntemlerini bugün uygulayarak, sizleri sağlıklı bir yaşam için doğal ve taze alternatiflerle buluşturmayı hedefliyor. Sağlıklı yaşamın anahtarı, Skycrops'un yeşilliklerinde gizli.
-            </p>
+            <h1 className="text-4xl font-extrabold mb-4 leading-tight">{t('about_fresh_veggies_title')}</h1>
+            <p className="text-base text-muted-foreground">{t('about_fresh_veggies_desc1')}<br /><br />{t('about_fresh_veggies_desc2')}</p>
           </div>
         </div>
       </section>

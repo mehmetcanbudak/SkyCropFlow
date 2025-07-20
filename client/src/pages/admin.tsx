@@ -269,7 +269,11 @@ export default function AdminPage() {
                       <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => deleteProductMutation.mutate(product.id)}
+                        onClick={() => {
+                          if (window.confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
+                            deleteProductMutation.mutate(product.id);
+                          }
+                        }}
                         disabled={deleteProductMutation.isPending}
                       >
                         <Trash2 className="h-4 w-4" />

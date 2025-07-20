@@ -30,7 +30,7 @@ export default function Navbar() {
     { href: "/about", label: t("about_us") },
     { href: "/uretim", label: "Üretim" },
     { href: "/blog", label: t("blog") },
-    { href: "/contact", label: t("contacts") },
+    { href: "/contact", label: t("contact") },
   ];
 
   // Minimal menu button at top left when header is hidden

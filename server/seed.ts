@@ -35,7 +35,14 @@ export async function seedDatabase() {
     ];
 
     for (const cat of categoryData) {
-      await db.insert(categories).values(cat).onConflictDoNothing();
+      await db.insert(categories).values(cat).onConflictDoUpdate({
+        target: categories.slug,
+        set: {
+          name: cat.name,
+          description: cat.description,
+          color: cat.color
+        }
+      });
     }
 
     // Seed products with upsert logic

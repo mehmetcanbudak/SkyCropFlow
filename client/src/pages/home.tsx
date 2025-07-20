@@ -47,7 +47,7 @@ export default function Home() {
               <div className="relative">
                 <img
                   src={bundle1}
-                  alt="Fresh Greens Bundle"
+                  alt={t('bundle_fresh_greens_name')}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4">
@@ -57,8 +57,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">Taze Yeşillikler Paketi</h3>
-                <p className="text-base text-muted-foreground mb-4">Kıvırcık, roka ve tesisimizden taze ürünler.</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{t('bundle_fresh_greens_name')}</h3>
+                <p className="text-base text-muted-foreground mb-4">{t('bundle_fresh_greens_desc')}</p>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-primary">24,99 TL</span>
@@ -68,11 +68,11 @@ export default function Home() {
                 <DeliveryModal 
                   product={{
                     id: 1001,
-                    name: "Taze Yeşillikler Paketi",
+                    name: t('bundle_fresh_greens_name'),
                     slug: "taze-yesillikler-paketi",
                     price: 2499,
                     originalPrice: 3299,
-                    description: "Kıvırcık, roka ve tesisimizden taze ürünler.",
+                    description: t('bundle_fresh_greens_desc'),
                     imageUrl: bundle1,
                     category: "bundles",
                     inStock: true,
@@ -94,7 +94,7 @@ export default function Home() {
               <div className="relative">
                 <img
                   src={bundle1}
-                  alt="Garden Mix Bundle"
+                  alt={t('bundle_garden_mix_name')}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4">
@@ -104,8 +104,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">Küçük Aile Paketi</h3>
-                <p className="text-base text-muted-foreground mb-4">Kıvırcık, roka ve tesisimizden taze ürünler.</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{t('bundle_garden_mix_name')}</h3>
+                <p className="text-base text-muted-foreground mb-4">{t('bundle_garden_mix_desc')}</p>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-primary">34,99 TL</span>
@@ -115,11 +115,11 @@ export default function Home() {
                 <DeliveryModal 
                   product={{
                     id: 1002,
-                    name: "Küçük Aile Paketi",
+                    name: t('bundle_garden_mix_name'),
                     slug: "kucuk-aile-paketi",
                     price: 3999,
                     originalPrice: 5999,
-                    description: "Kıvırcık, roka ve tesisimizden taze ürünler.",
+                    description: t('bundle_garden_mix_desc'),
                     imageUrl: bundle1,
                     category: "bundles",
                     inStock: true,
@@ -141,7 +141,7 @@ export default function Home() {
               <div className="relative">
                 <img
                   src={bundle1}
-                  alt="Family Pack Bundle"
+                  alt={t('bundle_family_pack_name')}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4">
@@ -151,8 +151,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">Büyük Aile Paketi</h3>
-                <p className="text-base text-muted-foreground mb-4">Kıvırcık, roka ve tesisimizden taze ürünler.</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{t('bundle_family_pack_name')}</h3>
+                <p className="text-base text-muted-foreground mb-4">{t('bundle_family_pack_desc')}</p>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-primary">59,99 TL</span>
@@ -162,11 +162,11 @@ export default function Home() {
                 <DeliveryModal 
                   product={{
                     id: 1003,
-                    name: "Büyük Aile Paketi",
+                    name: t('bundle_family_pack_name'),
                     slug: "buyuk-aile-paketi",
                     price: 5999,
                     originalPrice: 8999,
-                    description: "Kıvırcık, roka ve tesisimizden taze ürünler.",
+                    description: t('bundle_family_pack_desc'),
                     imageUrl: bundle1,
                     category: "bundles",
                     inStock: true,
@@ -192,7 +192,7 @@ export default function Home() {
       <section className="py-20 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-6 text-center">Blog - Basında Biz</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-6 text-center">{t('blog_press_heading')}</h2>
             <Link href="/blog" className="text-primary font-medium hover:underline" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               {t('read_all_stories')}
             </Link>

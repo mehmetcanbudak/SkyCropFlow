@@ -22,12 +22,12 @@ export default function Footer() {
             <ul className="space-y-1 text-muted-foreground">
               <li>
                 <Link href="/shop" className="hover:text-primary transition-colors">
-                  Tüm Ürünler
+                  {t('all_products_footer')}
                 </Link>
               </li>
               <li>
                 <Link href="/shop?category=paketler" className="hover:text-primary transition-colors">
-                  Paketler
+                  {t('bundles_footer')}
                 </Link>
               </li>
             </ul>

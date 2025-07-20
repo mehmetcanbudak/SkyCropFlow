@@ -27,14 +27,14 @@ export default function HeroSection() {
 
   // Static product images and names for the homepage carousel
   const staticCarouselProducts = [
-    { name: 'Kıvırcık', imageUrl: kivircikImg },
-    { name: 'Fesleğen', imageUrl: feslegenImg },
-    { name: 'Maydanoz', imageUrl: maydanozImg },
-    { name: 'Lollo Rosso', imageUrl: lolloRossoImg },
-    { name: 'Reyhan', imageUrl: reyhanImg },
-    { name: 'Roka', imageUrl: rokaImg },
-    { name: 'Kekik', imageUrl: kekikImg },
-    { name: 'Yağlı Yaprak', imageUrl: yagliYaprakImg },
+    { name: t('product_kivircik_name'), imageUrl: kivircikImg },
+    { name: t('product_feslegen_name'), imageUrl: feslegenImg },
+    { name: t('product_maydanoz_name'), imageUrl: maydanozImg },
+    { name: t('product_lollo_rosso_name'), imageUrl: lolloRossoImg },
+    { name: t('product_reyhan_name'), imageUrl: reyhanImg },
+    { name: t('product_roka_name'), imageUrl: rokaImg },
+    { name: t('product_kekik_name'), imageUrl: kekikImg },
+    { name: t('product_yagli_yaprak_name'), imageUrl: yagliYaprakImg },
   ];
 
   return (

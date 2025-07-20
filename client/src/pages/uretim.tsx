@@ -3,8 +3,10 @@ import skycropsVideo from '@/assets/skycrops.mp4';
 import productionImg from '@/assets/bundle1.png';
 import tesisImg from '@/assets/tesis.png';
 import isoImg from '@/assets/iso.png';
+import { useTranslation } from 'react-i18next';
 
 export default function Uretim() {
+  const { t } = useTranslation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -25,13 +27,13 @@ export default function Uretim() {
 
       {/* Info Section (not overlaying video) */}
       <section className="bg-white py-16 px-4 flex flex-col items-center w-full">
-        <h2 className="text-5xl font-bold text-foreground mb-12 text-center">Skycrops Üretim Tesisi</h2>
+        <h2 className="text-5xl font-bold text-foreground mb-12 text-center">{t('production_facility_title')}</h2>
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
           {/* Circular Image */}
           <div className="flex-shrink-0">
             <img
               src={tesisImg}
-              alt="Skycrops üretim tesisi alanı"
+              alt={t('production_facility_image_alt')}
               className="rounded-full object-cover w-96 h-96 border-4 border-gray-200 shadow-lg"
             />
           </div>
@@ -39,22 +41,22 @@ export default function Uretim() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
             <div className="space-y-8">
               <div>
-                <h3 className="font-bold text-xl mb-2">Üretim Alanı</h3>
-                <p className="text-base text-muted-foreground">650 metrekare net üretim alanımızda 84 adet 8 katlı dikey tarım ünitesiyle yıl boyunca üretim ve hasat yapıyoruz. Bu sayede yıl boyunca taze ürünleri tüketiciyle buluşturuyoruz.</p>
+                <h3 className="font-bold text-xl mb-2">{t('production_area_title')}</h3>
+                <p className="text-base text-muted-foreground">{t('production_area_desc')}</p>
               </div>
               <div>
-                <h3 className="font-bold text-xl mb-2">Paketleme ve Sevkiyat</h3>
-                <p className="text-base text-muted-foreground">Üretim alanıyla bütünleşik, hijyenik paketleme ve sevkiyat alanı sebzelerin üretim tesisinden çıktıktan sonra mümkün olan en hızlı sürede tüketiciyle buluşturmasını sağlıyor. Şehir içinde yerleşik üretim tesisimizden toplanan ürünler zaman kaybetmeden tazeliklerini koruyarak sofralara ulaşıyor.</p>
+                <h3 className="font-bold text-xl mb-2">{t('packaging_shipping_title')}</h3>
+                <p className="text-base text-muted-foreground">{t('packaging_shipping_desc')}</p>
               </div>
             </div>
             <div className="space-y-8">
               <div>
-                <h3 className="font-bold text-xl mb-2">Teknoloji</h3>
-                <p className="text-base text-muted-foreground">Üstün Farmicca büyütme ledleri, iklim kontrol, gübre dozajlama ve enerji yönetim teknolojisi sayesinde bitkilerimiz doğal ortamlarında olduğu kadar mutlu ve sağlıklı büyüyor.</p>
+                <h3 className="font-bold text-xl mb-2">{t('technology_title')}</h3>
+                <p className="text-base text-muted-foreground">{t('technology_desc')}</p>
               </div>
               <div>
-                <h3 className="font-bold text-xl mb-2">Yeşil Enerji</h3>
-                <p className="text-base text-muted-foreground">Kurulu 1 mW güneş panelleri ve yağmur hasadı, kullandığımız enerji yönetim teknolojileri sayesinde doğaya saygı en önemli prensibimiz. Skycrops'ta yetiştirilen sebzeler geleneksel tarım yöntemlerine göre %94 daha az su tüketerek su kaynaklarının verimli kullanıyoruz.</p>
+                <h3 className="font-bold text-xl mb-2">{t('green_energy_title')}</h3>
+                <p className="text-base text-muted-foreground">{t('green_energy_desc')}</p>
               </div>
             </div>
           </div>
@@ -63,7 +65,7 @@ export default function Uretim() {
         <div className="mt-12 flex flex-col items-center w-full">
           <img
             src={isoImg}
-            alt="ISO Sertifikası"
+            alt={t('iso_certificate_alt')}
             className="w-full max-w-5xl h-auto mb-6 shadow-lg rounded-xl border border-gray-200 object-contain"
           />
         </div>
@@ -85,7 +87,7 @@ export default function Uretim() {
               </g>
             </svg>
           </a>
-          <span className="text-base text-muted-foreground text-center">Skycrops tesis kurulumu ve teknoloji altyapısı sağlayıcısı</span>
+          <span className="text-base text-muted-foreground text-center">{t('farmicca_note')}</span>
         </div>
       </section>
     </div>

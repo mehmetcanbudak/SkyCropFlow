@@ -44,7 +44,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-foreground mb-6">{t('contacts')}</h1>
+          <h1 className="text-5xl font-bold text-foreground mb-6">{t('contact')}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             {t('contact_subtitle')}
           </p>
@@ -54,7 +54,7 @@ export default function Contact() {
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Bize Mesaj Gönderin</CardTitle>
+              <CardTitle className="text-2xl">{t('contact_us_header')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -189,7 +189,7 @@ export default function Contact() {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Dikey tarım teknolojimizi yerinde görmek ister misiniz?
+                {t('facility_tours_desc')}
               </p>
               <Button variant="outline" size="lg">
                 {t('schedule_tour')}
