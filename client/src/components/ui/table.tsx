@@ -93,6 +93,9 @@ const TableHead = React.forwardRef<
   />
 ));
 TableHead.displayName = "TableHead";
+TableHead.propTypes = {
+  className: PropTypes.string,
+};
 
 const TableCell = React.forwardRef<
   HTMLTableCellElement,

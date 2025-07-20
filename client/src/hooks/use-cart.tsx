@@ -12,7 +12,7 @@ interface CartContextType {
   addToCart: (
     product: Product & { id: string | number },
     quantity: number,
-    metadata?: any,
+    metadata?: Record<string, unknown>,
   ) => void;
   removeFromCart: (productId: string | number) => void;
   updateQuantity: (productId: string | number, quantity: number) => void;

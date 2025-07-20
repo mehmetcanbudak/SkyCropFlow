@@ -3,6 +3,7 @@ import express, { type Request, Response } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedDatabase } from "./seed";
+import onFinished from "on-finished";
 
 const app = express();
 // Serve attached_assets as static files
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
-  res.on("finish", () => {
+  onFinished(res, () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
@@ -40,19 +41,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// Error-handling middleware (should be after all other app.use and routes)
+app.use((err: Error & { status?: number; statusCode?: number }, req: Request, res: Response, next: express.NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+});
+
 (async () => {
   // Seed the database on startup
   await seedDatabase();
 
   const server = await registerRoutes(app);
-
-  app.use((err: Error & { status?: number; statusCode?: number }, _req: Request, res: Response) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    res.status(status).json({ message });
-    throw err;
-  });
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route

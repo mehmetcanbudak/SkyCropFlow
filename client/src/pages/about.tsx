@@ -31,7 +31,7 @@ export default function About() {
               {t("about_fresh_veggies_title")}
             </h1>
             <p className="text-base text-muted-foreground">
-              {t("about_fresh_veggies_desc1").replace(/'/g, "&#39;").replace(/"/g, '&quot;')}<br /><br />{t("about_fresh_veggies_desc2").replace(/'/g, "&#39;").replace(/"/g, '&quot;')}
+              Skycrops is a vertical farming facility opening the doors to healthy living and fresh flavors. Our nutritious greens, grown indoors away from the negative effects of the outside world, bring taste and freshness to your table.<br /><br />By applying the farming methods of the future today, Skycrops aims to bring you natural and fresh alternatives for a healthy life. The key to healthy living is hidden in Skycrops&#39; greens.
             </p>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function About() {
               {t("about_fresh_veggies_title")}
             </h1>
             <p className="text-base text-muted-foreground">
-              {t("about_fresh_veggies_desc1").replace(/'/g, "&#39;").replace(/"/g, '&quot;')}<br /><br />{t("about_fresh_veggies_desc2").replace(/'/g, "&#39;").replace(/"/g, '&quot;')}
+              Skycrops is a vertical farming facility opening the doors to healthy living and fresh flavors. Our nutritious greens, grown indoors away from the negative effects of the outside world, bring taste and freshness to your table.<br /><br />By applying the farming methods of the future today, Skycrops aims to bring you natural and fresh alternatives for a healthy life. The key to healthy living is hidden in Skycrops&#39; greens.
             </p>
           </div>
         </div>
