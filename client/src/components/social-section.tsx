@@ -1,6 +1,8 @@
 import { Instagram, Youtube, Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function SocialSection() {
+  const { t } = useTranslation();
   const socialPlatforms = [
     {
       id: 1,
@@ -32,7 +34,7 @@ export default function SocialSection() {
     <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-foreground text-center mb-8">
-          Bizi Takip Edin
+          {t("follow_us")}
         </h2>
 
         <div className="flex justify-center">
