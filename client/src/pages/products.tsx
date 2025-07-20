@@ -42,14 +42,14 @@ export default function Products() {
   });
 
   const productOrder = [
-    "Kıvırcık",
-    "Fesleğen",
-    "Maydanoz",
-    "Lollo Rosso",
-    "Reyhan",
-    "Roka",
-    "Kekik",
-    "Yağlı Yaprak",
+    "kivircik",
+    "feslegen",
+    "maydanoz",
+    "lollo-rosso",
+    "reyhan",
+    "roka",
+    "kekik",
+    "yagli-yaprak",
   ];
 
   const filteredProducts = products

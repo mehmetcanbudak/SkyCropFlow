@@ -230,7 +230,7 @@ export default function Contact() {
         <div className="mt-16 text-center">
           <p className="text-muted-foreground">
             <a
-              href="/attached_assets/gida-guvenligi.pdf"
+              href="/attached_assets/gida-guvenligi-sertifikasi.pdf"
               className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"

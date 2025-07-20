@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
-import kivircikImg from "@/assets/Kıvırcık.png";
-import feslegenImg from "@/assets/Fesleğen.png";
-import maydanozImg from "@/assets/Maydanoz.png";
-import lolloRossoImg from "@/assets/Lollo Rosso.png";
-import reyhanImg from "@/assets/Reyhan.png";
-import rokaImg from "@/assets/Roka.png";
-import kekikImg from "@/assets/Kekik.png";
-import yagliYaprakImg from "@/assets/Yağlı Yaprak.png";
+import kivircikImg from "@/assets/kivircik.png";
+import feslegenImg from "@/assets/feslegen.png";
+import maydanozImg from "@/assets/maydanoz.png";
+import lolloRossoImg from "@/assets/lollo-rosso.png";
+import reyhanImg from "@/assets/reyhan.png";
+import rokaImg from "@/assets/roka.png";
+import kekikImg from "@/assets/kekik.png";
+import yagliYaprakImg from "@/assets/yagli-yaprak.png";
 import headerImg from "@/assets/header.png";
 
 export default function HeroSection() {
