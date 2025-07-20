@@ -1,40 +1,29 @@
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
-import type { Product } from "@shared/schema";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
-import kivircikImg from '@/assets/Kıvırcık.png';
-import feslegenImg from '@/assets/Fesleğen.png';
-import maydanozImg from '@/assets/Maydanoz.png';
-import lolloRossoImg from '@/assets/Lollo Rosso.png';
-import reyhanImg from '@/assets/Reyhan.png';
-import rokaImg from '@/assets/Roka.png';
-import kekikImg from '@/assets/Kekik.png';
-import yagliYaprakImg from '@/assets/Yağlı Yaprak.png';
-import headerImg from '@/assets/header.png';
+import kivircikImg from "@/assets/Kıvırcık.png";
+import feslegenImg from "@/assets/Fesleğen.png";
+import maydanozImg from "@/assets/Maydanoz.png";
+import lolloRossoImg from "@/assets/Lollo Rosso.png";
+import reyhanImg from "@/assets/Reyhan.png";
+import rokaImg from "@/assets/Roka.png";
+import kekikImg from "@/assets/Kekik.png";
+import yagliYaprakImg from "@/assets/Yağlı Yaprak.png";
+import headerImg from "@/assets/header.png";
 
 export default function HeroSection() {
   const { t } = useTranslation();
-  const { data: featuredProducts = [] } = useQuery<Product[]>({
-    queryKey: ["/api/products/featured"],
-  });
-
-  const { data: allProducts = [] } = useQuery<Product[]>({
-    queryKey: ["/api/products"],
-  });
-
-  const heroProduct = featuredProducts[0];
 
   // Static product images and names for the homepage carousel
   const staticCarouselProducts = [
-    { name: t('product_kivircik_name'), imageUrl: kivircikImg },
-    { name: t('product_feslegen_name'), imageUrl: feslegenImg },
-    { name: t('product_maydanoz_name'), imageUrl: maydanozImg },
-    { name: t('product_lollo_rosso_name'), imageUrl: lolloRossoImg },
-    { name: t('product_reyhan_name'), imageUrl: reyhanImg },
-    { name: t('product_roka_name'), imageUrl: rokaImg },
-    { name: t('product_kekik_name'), imageUrl: kekikImg },
-    { name: t('product_yagli_yaprak_name'), imageUrl: yagliYaprakImg },
+    { name: t("product_kivircik_name"), imageUrl: kivircikImg },
+    { name: t("product_feslegen_name"), imageUrl: feslegenImg },
+    { name: t("product_maydanoz_name"), imageUrl: maydanozImg },
+    { name: t("product_lollo_rosso_name"), imageUrl: lolloRossoImg },
+    { name: t("product_reyhan_name"), imageUrl: reyhanImg },
+    { name: t("product_roka_name"), imageUrl: rokaImg },
+    { name: t("product_kekik_name"), imageUrl: kekikImg },
+    { name: t("product_yagli_yaprak_name"), imageUrl: yagliYaprakImg },
   ];
 
   return (
@@ -43,17 +32,19 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-8 text-center">
-              {t('hero_title1')}<br />
-              <span className="text-primary">{t('hero_title2')}</span><br />
-              {t('hero_title3')}
+              {t("hero_title1")}
+              <br />
+              <span className="text-primary">{t("hero_title2")}</span>
+              <br />
+              {t("hero_title3")}
             </h1>
             <p className="text-base text-muted-foreground mb-6 text-center">
-              {heroProduct?.description || t('hero_description')}
+              {t("hero_description")}
             </p>
             <div className="flex justify-center mt-6">
               <Link href="/shop">
                 <Button size="lg" className="text-lg px-8 py-6">
-                  {t('shop_now')}
+                  {t("shop_now")}
                 </Button>
               </Link>
             </div>
@@ -79,7 +70,9 @@ export default function HeroSection() {
                 alt={product.name}
                 className="rounded-full shadow-lg w-48 h-48 object-cover border-4 border-white mb-4"
               />
-              <span className="font-semibold text-lg text-foreground text-center">{product.name}</span>
+              <span className="font-semibold text-lg text-foreground text-center">
+                {product.name}
+              </span>
             </div>
           ))}
         </div>

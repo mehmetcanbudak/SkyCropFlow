@@ -1,10 +1,10 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { 
+import {
   insertNewsletterSchema,
   insertArticleSchema,
-  insertProductSchema 
+  insertProductSchema,
 } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
@@ -21,11 +21,11 @@ const upload = multer({
       cb(null, path.join(__dirname, "../attached_assets"));
     },
     filename: (req: Request, file: Express.Multer.File, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       const ext = path.extname(file.originalname);
-      cb(null, file.fieldname + '-' + uniqueSuffix + ext);
-    }
-  })
+      cb(null, file.fieldname + "-" + uniqueSuffix + ext);
+    },
+  }),
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -34,7 +34,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const products = await storage.getProducts();
       res.json(products);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch products" });
     }
   });
@@ -43,7 +43,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const products = await storage.getFeaturedProducts();
       res.json(products);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch featured products" });
     }
   });
@@ -52,7 +52,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const products = await storage.getTopSalesProducts();
       res.json(products);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch top sales products" });
     }
   });
@@ -62,7 +62,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { category } = req.params;
       const products = await storage.getProductsByCategory(category);
       res.json(products);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch products by category" });
     }
   });
@@ -75,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Product not found" });
       }
       res.json(product);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch product" });
     }
   });
@@ -85,7 +85,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const categories = await storage.getCategories();
       res.json(categories);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch categories" });
     }
   });
@@ -98,7 +98,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Category not found" });
       }
       res.json(category);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch category" });
     }
   });
@@ -108,7 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const articles = await storage.getArticles();
       res.json(articles);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch articles" });
     }
   });
@@ -121,7 +121,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Article not found" });
       }
       res.json(article);
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to fetch article" });
     }
   });
@@ -130,22 +130,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/newsletter/subscribe", async (req, res) => {
     try {
       const validatedData = insertNewsletterSchema.parse(req.body);
-      
+
       // Check if email already exists
       const subscribers = await storage.getNewsletterSubscribers();
-      const existingSubscriber = subscribers.find(s => s.email === validatedData.email);
-      
+      const existingSubscriber = subscribers.find(
+        (s) => s.email === validatedData.email,
+      );
+
       if (existingSubscriber) {
         return res.status(400).json({ message: "Email already subscribed" });
       }
 
       const newsletter = await storage.subscribeNewsletter(validatedData);
-      res.json({ message: "Successfully subscribed to newsletter", newsletter });
+      res.json({
+        message: "Successfully subscribed to newsletter",
+        newsletter,
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: "Invalid email format",
-          errors: error.errors
+          errors: error.errors,
         });
       }
       res.status(500).json({ message: "Failed to subscribe to newsletter" });
@@ -160,9 +165,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(article);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: "Invalid article data",
-          errors: error.errors
+          errors: error.errors,
         });
       }
       res.status(500).json({ message: "Failed to create article" });
@@ -177,9 +182,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(article);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: "Invalid article data",
-          errors: error.errors
+          errors: error.errors,
         });
       }
       res.status(500).json({ message: "Failed to update article" });
@@ -191,7 +196,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const id = parseInt(req.params.id);
       await storage.deleteArticle(id);
       res.json({ message: "Article deleted successfully" });
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to delete article" });
     }
   });
@@ -203,9 +208,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(product);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: "Invalid product data",
-          errors: error.errors
+          errors: error.errors,
         });
       }
       res.status(500).json({ message: "Failed to create product" });
@@ -220,9 +225,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(product);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: "Invalid product data",
-          errors: error.errors
+          errors: error.errors,
         });
       }
       res.status(500).json({ message: "Failed to update product" });
@@ -234,7 +239,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const id = parseInt(req.params.id);
       await storage.deleteProduct(id);
       res.json({ message: "Product deleted successfully" });
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Failed to delete product" });
     }
   });

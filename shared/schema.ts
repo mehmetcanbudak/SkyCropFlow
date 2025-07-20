@@ -1,4 +1,11 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  serial,
+  integer,
+  boolean,
+  timestamp,
+} from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -34,7 +41,7 @@ export const articles = pgTable("articles", {
   content: text("content").notNull(),
   imageUrl: text("image_url").notNull(),
   publishedAt: text("published_at").notNull(), // ISO date string
-  type: text("type").notNull().default('blog'), // 'blog' or 'press'
+  type: text("type").notNull().default("blog"), // 'blog' or 'press'
 });
 
 export const newsletters = pgTable("newsletters", {

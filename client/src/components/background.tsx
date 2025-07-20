@@ -1,6 +1,8 @@
 import React from "react";
 
-const AnimatedBackground: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
+const AnimatedBackground: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => (
   <div className="absolute top-0 left-0 w-full h-[240px] z-0 overflow-hidden">
     <svg
       className="absolute top-0 left-0 w-full h-full animate-wave"
@@ -30,4 +32,4 @@ const AnimatedBackground: React.FC<{ children?: React.ReactNode }> = ({ children
   </div>
 );
 
-export default AnimatedBackground; 
+export default AnimatedBackground;

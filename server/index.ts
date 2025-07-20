@@ -1,12 +1,12 @@
-import 'dotenv/config';
-import express, { type Request, Response, NextFunction } from "express";
+import "dotenv/config";
+import express, { type Request, Response } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedDatabase } from "./seed";
 
 const app = express();
 // Serve attached_assets as static files
-app.use('/attached_assets', express.static('attached_assets'));
+app.use("/attached_assets", express.static("attached_assets"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -43,10 +43,10 @@ app.use((req, res, next) => {
 (async () => {
   // Seed the database on startup
   await seedDatabase();
-  
+
   const server = await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  app.use((err: Error & { status?: number; statusCode?: number }, _req: Request, res: Response) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
@@ -67,11 +67,14 @@ app.use((req, res, next) => {
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "127.0.0.1"
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  const port = parseInt(process.env.PORT || "5000", 10);
+  server.listen(
+    {
+      port,
+      host: "127.0.0.1",
+    },
+    () => {
+      log(`serving on port ${port}`);
+    },
+  );
 })();

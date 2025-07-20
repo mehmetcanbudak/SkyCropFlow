@@ -11,6 +11,7 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Frontend Architecture
+
 - **Framework**: React with TypeScript
 - **Routing**: Wouter for client-side routing
 - **State Management**: TanStack Query (React Query) for server state
@@ -18,6 +19,7 @@ Preferred communication style: Simple, everyday language.
 - **Build Tool**: Vite for development and building
 
 ### Backend Architecture
+
 - **Runtime**: Node.js with Express.js
 - **Language**: TypeScript
 - **API Style**: REST API
@@ -25,6 +27,7 @@ Preferred communication style: Simple, everyday language.
 - **Database**: PostgreSQL (configured for Neon)
 
 ### Project Structure
+
 ```
 ├── client/               # Frontend React application
 │   ├── src/
@@ -40,16 +43,19 @@ Preferred communication style: Simple, everyday language.
 ## Key Components
 
 ### Database Schema
+
 The application uses four main entities:
+
 - **Products**: Core product information with pricing, categories, and flags
 - **Categories**: Product categorization with styling metadata
 - **Articles**: Blog/journal content for marketing
 - **Newsletters**: Email subscription management
 
 ### API Endpoints
+
 - `GET /api/products` - Fetch all products
 - `GET /api/products/featured` - Get featured products
-- `GET /api/products/top-sales` - Get bestselling products  
+- `GET /api/products/top-sales` - Get bestselling products
 - `GET /api/products/category/:category` - Filter by category
 - `GET /api/products/:slug` - Get single product
 - `GET /api/categories` - Fetch all categories
@@ -58,6 +64,7 @@ The application uses four main entities:
 - `POST /api/newsletter/subscribe` - Newsletter subscription
 
 ### Admin API Endpoints (Content Management)
+
 - `POST /api/admin/articles` - Create new article
 - `PUT /api/admin/articles/:id` - Update existing article
 - `DELETE /api/admin/articles/:id` - Delete article
@@ -66,6 +73,7 @@ The application uses four main entities:
 - `DELETE /api/admin/products/:id` - Delete product
 
 ### UI Components
+
 - **Navigation**: Responsive navbar with mobile menu
 - **Product Display**: Product cards with featured layout options
 - **Category Browser**: Visual category grid with color coding
@@ -86,6 +94,7 @@ The application uses PostgreSQL for persistent data storage with automatic datab
 ## External Dependencies
 
 ### Frontend Dependencies
+
 - **UI Framework**: Radix UI primitives with shadcn/ui components
 - **Styling**: Tailwind CSS with custom CSS variables
 - **Data Fetching**: TanStack Query for caching and synchronization
@@ -93,6 +102,7 @@ The application uses PostgreSQL for persistent data storage with automatic datab
 - **Icons**: Lucide React icon library
 
 ### Backend Dependencies
+
 - **Database**: Neon PostgreSQL with connection pooling
 - **ORM**: Drizzle ORM with Zod schema validation
 - **Session Management**: Express sessions with PostgreSQL store
@@ -101,28 +111,33 @@ The application uses PostgreSQL for persistent data storage with automatic datab
 ## Deployment Strategy
 
 ### Development
+
 - **Frontend**: Vite dev server with HMR
 - **Backend**: tsx for running TypeScript directly
 - **Database**: Drizzle Kit for schema management and migrations
 
 ### Production Build
+
 - **Frontend**: Vite builds static assets to `dist/public`
 - **Backend**: esbuild bundles server code to `dist/index.js`
 - **Deployment**: Single Node.js process serves both API and static files
 
 ### Environment Configuration
+
 - `DATABASE_URL`: PostgreSQL connection string (required)
 - `NODE_ENV`: Environment mode (development/production)
 - Development includes Replit-specific tooling and error overlays
 
 ## Recent Changes (July 19, 2025)
 
-### Philosophy Section & Bundles Update  
+### Philosophy Section & Bundles Update
+
 - **Philosophy Migration**: Moved philosophy section from home page to about us page
 - **Bundles Section**: Replaced "top sales" section with 3 curated vegetable bundles (Fresh Greens, Garden Mix, Family Pack)
 - **Bundle Features**: Each bundle includes savings badges, detailed descriptions, and pricing
 
 ### Subscription & Delivery System
+
 - **Delivery Modal**: Advanced subscription and delivery timing system for all products and bundles
 - **Subscription Plans**: One-time, weekly (10% off), monthly (15% off), yearly (25% off) options
 - **Delivery Options**: Express (same day), Standard (1-2 days), Scheduled (3-5 days, free)
@@ -130,6 +145,7 @@ The application uses PostgreSQL for persistent data storage with automatic datab
 - **Product Integration**: All product pages and bundle cards use the new delivery selection system
 
 ### Database Schema Updates
+
 - **Bundles Table**: Added bundles schema with products array, savings, and pricing
 - **Cart Metadata**: Enhanced cart system to store subscription and delivery preferences
 - **Database Migration**: Successfully pushed schema changes to PostgreSQL

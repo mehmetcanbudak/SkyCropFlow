@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/cart-button";
-import { useTranslation } from 'react-i18next';
-import skycropsLogo from '@/assets/skycrops.svg';
+import { useTranslation } from "react-i18next";
+import skycropsLogo from "@/assets/skycrops.svg";
 
 export default function Navbar() {
   const [showHeader, setShowHeader] = useState(true);
@@ -21,8 +20,8 @@ export default function Navbar() {
         setShowHeader(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
@@ -60,7 +59,7 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`text-lg font-medium hover:text-primary transition-colors ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}
+                    className={`text-lg font-medium hover:text-primary transition-colors ${location === item.href ? "text-primary" : "text-muted-foreground"}`}
                     onClick={() => setShowMenu(false)}
                   >
                     {item.label}
@@ -71,16 +70,16 @@ export default function Navbar() {
                 {/* Language selector stacked above cart */}
                 <div className="flex flex-col gap-2 mb-2">
                   <button
-                    className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === 'tr' ? 'bg-primary text-white' : 'bg-white text-foreground'}`}
-                    onClick={() => i18n.changeLanguage('tr')}
-                    disabled={i18n.language === 'tr'}
+                    className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === "tr" ? "bg-primary text-white" : "bg-white text-foreground"}`}
+                    onClick={() => i18n.changeLanguage("tr")}
+                    disabled={i18n.language === "tr"}
                   >
                     TR
                   </button>
                   <button
-                    className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === 'en' ? 'bg-primary text-white' : 'bg-white text-foreground'}`}
-                    onClick={() => i18n.changeLanguage('en')}
-                    disabled={i18n.language === 'en'}
+                    className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === "en" ? "bg-primary text-white" : "bg-white text-foreground"}`}
+                    onClick={() => i18n.changeLanguage("en")}
+                    disabled={i18n.language === "en"}
                   >
                     EN
                   </button>
@@ -128,25 +127,31 @@ export default function Navbar() {
                 className="flex items-center gap-1 px-3 py-2 rounded-md border bg-white text-foreground hover:bg-gray-50 transition-all"
                 id="lang-menu-btn"
                 aria-haspopup="listbox"
-                aria-expanded={showLangMenu ? 'true' : 'false'}
+                aria-expanded={showLangMenu ? "true" : "false"}
                 onClick={() => setShowLangMenu((v: boolean) => !v)}
               >
-                {i18n.language === 'tr' ? 'TR' : 'EN'}
+                {i18n.language === "tr" ? "TR" : "EN"}
                 <ChevronDown className="h-4 w-4" />
               </button>
               {showLangMenu && (
                 <div className="absolute right-0 mt-2 w-24 bg-white border rounded shadow z-10">
                   <button
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                    onClick={() => { i18n.changeLanguage('tr'); setShowLangMenu(false); }}
-                    disabled={i18n.language === 'tr'}
+                    onClick={() => {
+                      i18n.changeLanguage("tr");
+                      setShowLangMenu(false);
+                    }}
+                    disabled={i18n.language === "tr"}
                   >
                     TR
                   </button>
                   <button
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                    onClick={() => { i18n.changeLanguage('en'); setShowLangMenu(false); }}
-                    disabled={i18n.language === 'en'}
+                    onClick={() => {
+                      i18n.changeLanguage("en");
+                      setShowLangMenu(false);
+                    }}
+                    disabled={i18n.language === "en"}
                   >
                     EN
                   </button>

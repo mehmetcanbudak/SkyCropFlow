@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,8 +23,8 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          DEFAULT: '#1e293b', // dark blue-gray
-          foreground: '#fff', // white text
+          DEFAULT: "#1e293b", // dark blue-gray
+          foreground: "#fff", // white text
         },
         secondary: {
           DEFAULT: "var(--secondary)",
@@ -80,8 +81,8 @@ export default {
           },
         },
         wave: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(-20px)' },
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(-20px)" },
         },
       },
       animation: {
@@ -91,5 +92,8 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwindcss-animate"),
+  ],
 } satisfies Config;
