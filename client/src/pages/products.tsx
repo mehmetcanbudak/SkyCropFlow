@@ -83,12 +83,14 @@ export default function Products() {
   }
 
   return (
-    <div className="min-h-screen pt-24 sm:pt-32">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-        {/* Main Heading */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
-          {t("shop")}
-        </h1>
+    <div className="flex-1 flex flex-col min-h-screen pt-32 sm:pt-40">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
+            {t("shop")}
+          </h1>
+        </div>
         <div className="flex flex-col md:flex-row">
           {/* Sidebar Filter - responsive */}
           <div className="w-full md:w-64 p-2 sm:p-4 md:p-8 border-b md:border-b-0 md:border-r border-gray-100">

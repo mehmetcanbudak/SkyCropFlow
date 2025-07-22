@@ -11,7 +11,7 @@ export default function Uretim() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-black flex flex-col">
+    <div className="flex-1 flex flex-col min-h-screen w-full bg-black">
       {/* Fullscreen video at the top only */}
       <div className="w-full h-56 xs:h-72 sm:h-screen overflow-hidden flex items-center justify-center bg-black relative">
         <video
@@ -24,8 +24,8 @@ export default function Uretim() {
         />
       </div>
       {/* Info Section (not overlaying video) */}
-      <section className="bg-white py-8 sm:py-16 px-2 sm:px-4 flex flex-col items-center w-full">
-        <h2 className="text-2xl sm:text-5xl font-bold text-foreground mb-6 sm:mb-12 text-center">
+      <section className="bg-white py-8 px-2 sm:px-4 flex flex-col items-center w-full">
+        <h2 className="text-2xl sm:text-5xl font-bold text-foreground mb-6 text-center">
           {t("production_facility_title")}
         </h2>
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 max-w-6xl mx-auto w-full">
@@ -78,11 +78,11 @@ export default function Uretim() {
           </div>
         </div>
         {/* Add ISO certificate image here */}
-        <div className="mt-8 sm:mt-12 flex flex-col items-center w-full">
+        <div className="mt-6 flex flex-col items-center w-full">
           <img
             src={isoImg}
             alt={t("iso_certificate_alt")}
-            className="w-full max-w-xs xs:max-w-md sm:max-w-5xl h-auto mb-4 sm:mb-6 shadow-lg rounded-xl border border-gray-200 object-contain"
+            className="w-full max-w-xs xs:max-w-md sm:max-w-5xl h-auto mb-4 shadow-lg rounded-xl border border-gray-200 object-contain"
           />
         </div>
         {/* Farmicca logo and note */}

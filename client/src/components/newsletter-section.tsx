@@ -40,7 +40,7 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-8 sm:py-16 bg-primary text-primary-foreground">
+    <section className="py-8 bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-2xl sm:text-4xl font-bold mb-2">{t("newsletter_heading")}</h2>
         <p className="text-base sm:text-xl mb-4 sm:mb-8 opacity-90">{t("newsletter_subtitle")}</p>

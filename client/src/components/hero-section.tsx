@@ -27,19 +27,22 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden pt-24 sm:pt-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden pt-32 sm:pt-40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">
-            <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 md:mb-8 text-center">
+            <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 md:mb-8 text-left">
               {t("hero_title1")}
               <br />
               <span className="text-primary">{t("hero_title2")}</span>
               <br />
               {t("hero_title3")}
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground mb-4 md:mb-6 text-center">
-              {t("hero_description")}
+            <p className="text-base sm:text-lg text-muted-foreground mb-4 md:mb-6 text-left leading-relaxed max-w-2xl">
+              <span className="font-semibold block mb-2">
+                {t("hero_description").split(". ")[0] + (t("hero_description").includes(".") ? "." : "")}
+              </span>
+              {t("hero_description").split(". ").slice(1).join(". ")}
             </p>
             <div className="flex justify-center mt-4 md:mt-6">
               <Link href="/shop">
@@ -49,7 +52,7 @@ export default function HeroSection() {
               </Link>
             </div>
           </div>
-          <div className="relative flex justify-center items-center mt-8 lg:mt-0">
+          <div className="relative flex justify-center items-center -mt-48">
             <img
               src={headerImg}
               alt="Skycrops Header"
@@ -59,7 +62,7 @@ export default function HeroSection() {
         </div>
       </div>
       {/* Product Carousel */}
-      <div className="pb-8 md:pb-12">
+      <div className="pb-8">
         <div className="flex space-x-4 sm:space-x-6 px-2 sm:px-4 overflow-x-auto scrollbar-hide">
           {staticCarouselProducts.map((product, idx) => (
             <div key={idx} className="flex-shrink-0 flex flex-col items-center">

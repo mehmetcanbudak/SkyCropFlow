@@ -36,10 +36,10 @@ export default function Journal() {
   }
 
   return (
-    <div className="min-h-screen pt-32">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="flex-1 flex flex-col min-h-screen pt-32 sm:pt-40">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-6">
           <h1 className="text-5xl font-bold text-foreground mb-6 text-center">
             {t("blog")}
           </h1>
@@ -133,8 +133,8 @@ export default function Journal() {
       </div>
 
       {/* Basında Biz Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="mb-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-6">
           <h2 className="text-4xl font-bold text-foreground mb-6 text-center">
             Basında Biz
           </h2>

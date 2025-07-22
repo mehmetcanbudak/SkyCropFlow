@@ -5,12 +5,12 @@ import skycropsLogo from "@/assets/skycrops.svg";
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="bg-card border-t">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-6">
+    <footer className="bg-card border-t mt-auto">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 pt-3 pb-0">
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 sm:flex-wrap">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-0 lg:flex-nowrap">
           {/* Left: Logo and tagline */}
-          <div className="flex flex-row items-center gap-2 min-w-0 max-w-full sm:max-w-[420px] flex-shrink">
+          <div className="flex flex-row items-center gap-4 min-w-0 max-w-full sm:max-w-[420px] flex-shrink mb-4 lg:mb-0">
             <img src={skycropsLogo} alt="SKYCROPS" className="h-8 w-auto flex-shrink-0" />
             <p className="text-muted-foreground mb-0 text-xs sm:text-sm whitespace-normal break-words" style={{maxWidth: '260px'}}>{t("footer_tagline")}</p>
           </div>
@@ -82,8 +82,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t mt-2 pt-2 text-center text-muted-foreground text-xs sm:text-sm">
-          <p>&copy; 2025 Skycrops. {t("all_rights_reserved")}</p>
+        <div className="border-t mt-2 pt-2 text-center text-muted-foreground text-xs sm:text-sm pb-0 mb-0">
+          <p className="pb-0 mb-0">&copy; 2025 Skycrops. {t("all_rights_reserved")}</p>
         </div>
       </div>
     </footer>

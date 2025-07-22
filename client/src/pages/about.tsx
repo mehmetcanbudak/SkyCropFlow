@@ -26,8 +26,8 @@ export default function About() {
         />
         {/* Desktop: Text over image */}
         <div className="hidden md:flex absolute inset-0 items-center justify-end px-2 sm:px-4 md:px-16 mt-4 sm:mt-12">
-          <div className="max-w-2xl text-right text-black ml-auto">
-            <h1 className="text-2xl sm:text-5xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight">
+          <div className="max-w-2xl text-left text-black">
+            <h1 className="text-2xl sm:text-5xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight text-center">
               {t("about_fresh_veggies_title")}
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground">
@@ -37,8 +37,8 @@ export default function About() {
         </div>
         {/* Mobile: Text below image */}
         <div className="block md:hidden w-full px-2 sm:px-4 py-4 sm:py-8 bg-white/80">
-          <div className="max-w-2xl mx-auto text-center text-black">
-            <h1 className="text-xl sm:text-4xl font-extrabold mb-2 sm:mb-4 leading-tight">
+          <div className="max-w-2xl text-left text-black">
+            <h1 className="text-xl sm:text-4xl font-extrabold mb-2 sm:mb-4 leading-tight text-center">
               {t("about_fresh_veggies_title")}
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground">

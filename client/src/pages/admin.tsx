@@ -155,7 +155,7 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 pt-32">
+    <div className="container mx-auto p-6 pt-32 sm:pt-40">
       <h1 className="text-3xl font-bold mb-6">{t("admin_panel_title")}</h1>
 
       <Tabs defaultValue="articles" className="space-y-6">

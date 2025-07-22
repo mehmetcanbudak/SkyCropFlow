@@ -42,8 +42,8 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-muted/50 pt-24 sm:pt-32">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="flex-1 flex flex-col min-h-screen pt-32 sm:pt-40">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-16">
           <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
@@ -58,7 +58,7 @@ export default function Contact() {
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg sm:text-2xl">
+              <CardTitle className="text-lg sm:text-2xl text-center">
                 {t("contact_us_header")}
               </CardTitle>
             </CardHeader>
@@ -152,7 +152,7 @@ export default function Contact() {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg sm:text-2xl">
+                <CardTitle className="text-lg sm:text-2xl text-center">
                   {t("contact_information")}
                 </CardTitle>
               </CardHeader>

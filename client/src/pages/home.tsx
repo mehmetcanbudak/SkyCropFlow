@@ -16,14 +16,14 @@ export default function Home() {
   });
 
   return (
-    <div>
+    <div className="flex-1 flex flex-col">
       <HeroSection />
       {/* <CategorySection /> */}
 
       {/* Bundles Section */}
-      <section className="py-10 sm:py-20 bg-muted/50">
+      <section className="py-8 bg-muted/50">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="text-center mb-8 sm:mb-16">
+          <div className="text-center mb-4">
             <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
               {t("bundles_heading")}
             </h2>
@@ -206,9 +206,9 @@ export default function Home() {
       </section>
 
       {/* Journal Preview */}
-      <section className="py-10 sm:py-20 bg-muted/50">
+      <section className="py-8 bg-muted/50">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-16 gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
             <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
               {t("blog_press_heading")}
             </h2>
@@ -221,17 +221,15 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="flex flex-row overflow-x-auto gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 scrollbar-hide snap-x snap-mandatory pl-4 pr-4 sm:pl-0 sm:pr-0">
-            {articles.slice(0, 3).map((article) => (
+          <div className="flex flex-row overflow-x-auto gap-4 scrollbar-hide snap-x snap-mandatory pl-4 pr-4">
+            {articles.map((article) => (
               <Link
                 key={article.id}
                 href={`/blog/${article.slug}`}
-                className="w-72 min-w-[16rem] max-w-xs flex-shrink-0 mr-4 last:mr-0 snap-center sm:w-full sm:min-w-0 sm:max-w-none"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow w-72 min-w-[16rem] max-w-xs flex-shrink-0 mr-4 last:mr-0 snap-center"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
-                <article
-                  className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 sm:rounded-2xl sm:shadow-lg sm:border-0 sm:hover:shadow-xl sm:transition-shadow sm:overflow-hidden"
-                >
+                <article>
                   <img
                     src={article.imageUrl}
                     alt={article.title}
@@ -241,7 +239,7 @@ export default function Home() {
                     <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
                       {new Date(article.publishedAt).toLocaleDateString(
                         i18n.language,
-                        { year: "numeric", month: "short", day: "numeric" },
+                        { year: 'numeric', month: 'short', day: 'numeric' },
                       )}
                     </p>
                     <h3 className="text-base sm:text-lg font-bold text-foreground mb-1 sm:mb-2">
