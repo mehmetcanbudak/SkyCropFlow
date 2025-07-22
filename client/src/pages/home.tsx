@@ -21,52 +21,50 @@ export default function Home() {
       {/* <CategorySection /> */}
 
       {/* Bundles Section */}
-      <section className="py-20 bg-muted/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-6 text-center">
+      <section className="py-10 sm:py-20 bg-muted/50">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="text-center mb-8 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
               {t("bundles_heading")}
             </h2>
-            <p className="text-base text-muted-foreground mb-6 text-center">
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 text-center">
               {t("bundles_subheading")}
             </p>
           </div>
 
           {/* Bundle Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 justify-items-center">
+          <div className="flex flex-row overflow-x-auto gap-4 md:grid md:grid-cols-3 md:gap-8 scrollbar-hide snap-x snap-mandatory pl-4 pr-4 md:pl-0 md:pr-0">
             {/* Fresh Greens Bundle */}
-            <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
-              <div className="relative">
+            <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow w-72 min-w-[16rem] max-w-xs flex-shrink-0 flex flex-col p-4 mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-none md:rounded-2xl md:shadow-lg md:hover:shadow-xl md:transition-shadow md:overflow-hidden">
+              <div className="relative mb-3">
                 <img
                   src={bundle1}
                   alt={t("bundle_fresh_greens_name")}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-32 xs:h-40 object-cover rounded-lg group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-2 right-2">
                   <span
-                    className="px-3 py-1 rounded-full text-sm font-medium"
+                    className="px-3 py-1 rounded-full text-xs font-medium"
                     style={{ backgroundColor: "#B6D2DC", color: "#1e293b" }}
                   >
                     {t("save_percent", { percent: 25 })}
                   </span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+              <div className="flex flex-col flex-1">
+                <h3 className="text-lg font-bold text-foreground mb-2">
                   {t("bundle_fresh_greens_name")}
                 </h3>
-                <p className="text-base text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-2">
                   {t("bundle_fresh_greens_desc")}
                 </p>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-primary">
-                      24,99 TL
-                    </span>
-                    <span className="text-lg text-muted-foreground line-through">
-                      32,99 TL
-                    </span>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold text-primary">
+                    24,99 TL
+                  </span>
+                  <span className="text-base text-muted-foreground line-through">
+                    32,99 TL
+                  </span>
                 </div>
                 <DeliveryModal
                   product={{
@@ -85,7 +83,7 @@ export default function Home() {
                     isNewArrival: null,
                   }}
                 >
-                  <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+                  <button className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors mt-2">
                     {t("choose_delivery")}
                   </button>
                 </DeliveryModal>
@@ -93,38 +91,36 @@ export default function Home() {
             </div>
 
             {/* Garden Mix Bundle */}
-            <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
-              <div className="relative">
+            <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow w-72 min-w-[16rem] max-w-xs flex-shrink-0 flex flex-col p-4 mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-none md:rounded-2xl md:shadow-lg md:hover:shadow-xl md:transition-shadow md:overflow-hidden">
+              <div className="relative mb-3">
                 <img
                   src={bundle1}
                   alt={t("bundle_garden_mix_name")}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-32 xs:h-40 object-cover rounded-lg group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-2 right-2">
                   <span
-                    className="px-3 py-1 rounded-full text-sm font-medium"
+                    className="px-3 py-1 rounded-full text-xs font-medium"
                     style={{ backgroundColor: "#B6D2DC", color: "#1e293b" }}
                   >
                     {t("save_percent", { percent: 30 })}
                   </span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+              <div className="flex flex-col flex-1">
+                <h3 className="text-lg font-bold text-foreground mb-2">
                   {t("bundle_garden_mix_name")}
                 </h3>
-                <p className="text-base text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-2">
                   {t("bundle_garden_mix_desc")}
                 </p>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-primary">
-                      34,99 TL
-                    </span>
-                    <span className="text-lg text-muted-foreground line-through">
-                      49,99 TL
-                    </span>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold text-primary">
+                    34,99 TL
+                  </span>
+                  <span className="text-base text-muted-foreground line-through">
+                    49,99 TL
+                  </span>
                 </div>
                 <DeliveryModal
                   product={{
@@ -143,7 +139,7 @@ export default function Home() {
                     isNewArrival: null,
                   }}
                 >
-                  <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+                  <button className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors mt-2">
                     {t("choose_delivery")}
                   </button>
                 </DeliveryModal>
@@ -151,38 +147,36 @@ export default function Home() {
             </div>
 
             {/* Family Pack Bundle */}
-            <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group col-span-2 md:col-span-1 max-w-sm md:max-w-none">
-              <div className="relative">
+            <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow w-72 min-w-[16rem] max-w-xs flex-shrink-0 flex flex-col p-4 mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-none md:rounded-2xl md:shadow-lg md:hover:shadow-xl md:transition-shadow md:overflow-hidden">
+              <div className="relative mb-3">
                 <img
                   src={bundle1}
                   alt={t("bundle_family_pack_name")}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-32 xs:h-40 object-cover rounded-lg group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-2 right-2">
                   <span
-                    className="px-3 py-1 rounded-full text-sm font-medium"
+                    className="px-3 py-1 rounded-full text-xs font-medium"
                     style={{ backgroundColor: "#B6D2DC", color: "#1e293b" }}
                   >
                     {t("save_percent", { percent: 35 })}
                   </span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+              <div className="flex flex-col flex-1">
+                <h3 className="text-lg font-bold text-foreground mb-2">
                   {t("bundle_family_pack_name")}
                 </h3>
-                <p className="text-base text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-2">
                   {t("bundle_family_pack_desc")}
                 </p>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-primary">
-                      59,99 TL
-                    </span>
-                    <span className="text-lg text-muted-foreground line-through">
-                      89,99 TL
-                    </span>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold text-primary">
+                    59,99 TL
+                  </span>
+                  <span className="text-base text-muted-foreground line-through">
+                    89,99 TL
+                  </span>
                 </div>
                 <DeliveryModal
                   product={{
@@ -201,7 +195,7 @@ export default function Home() {
                     isNewArrival: null,
                   }}
                 >
-                  <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+                  <button className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors mt-2">
                     {t("choose_delivery")}
                   </button>
                 </DeliveryModal>
@@ -212,10 +206,10 @@ export default function Home() {
       </section>
 
       {/* Journal Preview */}
-      <section className="py-20 bg-muted/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-6 text-center">
+      <section className="py-10 sm:py-20 bg-muted/50">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-16 gap-4">
+            <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
               {t("blog_press_heading")}
             </h2>
             <Link
@@ -227,32 +221,38 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-row overflow-x-auto gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 scrollbar-hide snap-x snap-mandatory pl-4 pr-4 sm:pl-0 sm:pr-0">
             {articles.slice(0, 3).map((article) => (
-              <article
+              <Link
                 key={article.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                href={`/blog/${article.slug}`}
+                className="w-72 min-w-[16rem] max-w-xs flex-shrink-0 mr-4 last:mr-0 snap-center sm:w-full sm:min-w-0 sm:max-w-none"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               >
-                <img
-                  src={article.imageUrl}
-                  alt={article.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {new Date(article.publishedAt).toLocaleDateString(
-                      i18n.language,
-                      { year: "numeric", month: "short", day: "numeric" },
-                    )}
-                  </p>
-                  <h3 className="text-lg font-bold text-foreground mb-2">
-                    {article.title}
-                  </h3>
-                  <p className="text-base text-muted-foreground mb-2">
-                    {article.excerpt}
-                  </p>
-                </div>
-              </article>
+                <article
+                  className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 sm:rounded-2xl sm:shadow-lg sm:border-0 sm:hover:shadow-xl sm:transition-shadow sm:overflow-hidden"
+                >
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-32 xs:h-40 sm:h-48 object-cover"
+                  />
+                  <div className="p-4 sm:p-6">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
+                      {new Date(article.publishedAt).toLocaleDateString(
+                        i18n.language,
+                        { year: "numeric", month: "short", day: "numeric" },
+                      )}
+                    </p>
+                    <h3 className="text-base sm:text-lg font-bold text-foreground mb-1 sm:mb-2">
+                      {article.title}
+                    </h3>
+                    <p className="text-xs sm:text-base text-muted-foreground mb-1 sm:mb-2">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -260,6 +260,7 @@ export default function Home() {
 
       <NewsletterSection />
       <SocialSection />
+    
     </div>
   );
 }

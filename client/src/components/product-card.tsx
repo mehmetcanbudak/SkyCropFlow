@@ -36,26 +36,26 @@ export default function ProductCard({
 
   if (featured) {
     return (
-      <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="p-12">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
+      <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="p-6 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-4">
               {product.name}
             </h3>
-            <div className="flex items-center gap-4 mb-4">
-              <p className="text-xl text-primary font-semibold">
+            <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
+              <p className="text-lg md:text-xl text-primary font-semibold">
                 {formatPrice(product.price)}
               </p>
               {product.originalPrice && (
-                <p className="text-lg text-muted-foreground line-through">
+                <p className="text-base md:text-lg text-muted-foreground line-through">
                   {formatPrice(product.originalPrice)}
                 </p>
               )}
             </div>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-8 leading-relaxed">
               {product.description}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-2 md:gap-4">
               <Link href={`/products/${product.slug}`}>
                 <Button size="lg">{t("view_details")}</Button>
               </Link>
@@ -74,7 +74,7 @@ export default function ProductCard({
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-40 xs:h-56 sm:h-64 md:h-full object-cover"
             />
           </div>
         </div>
@@ -89,10 +89,10 @@ export default function ProductCard({
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-32 xs:h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           />
           {(product.isNewArrival || product.isBestseller) && (
-            <div className="absolute top-4 right-4">
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
               {product.isNewArrival && (
                 <Badge
                   variant="secondary"
@@ -112,22 +112,22 @@ export default function ProductCard({
             </div>
           )}
         </div>
-        <div className="p-6">
-          <h4 className="font-bold text-lg text-foreground mb-2">
+        <div className="p-4 sm:p-6">
+          <h4 className="font-bold text-base sm:text-lg text-foreground mb-1 sm:mb-2">
             {product.name}
           </h4>
           {product.flavor && (
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-4">
               Flavor: {product.flavor}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <p className="text-xl font-bold text-primary">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <p className="text-lg sm:text-xl font-bold text-primary">
                 {formatPrice(product.price)}
               </p>
               {product.originalPrice && (
-                <p className="text-sm text-muted-foreground line-through">
+                <p className="text-xs sm:text-sm text-muted-foreground line-through">
                   {formatPrice(product.originalPrice)}
                 </p>
               )}

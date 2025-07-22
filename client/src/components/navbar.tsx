@@ -98,15 +98,25 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16 w-full">
+        <div className="flex items-center h-16 w-full justify-between">
           {/* Logo on the left */}
           <div className="flex-shrink-0 flex items-center min-w-[120px]">
             <Link href="/" className="flex items-center space-x-2">
               <img src={skycropsLogo} alt="SKYCROPS" className="h-10 w-auto" />
             </Link>
           </div>
-          {/* Centered nav links */}
-          <div className="flex-1 flex justify-center">
+          {/* Hamburger for mobile */}
+          <div className="flex md:hidden">
+            <button
+              className="p-2 rounded-md border bg-white text-primary hover:bg-gray-50"
+              onClick={() => setShowMenu(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+          </div>
+          {/* Centered nav links (hidden on mobile) */}
+          <div className="hidden md:flex flex-1 justify-center">
             <div className="flex items-center space-x-8">
               {navItems.map((item) => (
                 <Link
@@ -119,9 +129,8 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          {/* Right: language selector and cart */}
-          <div className="flex items-center gap-2">
-            {/* Language selector dropdown */}
+          {/* Right: language selector and cart (stacked on mobile) */}
+          <div className="hidden md:flex items-center gap-2">
             <div className="relative">
               <button
                 className="flex items-center gap-1 px-3 py-2 rounded-md border bg-white text-foreground hover:bg-gray-50 transition-all"
@@ -158,9 +167,56 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            {/* Cart button */}
             <CartButton />
           </div>
+          {/* Mobile menu overlay */}
+          {showMenu && (
+            <div className="fixed inset-0 z-50 flex md:hidden">
+              <div className="bg-white min-w-[180px] max-w-[240px] h-full shadow-lg p-6 flex flex-col">
+                <button
+                  className="self-end mb-4"
+                  onClick={() => setShowMenu(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="h-6 w-6 text-primary" />
+                </button>
+                {/* Nav links */}
+                <nav className="flex flex-col gap-4 mb-8">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`text-lg font-medium hover:text-primary transition-colors ${location === item.href ? "text-primary" : "text-muted-foreground"}`}
+                      onClick={() => setShowMenu(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+                <div className="mt-auto flex flex-col gap-2">
+                  {/* Language selector stacked above cart */}
+                  <div className="flex flex-col gap-2 mb-2">
+                    <button
+                      className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === "tr" ? "bg-primary text-white" : "bg-white text-foreground"}`}
+                      onClick={() => i18n.changeLanguage("tr")}
+                      disabled={i18n.language === "tr"}
+                    >
+                      TR
+                    </button>
+                    <button
+                      className={`w-full px-3 py-2 rounded-md border text-center ${i18n.language === "en" ? "bg-primary text-white" : "bg-white text-foreground"}`}
+                      onClick={() => i18n.changeLanguage("en")}
+                      disabled={i18n.language === "en"}
+                    >
+                      EN
+                    </button>
+                  </div>
+                  <CartButton />
+                </div>
+              </div>
+              <div className="flex-1" onClick={() => setShowMenu(false)} />
+            </div>
+          )}
         </div>
       </div>
     </nav>

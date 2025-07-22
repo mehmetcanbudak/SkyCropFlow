@@ -42,23 +42,23 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-muted/50 pt-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-muted/50 pt-24 sm:pt-32">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-foreground mb-6">
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             {t("contact")}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             {t("contact_subtitle")}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-start">
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">
+              <CardTitle className="text-lg sm:text-2xl">
                 {t("contact_us_header")}
               </CardTitle>
             </CardHeader>
@@ -152,11 +152,11 @@ export default function Contact() {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl">
+                <CardTitle className="text-lg sm:text-2xl">
                   {t("contact_information")}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4 sm:space-y-6">
                 <div className="flex items-start space-x-4">
                   <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
@@ -208,15 +208,15 @@ export default function Contact() {
         </div>
 
         {/* Facility Tours - Full Width */}
-        <div className="mt-16">
+        <div className="mt-10 sm:mt-16">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl text-center">
+              <CardTitle className="text-lg sm:text-2xl text-center">
                 {t("facility_tours")}
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              <p className="text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto">
                 {t("facility_tours_desc")}
               </p>
               <Button variant="outline" size="lg">
@@ -227,7 +227,7 @@ export default function Contact() {
         </div>
 
         {/* Quality Policy */}
-        <div className="mt-16 text-center">
+        <div className="mt-10 sm:mt-16 text-center">
           <p className="text-muted-foreground">
             <a
               href="/attached_assets/gida-guvenligi-sertifikasi.pdf"

@@ -4,54 +4,53 @@ import skycropsImg from "@/assets/skycrops.png";
 export default function About() {
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen pt-40">
+    <div className="min-h-screen pt-32 sm:pt-40">
       {/* Page Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-foreground mb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-10 sm:pb-16">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             {t("about_header")}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             {t("about_hero")}
           </p>
         </div>
       </div>
       {/* Hero Section */}
-      <section className="relative w-full min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-primary/10 to-accent/10 p-0 mt-8">
+      <section className="relative w-full min-h-[220px] sm:min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-primary/10 to-accent/10 p-0 mt-4 sm:mt-8">
         {/* Image */}
         <img
           src={skycropsImg}
           alt={t("about_hero_image_alt")}
-          className="w-full h-[400px] md:h-[500px] object-cover object-center"
+          className="w-full h-[180px] xs:h-[240px] sm:h-[400px] md:h-[500px] object-cover object-center"
         />
         {/* Desktop: Text over image */}
-        <div className="hidden md:flex absolute inset-0 items-center justify-end px-4 md:px-16 mt-12">
+        <div className="hidden md:flex absolute inset-0 items-center justify-end px-2 sm:px-4 md:px-16 mt-4 sm:mt-12">
           <div className="max-w-2xl text-right text-black ml-auto">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-5xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight">
               {t("about_fresh_veggies_title")}
             </h1>
-            <p className="text-base text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Skycrops is a vertical farming facility opening the doors to healthy living and fresh flavors. Our nutritious greens, grown indoors away from the negative effects of the outside world, bring taste and freshness to your table.<br /><br />By applying the farming methods of the future today, Skycrops aims to bring you natural and fresh alternatives for a healthy life. The key to healthy living is hidden in Skycrops&#39; greens.
             </p>
           </div>
         </div>
         {/* Mobile: Text below image */}
-        <div className="block md:hidden w-full px-4 py-8 bg-white/80">
+        <div className="block md:hidden w-full px-2 sm:px-4 py-4 sm:py-8 bg-white/80">
           <div className="max-w-2xl mx-auto text-center text-black">
-            <h1 className="text-4xl font-extrabold mb-4 leading-tight">
+            <h1 className="text-xl sm:text-4xl font-extrabold mb-2 sm:mb-4 leading-tight">
               {t("about_fresh_veggies_title")}
             </h1>
-            <p className="text-base text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Skycrops is a vertical farming facility opening the doors to healthy living and fresh flavors. Our nutritious greens, grown indoors away from the negative effects of the outside world, bring taste and freshness to your table.<br /><br />By applying the farming methods of the future today, Skycrops aims to bring you natural and fresh alternatives for a healthy life. The key to healthy living is hidden in Skycrops&#39; greens.
             </p>
           </div>
         </div>
       </section>
-
       {/* Philosophy Section - Updated to 2x2 Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="py-10 sm:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             {/* taze, sağlıklı */}
             <div className="bg-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full">
               <div>
@@ -1168,11 +1167,10 @@ export default function About() {
           </div>
         </div>
       </section>
-
       {/* Features Grid */}
-      <section className="py-20 bg-muted/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <section className="py-10 sm:py-20 bg-muted/50">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
             <div className="text-center">
               <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl">🌱</span>

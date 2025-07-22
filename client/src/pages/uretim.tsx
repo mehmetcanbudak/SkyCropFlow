@@ -13,7 +13,7 @@ export default function Uretim() {
   return (
     <div className="min-h-screen w-full bg-black flex flex-col">
       {/* Fullscreen video at the top only */}
-      <div className="w-full h-screen overflow-hidden flex items-center justify-center bg-black relative">
+      <div className="w-full h-56 xs:h-72 sm:h-screen overflow-hidden flex items-center justify-center bg-black relative">
         <video
           src={skycropsVideo}
           autoPlay
@@ -23,23 +23,22 @@ export default function Uretim() {
           className="w-full h-full object-cover"
         />
       </div>
-
       {/* Info Section (not overlaying video) */}
-      <section className="bg-white py-16 px-4 flex flex-col items-center w-full">
-        <h2 className="text-5xl font-bold text-foreground mb-12 text-center">
+      <section className="bg-white py-8 sm:py-16 px-2 sm:px-4 flex flex-col items-center w-full">
+        <h2 className="text-2xl sm:text-5xl font-bold text-foreground mb-6 sm:mb-12 text-center">
           {t("production_facility_title")}
         </h2>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 max-w-6xl mx-auto w-full">
           {/* Circular Image */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 mb-4 md:mb-0">
             <img
               src={tesisImg}
               alt={t("production_facility_image_alt")}
-              className="rounded-full object-cover w-96 h-96 border-4 border-gray-200 shadow-lg"
+              className="rounded-full object-cover w-40 h-40 xs:w-56 xs:h-56 sm:w-96 sm:h-96 border-4 border-gray-200 shadow-lg"
             />
           </div>
           {/* Text Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 w-full max-w-3xl">
             <div className="space-y-8">
               <div>
                 <h3 className="font-bold text-xl mb-2">
@@ -79,15 +78,15 @@ export default function Uretim() {
           </div>
         </div>
         {/* Add ISO certificate image here */}
-        <div className="mt-12 flex flex-col items-center w-full">
+        <div className="mt-8 sm:mt-12 flex flex-col items-center w-full">
           <img
             src={isoImg}
             alt={t("iso_certificate_alt")}
-            className="w-full max-w-5xl h-auto mb-6 shadow-lg rounded-xl border border-gray-200 object-contain"
+            className="w-full max-w-xs xs:max-w-md sm:max-w-5xl h-auto mb-4 sm:mb-6 shadow-lg rounded-xl border border-gray-200 object-contain"
           />
         </div>
         {/* Farmicca logo and note */}
-        <div className="mt-12 flex flex-col items-center">
+        <div className="mt-8 sm:mt-12 flex flex-col items-center">
           {/* Farmicca SVG logo as a link */}
           <a
             href="https://www.farmicca.com/"
@@ -104,7 +103,7 @@ export default function Uretim() {
               role="presentation"
               aria-hidden="true"
               aria-label=""
-              className="w-48 h-auto mx-auto"
+              className="w-32 sm:w-48 h-auto mx-auto"
               style={{ color: "black" }}
             >
               <g>
@@ -156,7 +155,7 @@ export default function Uretim() {
               </g>
             </svg>
           </a>
-          <span className="text-base text-muted-foreground text-center">
+          <span className="text-xs sm:text-base text-muted-foreground text-center">
             {t("farmicca_note")}
           </span>
         </div>

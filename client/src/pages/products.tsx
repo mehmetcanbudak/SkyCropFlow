@@ -83,19 +83,19 @@ export default function Products() {
   }
 
   return (
-    <div className="min-h-screen pt-32">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen pt-24 sm:pt-32">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
         {/* Main Heading */}
-        <h1 className="text-4xl font-bold text-foreground mb-6 text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
           {t("shop")}
         </h1>
         <div className="flex flex-col md:flex-row">
           {/* Sidebar Filter - responsive */}
-          <div className="w-full md:w-64 p-4 md:p-8 border-b md:border-b-0 md:border-r border-gray-100">
-            <div className="mb-6">
+          <div className="w-full md:w-64 p-2 sm:p-4 md:p-8 border-b md:border-b-0 md:border-r border-gray-100">
+            <div className="mb-4 sm:mb-6">
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center justify-between w-full text-left font-medium text-gray-900 uppercase tracking-wider text-sm"
+                className="flex items-center justify-between w-full text-left font-medium text-gray-900 uppercase tracking-wider text-xs sm:text-sm"
               >
                 {t("product_type")}
                 <ChevronDown
@@ -104,7 +104,7 @@ export default function Products() {
               </button>
             </div>
             {isFilterOpen && (
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <button
                   onClick={() => handleCategoryChange("all")}
                   className={`block w-full text-left text-sm py-1 transition-colors ${
@@ -141,9 +141,9 @@ export default function Products() {
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 p-4 md:p-8">
+          <div className="flex-1 p-2 sm:p-4 md:p-8">
             {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 md:gap-12">
                 {filteredProducts.map((product) => (
                   <TeaflowProductCard
                     key={product.id}
@@ -153,8 +153,8 @@ export default function Products() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-24">
-                <p className="text-gray-600 text-lg mb-6">
+              <div className="text-center py-16 sm:py-24">
+                <p className="text-gray-600 text-base sm:text-lg mb-4 sm:mb-6">
                   {t("no_products_found")}
                 </p>
                 <Button
@@ -177,7 +177,7 @@ function TeaflowProductCard({ product, t }: { product: Product, t: (key: string)
   return (
     <Link href={`/shop/${product.slug}`} className="group cursor-pointer block">
       {/* Product Image */}
-      <div className="aspect-square bg-gray-50 rounded-lg mb-6 overflow-hidden">
+      <div className="aspect-square bg-gray-50 rounded-lg mb-4 sm:mb-6 overflow-hidden">
         <img
           src={product.imageUrl}
           alt={product.name}
@@ -186,15 +186,15 @@ function TeaflowProductCard({ product, t }: { product: Product, t: (key: string)
       </div>
 
       {/* Product Info */}
-      <div className="space-y-2">
-        <h3 className="text-2xl font-bold text-foreground mb-4">
+      <div className="space-y-1 sm:space-y-2">
+        <h3 className="text-lg sm:text-2xl font-bold text-foreground mb-2 sm:mb-4">
           {product.name}
         </h3>
-        <p className="text-base text-muted-foreground mb-2">
+        <p className="text-xs sm:text-base text-muted-foreground mb-1 sm:mb-2">
           {product.description}
         </p>
-        <div className="pt-2">
-          <span className="text-lg font-medium text-gray-900">
+        <div className="pt-1 sm:pt-2">
+          <span className="text-base sm:text-lg font-medium text-gray-900">
             {Number(product.price / 100).toLocaleString("tr-TR", {
               style: "currency",
               currency: "TRY",
@@ -204,7 +204,7 @@ function TeaflowProductCard({ product, t }: { product: Product, t: (key: string)
         </div>
 
         {/* Product Badges */}
-        <div className="flex gap-2 pt-2">
+        <div className="flex gap-1 sm:gap-2 pt-1 sm:pt-2 flex-wrap">
           {product.featured && (
             <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
               {t("featured")}

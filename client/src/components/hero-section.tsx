@@ -27,50 +27,48 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-8 text-center">
+    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden pt-24 sm:pt-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="space-y-6 md:space-y-8">
+            <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 md:mb-8 text-center">
               {t("hero_title1")}
               <br />
               <span className="text-primary">{t("hero_title2")}</span>
               <br />
               {t("hero_title3")}
             </h1>
-            <p className="text-base text-muted-foreground mb-6 text-center">
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 md:mb-6 text-center">
               {t("hero_description")}
             </p>
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-4 md:mt-6">
               <Link href="/shop">
-                <Button size="lg" className="text-lg px-8 py-6">
+                <Button size="lg" className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6">
                   {t("shop_now")}
                 </Button>
               </Link>
             </div>
           </div>
-
-          <div className="relative flex justify-center items-center">
+          <div className="relative flex justify-center items-center mt-8 lg:mt-0">
             <img
               src={headerImg}
               alt="Skycrops Header"
-              className="rounded-2xl shadow-2xl w-full max-h-[400px] object-cover rotate-[-8deg] translate-y-8"
+              className="rounded-2xl shadow-2xl w-full max-w-xs sm:max-w-md md:max-w-lg max-h-[220px] sm:max-h-[300px] md:max-h-[400px] object-cover rotate-[-8deg] translate-y-4 md:translate-y-8"
             />
           </div>
         </div>
       </div>
-
       {/* Product Carousel */}
-      <div className="pb-12">
-        <div className="flex space-x-6 px-4 overflow-x-auto scrollbar-hide">
+      <div className="pb-8 md:pb-12">
+        <div className="flex space-x-4 sm:space-x-6 px-2 sm:px-4 overflow-x-auto scrollbar-hide">
           {staticCarouselProducts.map((product, idx) => (
             <div key={idx} className="flex-shrink-0 flex flex-col items-center">
               <img
                 src={product.imageUrl}
                 alt={product.name}
-                className="rounded-full shadow-lg w-48 h-48 object-cover border-4 border-white mb-4"
+                className="rounded-full shadow-lg w-24 h-24 xs:w-32 xs:h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover border-4 border-white mb-2 sm:mb-4"
               />
-              <span className="font-semibold text-lg text-foreground text-center">
+              <span className="font-semibold text-xs xs:text-sm sm:text-base md:text-lg text-foreground text-center">
                 {product.name}
               </span>
             </div>
