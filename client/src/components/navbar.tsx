@@ -122,6 +122,7 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  
                   className={`text-sm font-medium transition-colors hover:text-primary ${location === item.href ? "text-primary" : "text-muted-foreground"}`}
                 >
                   {item.label}

@@ -179,7 +179,7 @@ const resources = {
       free: "Free",
       recurring_plan: "Recurring {{plan}} • Cancel anytime",
       footer_address:
-        "Çorlu 1 OSB Bülent Ecevit Caddesi No:13/1\nPK: 59860 Çorlu – Tekirdağ",
+        "Çorlu 1 OSB\nBülent Ecevit Caddesi No:13/1\nPK: 59860 Çorlu – Tekirdağ\nTurkey",
       footer_phone: "90 282 685 43 83",
       footer_email: "info@skycrops.farm",
       newsletter_heading: "GET 20% OFF",

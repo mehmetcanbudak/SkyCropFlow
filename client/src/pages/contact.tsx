@@ -49,7 +49,7 @@ export default function Contact() {
           <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             {t("contact")}
           </h1>
-          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-3xl mx-auto">
             {t("contact_subtitle")}
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium mb-2"
+                      className="block font-semibold mb-1"
                     >
                       {t("name")} *
                     </label>
@@ -85,7 +85,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium mb-2"
+                      className="block font-semibold mb-1"
                     >
                       {t("email")} *
                     </label>
@@ -104,7 +104,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium mb-2"
+                    className="block font-semibold mb-1"
                   >
                     {t("subject")} *
                   </label>
@@ -122,7 +122,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium mb-2"
+                    className="block font-semibold mb-1"
                   >
                     {t("message")} *
                   </label>
@@ -139,7 +139,7 @@ export default function Contact() {
 
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full font-semibold"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? t("sending") : t("send_message")}
@@ -161,12 +161,10 @@ export default function Contact() {
                   <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold mb-1">{t("address")}</h3>
-                    <p className="text-muted-foreground">
-                      Çorlu 1 OSB Bülent Ecevit Caddesi No:13/1
-                      <br />
-                      PK: 59860 Çorlu – Tekirdağ
-                      <br />
-                      Turkey
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Çorlu 1 OSB<br />
+                      Bülent Ecevit Caddesi No:13/1<br />
+                      PK: 59860 – Tekirdağ, Türkiye
                     </p>
                   </div>
                 </div>
@@ -175,7 +173,7 @@ export default function Contact() {
                   <Phone className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold mb-1">{t("phone")}</h3>
-                    <p className="text-muted-foreground">+90 282 685 43 83</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">+90 282 685 43 83</p>
                   </div>
                 </div>
 
@@ -183,7 +181,7 @@ export default function Contact() {
                   <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold mb-1">{t("email")}</h3>
-                    <p className="text-muted-foreground">info@skycrops.farm</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">info@skycrops.farm</p>
                   </div>
                 </div>
 
@@ -193,7 +191,7 @@ export default function Contact() {
                     <h3 className="font-semibold mb-1">
                       {t("business_hours")}
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       {t("monday_to_friday")}: 9:00 AM - 6:00 PM
                       <br />
                       {t("saturday")}: 9:00 AM - 4:00 PM
@@ -216,7 +214,7 @@ export default function Contact() {
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto">
                 {t("facility_tours_desc")}
               </p>
               <Button variant="outline" size="lg">
@@ -226,19 +224,7 @@ export default function Contact() {
           </Card>
         </div>
 
-        {/* Quality Policy */}
-        <div className="mt-10 sm:mt-16 text-center">
-          <p className="text-muted-foreground">
-            <a
-              href="/attached_assets/gida-guvenligi-sertifikasi.pdf"
-              className="text-primary hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t("quality_policy")}
-            </a>
-          </p>
-        </div>
+
       </div>
     </div>
   );
