@@ -15,7 +15,6 @@ import Admin from "@/pages/admin";
 import Product from "@/pages/product";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import Background from "@/components/background";
 import React from "react";
 import Uretim from "@/pages/uretim";
 
@@ -26,7 +25,6 @@ function Router() {
   }, [location]);
   return (
     <div className="min-h-screen flex flex-col relative">
-      <Background />
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">

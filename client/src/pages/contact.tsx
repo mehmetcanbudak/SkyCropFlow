@@ -42,7 +42,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen pt-32 sm:pt-40">
+    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-16">

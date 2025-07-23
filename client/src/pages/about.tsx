@@ -4,7 +4,7 @@ import skycropsImg from "@/assets/skycrops.png";
 export default function About() {
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen pt-32 sm:pt-40">
+    <div className="min-h-screen">
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-10 sm:pb-16">
         <div className="text-center mb-6 sm:mb-8">

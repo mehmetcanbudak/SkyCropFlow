@@ -155,183 +155,187 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 pt-32 sm:pt-40">
-      <h1 className="text-3xl font-bold mb-6">{t("admin_panel_title")}</h1>
+    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8">
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">{t("admin_panel_title")}</h1>
+        </div>
 
-      <Tabs defaultValue="articles" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="articles">{t("articles_tab")}</TabsTrigger>
-          <TabsTrigger value="products">{t("products_tab")}</TabsTrigger>
-        </TabsList>
+        <Tabs defaultValue="articles" className="space-y-6">
+          <TabsList>
+            <TabsTrigger value="articles">{t("articles_tab")}</TabsTrigger>
+            <TabsTrigger value="products">{t("products_tab")}</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="articles" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">
-              {t("manage_articles_title")}
-            </h2>
-            <Button
-              onClick={() =>
-                setEditingArticle({
-                  title: "",
-                  slug: "",
-                  excerpt: "",
-                  content: "",
-                  imageUrl: "",
-                  publishedAt: new Date().toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  }),
-                  type: "blog",
-                } as Article)
-              }
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              {t("new_article_button")}
-            </Button>
-          </div>
+          <TabsContent value="articles" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-semibold">
+                {t("manage_articles_title")}
+              </h2>
+              <Button
+                onClick={() =>
+                  setEditingArticle({
+                    title: "",
+                    slug: "",
+                    excerpt: "",
+                    content: "",
+                    imageUrl: "",
+                    publishedAt: new Date().toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    }),
+                    type: "blog",
+                  } as Article)
+                }
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                {t("new_article_button")}
+              </Button>
+            </div>
 
-          {editingArticle && (
-            <ArticleForm
-              article={editingArticle.id ? editingArticle : null}
-              onSubmit={handleArticleSubmit}
-              onCancel={() => setEditingArticle(null)}
-              isLoading={
-                createArticleMutation.isPending ||
-                updateArticleMutation.isPending
-              }
-            />
-          )}
+            {editingArticle && (
+              <ArticleForm
+                article={editingArticle.id ? editingArticle : null}
+                onSubmit={handleArticleSubmit}
+                onCancel={() => setEditingArticle(null)}
+                isLoading={
+                  createArticleMutation.isPending ||
+                  updateArticleMutation.isPending
+                }
+              />
+            )}
 
-          <div className="grid gap-4">
-            {articles.map((article) => (
-              <Card key={article.id}>
-                <CardHeader>
-                  <CardTitle className="flex justify-between items-center">
-                    {article.title}
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setEditingArticle(article)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              "Bu yazıyı silmek istediğinize emin misiniz?",
-                            )
-                          ) {
-                            deleteArticleMutation.mutate(article.id);
-                          }
-                        }}
-                        disabled={deleteArticleMutation.isPending}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{article.excerpt}</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {t("published_date")}: {article.publishedAt}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
+            <div className="grid gap-4">
+              {articles.map((article) => (
+                <Card key={article.id}>
+                  <CardHeader>
+                    <CardTitle className="flex justify-between items-center">
+                      {article.title}
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setEditingArticle(article)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                "Bu yazıyı silmek istediğinize emin misiniz?",
+                              )
+                            ) {
+                              deleteArticleMutation.mutate(article.id);
+                            }
+                          }}
+                          disabled={deleteArticleMutation.isPending}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{article.excerpt}</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      {t("published_date")}: {article.publishedAt}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
 
-        <TabsContent value="products" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">
-              {t("manage_products_title")}
-            </h2>
-            <Button
-              onClick={() =>
-                setEditingProduct({
-                  name: "",
-                  slug: "",
-                  price: 0,
-                  description: "",
-                  category: "",
-                  imageUrl: "",
-                  originalPrice: null,
-                  flavor: null,
-                  isNewArrival: null,
-                  isBestseller: null,
-                  inStock: null,
-                  featured: null,
-                } as Product)
-              }
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              {t("new_product_button")}
-            </Button>
-          </div>
+          <TabsContent value="products" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-semibold">
+                {t("manage_products_title")}
+              </h2>
+              <Button
+                onClick={() =>
+                  setEditingProduct({
+                    name: "",
+                    slug: "",
+                    price: 0,
+                    description: "",
+                    category: "",
+                    imageUrl: "",
+                    originalPrice: null,
+                    flavor: null,
+                    isNewArrival: null,
+                    isBestseller: null,
+                    inStock: null,
+                    featured: null,
+                  } as Product)
+                }
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                {t("new_product_button")}
+              </Button>
+            </div>
 
-          {editingProduct && (
-            <ProductForm
-              product={editingProduct.id ? editingProduct : null}
-              onSubmit={handleProductSubmit}
-              onCancel={() => setEditingProduct(null)}
-              isLoading={
-                createProductMutation.isPending ||
-                updateProductMutation.isPending
-              }
-            />
-          )}
+            {editingProduct && (
+              <ProductForm
+                product={editingProduct.id ? editingProduct : null}
+                onSubmit={handleProductSubmit}
+                onCancel={() => setEditingProduct(null)}
+                isLoading={
+                  createProductMutation.isPending ||
+                  updateProductMutation.isPending
+                }
+              />
+            )}
 
-          <div className="grid gap-4">
-            {products.map((product) => (
-              <Card key={product.id}>
-                <CardHeader>
-                  <CardTitle className="flex justify-between items-center">
-                    {product.name}
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setEditingProduct(product)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              "Bu ürünü silmek istediğinize emin misiniz?",
-                            )
-                          ) {
-                            deleteProductMutation.mutate(product.id);
-                          }
-                        }}
-                        disabled={deleteProductMutation.isPending}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{product.description}</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {t("price")}: ${(product.price / 100).toFixed(2)} |{" "}
-                    {t("category")}: {product.category}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
+            <div className="grid gap-4">
+              {products.map((product) => (
+                <Card key={product.id}>
+                  <CardHeader>
+                    <CardTitle className="flex justify-between items-center">
+                      {product.name}
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setEditingProduct(product)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                "Bu ürünü silmek istediğinize emin misiniz?",
+                              )
+                            ) {
+                              deleteProductMutation.mutate(product.id);
+                            }
+                          }}
+                          disabled={deleteProductMutation.isPending}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{product.description}</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      {t("price")}: ${(product.price / 100).toFixed(2)} |{" "}
+                      {t("category")}: {product.category}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }

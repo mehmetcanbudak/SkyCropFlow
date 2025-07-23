@@ -36,7 +36,7 @@ export default function Journal() {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen pt-32 sm:pt-40">
+    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-6">

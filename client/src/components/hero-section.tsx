@@ -10,6 +10,8 @@ import rokaImg from "@/assets/roka.png";
 import kekikImg from "@/assets/kekik.png";
 import yagliYaprakImg from "@/assets/yagli-yaprak.png";
 import headerImg from "@/assets/header.png";
+import TiltedCard from "@/components/TiltedCard";
+import Magnet from "@/components/Magnet";
 
 export default function HeroSection() {
   const { t } = useTranslation();
@@ -27,8 +29,8 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden pt-32 sm:pt-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden pt-16 sm:pt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">
             <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 md:mb-8 text-left">
@@ -47,14 +49,16 @@ export default function HeroSection() {
               </span>
             </p>
             <div className="flex justify-center mt-4 md:mt-6">
-              <Link href="/shop">
-                <Button size="lg" className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6">
-                  {t("shop_now")}
-                </Button>
-              </Link>
+              <Magnet padding={5}>
+                <Link href="/shop">
+                  <Button size="lg" className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6">
+                    {t("shop_now")}
+                  </Button>
+                </Link>
+              </Magnet>
             </div>
           </div>
-          <div className="relative flex justify-center items-center -mt-48">
+          <div className="relative justify-center items-center -mt-48 hidden sm:flex">
             <img
               src={headerImg}
               alt="Skycrops Header"
@@ -63,16 +67,32 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+      {/* Mobile header image below text */}
+      <div className="flex sm:hidden justify-center items-center mt-4">
+        <img
+          src={headerImg}
+          alt="Skycrops Header"
+          className="rounded-2xl shadow-2xl w-full max-w-xs max-h-[220px] object-cover rotate-[-8deg]"
+        />
+      </div>
+      {/* Vegetables Slider Header */}
+      <div className="text-center mb-4 mt-6">
+        <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-2 sm:mb-4 text-center">
+          {t("vegetables_slider_heading", "Sebzeler")}
+        </h2>
+      </div>
       {/* Product Carousel */}
       <div className="pb-8">
         <div className="flex space-x-4 sm:space-x-6 px-2 sm:px-4 overflow-x-auto scrollbar-hide">
           {staticCarouselProducts.map((product, idx) => (
             <div key={idx} className="flex-shrink-0 flex flex-col items-center">
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="rounded-full shadow-sm hover:shadow-lg transition-all duration-300 w-24 h-24 xs:w-32 xs:h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover border-2 border-gray-100 mb-2 sm:mb-4"
-              />
+              <TiltedCard containerHeight="auto" containerWidth="auto" showMobileWarning={false} showTooltip={false}>
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="rounded-full shadow-sm hover:shadow-lg transition-all duration-300 w-24 h-24 xs:w-32 xs:h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover border-2 border-gray-100 mb-2 sm:mb-4"
+                />
+              </TiltedCard>
               <span className="font-semibold text-xs xs:text-sm sm:text-base md:text-lg text-foreground text-center">
                 {product.name}
               </span>
