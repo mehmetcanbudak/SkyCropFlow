@@ -5,8 +5,8 @@ import skycropsLogo from "@/assets/skycrops.svg";
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="bg-card border-t mt-auto">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 pt-3 pb-0">
+    <footer className="w-full max-w-screen overflow-x-hidden bg-card border-t mt-auto box-border">
+      <div className="w-full max-w-screen mx-auto px-2 sm:px-4 lg:px-8 pt-3 pb-0 overflow-x-hidden box-border">
 
         <div className="flex flex-row items-center justify-between gap-2 lg:gap-0 lg:flex-nowrap">
           {/* Left: Logo */}
@@ -18,9 +18,9 @@ export default function Footer() {
             <p className="text-muted-foreground mb-0 text-xs sm:text-sm whitespace-normal break-words text-center" style={{maxWidth: '260px'}}>{t("footer_tagline")}</p>
           </div>
           {/* Right: 4 sections in a row - scrollable */}
-          <div className="flex flex-row items-start justify-end gap-2 sm:gap-4 lg:gap-8 flex-shrink-0 overflow-x-auto scrollbar-hide px-2">
+          <div className="flex flex-row items-start justify-end gap-2 sm:gap-4 lg:gap-8 flex-shrink-0 overflow-x-auto scrollbar-hide px-2 max-w-full box-border snap-x snap-mandatory sm:overflow-x-visible sm:snap-none">
             {/* Products */}
-            <div className="flex flex-col items-start text-left min-w-[90px]">
+            <div className="flex flex-col items-start text-left min-w-[90px] snap-start">
               <h4 className="font-semibold mb-1 text-xs sm:text-base">{t("products")}</h4>
               <ul className="space-y-1 text-muted-foreground text-xs sm:text-sm">
                 <li>
@@ -42,7 +42,7 @@ export default function Footer() {
               </ul>
             </div>
                         {/* Company */}
-            <div className="flex flex-col items-start text-left min-w-[90px]">
+            <div className="flex flex-col items-start text-left min-w-[90px] snap-start">
               <h4 className="font-semibold mb-1 text-xs sm:text-base">{t("company")}</h4>
               <ul className="space-y-1 text-muted-foreground text-xs sm:text-sm">
                 <li>
@@ -65,7 +65,7 @@ export default function Footer() {
               </ul>
             </div>
             {/* Contact */}
-            <div className="flex flex-col items-start text-left min-w-[90px]">
+            <div className="flex flex-col items-start text-left min-w-[90px] snap-start">
               <h4 className="font-semibold mb-1 text-xs sm:text-base">{t("contact")}</h4>
               <ul className="space-y-1 text-muted-foreground text-xs sm:text-sm">
                 <li>
@@ -87,7 +87,7 @@ export default function Footer() {
               </ul>
             </div>
             {/* Address */}
-            <div className="flex flex-col items-start text-left min-w-[120px]">
+            <div className="flex flex-col items-start text-left min-w-[120px] snap-start">
               <h4 className="font-semibold mb-1 text-xs sm:text-base">Adres</h4>
               <div className="space-y-1 text-muted-foreground text-xs sm:text-sm">
                 <div>

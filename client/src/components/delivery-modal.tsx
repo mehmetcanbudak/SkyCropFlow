@@ -41,24 +41,21 @@ export function DeliveryModal({
   const [open, setOpen] = useState(false);
   const { addToCart } = useCart();
   const { toast } = useToast();
+  // Set 'subscribe' as the default selected tab
+  const [subscribeTab, setSubscribeTab] = useState<'subscribe' | 'once'>("subscribe");
+  const [selectedFrequency, setSelectedFrequency] = useState<string>("weekly");
 
   const item = product || bundle;
   if (!item) return null;
 
   const subscriptionPlans = [
     {
-      id: "one-time",
-      name: t("plan_one_time"),
-      description: t("plan_one_time_desc"),
-      discount: 0,
-      icon: <Package className="h-4 w-4" />,
-    },
-    {
       id: "weekly",
       name: t("plan_weekly"),
       description: t("plan_weekly_desc"),
       discount: 10,
       icon: <CalendarDays className="h-4 w-4" />,
+      frequencyLabel: t("every_week"),
     },
     {
       id: "twice-weekly",
@@ -66,6 +63,7 @@ export function DeliveryModal({
       description: "Her hafta 2 kez teslimat",
       discount: 15,
       icon: <CalendarDays className="h-4 w-4" />,
+      frequencyLabel: t("twice_a_week"),
     },
     {
       id: "monthly",
@@ -73,6 +71,7 @@ export function DeliveryModal({
       description: t("plan_monthly_desc"),
       discount: 15,
       icon: <CalendarDays className="h-4 w-4" />,
+      frequencyLabel: t("every_month"),
     },
   ];
 
@@ -103,12 +102,17 @@ export function DeliveryModal({
     },
   ];
 
+  const getSelectedPlan = () => subscriptionPlans.find((p) => p.id === selectedFrequency);
+
   const calculatePrice = () => {
-    const plan = subscriptionPlans.find((p) => p.id === selectedPlan);
-    const basePrice = item.price;
-    const discount = plan?.discount || 0;
-    const discountedPrice = basePrice * (1 - discount / 100);
-    return discountedPrice;
+    if (subscribeTab === "subscribe") {
+      const plan = getSelectedPlan();
+      const basePrice = item.price;
+      const discount = plan?.discount || 0;
+      const discountedPrice = basePrice * (1 - discount / 100);
+      return discountedPrice;
+    }
+    return item.price;
   };
 
   const calculateTotal = () => {
@@ -121,162 +125,120 @@ export function DeliveryModal({
   const handleAddToCart = () => {
     if (product) {
       addToCart(product, 1, {
-        subscriptionPlan: selectedPlan,
+        subscriptionPlan: subscribeTab === "subscribe" ? selectedFrequency : "one-time",
         deliverySchedule: selectedSchedule,
       });
     }
-
-    const plan = subscriptionPlans.find((p) => p.id === selectedPlan);
+    const plan = subscribeTab === "subscribe" ? getSelectedPlan() : null;
     const schedule = deliverySchedules.find((s) => s.id === selectedSchedule);
-
     toast({
       title: "Added to cart",
-      description: `${item.name} with ${plan?.name} and ${schedule?.name}`,
+      description: `${item.name} with ${subscribeTab === "subscribe" ? plan?.name : t("plan_one_time")} and ${schedule?.name}`,
     });
-
     setOpen(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
-        <DialogHeader></DialogHeader>
-
-        <div className="space-y-6">
-          {/* Item Summary */}
-          <div className="flex items-center space-x-4 p-4 bg-muted/50 rounded-lg">
-            <div className="flex-1">
-              <h4 className="font-medium">{item.name}</h4>
-              <p className="text-sm text-muted-foreground">
-                {item.description || product?.description}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="font-semibold">
-                {Number(calculatePrice() / 100).toLocaleString("tr-TR", {
-                  style: "currency",
-                  currency: "TRY",
-                  minimumFractionDigits: 2,
-                })}
-              </p>
-              {selectedPlan !== "one-time" && (
-                <p className="text-xs text-green-600">
-                  Save{" "}
-                  {
-                    subscriptionPlans.find((p) => p.id === selectedPlan)
-                      ?.discount
-                  }
-                  %
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* Subscription Plans */}
-          <div>
-            <Label className="text-base font-medium">Abonelik</Label>
-            <RadioGroup
-              value={selectedPlan}
-              onValueChange={setSelectedPlan}
-              className="mt-3"
-            >
-              {subscriptionPlans.map((plan) => (
-                <div key={plan.id} className="flex items-center space-x-3">
-                  <RadioGroupItem value={plan.id} id={plan.id} />
-                  <Label htmlFor={plan.id} className="flex-1 cursor-pointer">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        {plan.icon}
-                        <div>
-                          <p className="font-medium">{plan.name}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {plan.description}
-                          </p>
-                        </div>
-                      </div>
-                      {plan.discount > 0 && (
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-100 text-green-800"
-                        >
-                          -{plan.discount}%
-                        </Badge>
-                      )}
-                    </div>
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
-
-          {/* Delivery Schedule */}
-          <div>
-            <Label className="text-base font-medium">Teslimat</Label>
-            <RadioGroup
-              value={selectedSchedule}
-              onValueChange={setSelectedSchedule}
-              className="mt-3"
-            >
-              {deliverySchedules.map((schedule) => (
-                <div key={schedule.id} className="flex items-center space-x-3">
-                  <RadioGroupItem value={schedule.id} id={schedule.id} />
-                  <Label
-                    htmlFor={schedule.id}
-                    className="flex-1 cursor-pointer"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        {schedule.icon}
-                        <div>
-                          <p className="font-medium">{schedule.name}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {schedule.description} • {schedule.time}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="font-medium">
-                        {schedule.price === 0
-                          ? t("free")
-                          : Number(schedule.price / 100).toLocaleString(
-                              "tr-TR",
-                              {
-                                style: "currency",
-                                currency: "TRY",
-                                minimumFractionDigits: 2,
-                              },
-                            )}
-                      </p>
-                    </div>
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
-
-          {/* Total */}
-          <div className="border-t pt-4">
-            <div className="flex justify-between items-center text-lg font-semibold">
-              <span>{t("total")}</span>
-              <span>
-                {Number(calculateTotal() / 100).toLocaleString("tr-TR", {
-                  style: "currency",
-                  currency: "TRY",
-                  minimumFractionDigits: 2,
-                })}
-              </span>
-            </div>
-            {selectedPlan !== "one-time" && (
-              <p className="text-sm text-muted-foreground mt-1">
-                {t("recurring_plan", { plan: t(`plan_${selectedPlan}`) })}
-              </p>
+      <DialogContent className="sm:max-w-3xl p-0 overflow-hidden">
+        <div className="flex flex-col md:flex-row w-full min-h-[480px]">
+          {/* Left: Product Image Only, Full Cover */}
+          <div className="md:w-1/2 w-full h-[400px] md:h-auto flex items-center justify-center bg-muted/40 overflow-hidden">
+            {item.imageUrl && (
+              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-l-2xl" />
             )}
           </div>
-
-          {/* Action Button */}
-          <Button onClick={handleAddToCart} className="w-full" size="lg">
-            {t("add_to_cart")}
-          </Button>
+          {/* Right: Product Details and Purchase Options */}
+          <div className="md:w-1/2 w-full flex flex-col justify-start items-stretch bg-[#f7f6f1]">
+            <div className="px-8 pt-8 pb-4">
+              <h2 className="text-2xl font-semibold mb-2 text-foreground">{item.name}</h2>
+              <p className="text-base text-muted-foreground mb-6">{item.description || product?.description}</p>
+            </div>
+            <form className="flex flex-col gap-4 px-4">
+              {/* Subscribe Radio Card */}
+              <label className={`block rounded-lg border transition-all cursor-pointer ${subscribeTab === "subscribe" ? "border-green-700 bg-green-50" : "border-transparent bg-[#f7f6f1]"} p-0`}>  
+                <div className="flex items-center justify-between px-6 py-4" onClick={() => setSubscribeTab("subscribe")}>  
+                  <div className="flex items-center gap-3">
+                    <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${subscribeTab === "subscribe" ? "bg-green-700 border-green-700" : "bg-gray-200 border-gray-300"}`}>
+                      {subscribeTab === "subscribe" && <span className="w-3 h-3 bg-white rounded-full block" />}
+                    </span>
+                    <span className="font-bold text-lg text-green-900">{t("subscribe")}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="line-through text-muted-foreground text-base">
+                      {Number(item.price / 100).toLocaleString("tr-TR", { style: "currency", currency: "TRY", minimumFractionDigits: 2 })}
+                    </span>
+                    <span className="font-bold text-lg text-green-900">
+                      {Number(calculatePrice() / 100).toLocaleString("tr-TR", { style: "currency", currency: "TRY", minimumFractionDigits: 2 })}
+                    </span>
+                  </div>
+                </div>
+                {subscribeTab === "subscribe" && (
+                  <div className="px-8 pb-4 animate-fade-in">
+                    <ul className="text-green-900 text-sm mb-3 pl-4 list-disc">
+                      <li>{t("subscription_benefit_1")}</li>
+                      <li>{t("subscription_benefit_2")}</li>
+                      <li>{t("subscription_benefit_3")}</li>
+                    </ul>
+                    <div className="flex flex-col gap-1 mb-2">
+                      <label className="text-xs font-medium mb-1">{t("delivery_frequency")}</label>
+                      <select className="border rounded-md px-2 py-1 text-sm" value={selectedFrequency} onChange={e => setSelectedFrequency(e.target.value)}>
+                        {subscriptionPlans.map(plan => (
+                          <option key={plan.id} value={plan.id}>{plan.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
+              </label>
+              {/* Buy Once Radio Card */}
+              <label className={`block rounded-lg border transition-all cursor-pointer ${subscribeTab === "once" ? "border-green-700 bg-green-100" : "border-transparent bg-[#f7f6f1]"} p-0`}>  
+                <div className="flex items-center justify-between px-6 py-4" onClick={() => setSubscribeTab("once")}>  
+                  <div className="flex items-center gap-3">
+                    <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${subscribeTab === "once" ? "bg-green-700 border-green-700" : "bg-gray-200 border-gray-300"}`}>
+                      {subscribeTab === "once" && <span className="w-3 h-3 bg-white rounded-full block" />}
+                    </span>
+                    <span className="font-bold text-lg text-green-900">{t("buy_once")}</span>
+                  </div>
+                  <span className="font-bold text-lg text-green-900">
+                    {Number(item.price / 100).toLocaleString("tr-TR", { style: "currency", currency: "TRY", minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+              </label>
+              {/* Delivery Dropdown */}
+              <div className="flex flex-col gap-1 px-2">
+                <label className="text-xs font-medium mb-1">{t("delivery")}</label>
+                <select className="border rounded-md px-2 py-1 text-sm" value={selectedSchedule} onChange={e => setSelectedSchedule(e.target.value)}>
+                  {deliverySchedules.map((schedule) => (
+                    <option key={schedule.id} value={schedule.id}>
+                      {schedule.name} - {schedule.description} • {schedule.price === 0 ? t("free") : Number(schedule.price / 100).toLocaleString("tr-TR", { style: "currency", currency: "TRY", minimumFractionDigits: 2 })}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* Total */}
+              <div className="flex justify-between items-center text-lg font-semibold border-t pt-4 px-2">
+                <span>{t("total")}</span>
+                <span>
+                  {Number(calculateTotal() / 100).toLocaleString("tr-TR", { style: "currency", currency: "TRY", minimumFractionDigits: 2 })}
+                </span>
+              </div>
+              {subscribeTab === "subscribe" && (
+                <p className="text-xs text-muted-foreground mt-1 px-2">
+                  {t("recurring_plan", { plan: getSelectedPlan()?.name })}
+                </p>
+              )}
+              {/* Add to basket button */}
+              <button type="button" onClick={handleAddToCart} className="w-full mt-2 py-3 rounded-lg bg-green-900 text-white font-semibold text-lg hover:bg-green-800 transition">
+                {t("add_to_cart")}
+              </button>
+              {/* View Full Product Details link */}
+              <a href={`/products/${item.slug || product?.slug || ""}`} className="block text-center text-green-900 underline text-sm mt-2 mb-2">
+                {t("view_full_product_details", "View Full Product Details")}
+              </a>
+            </form>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
