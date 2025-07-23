@@ -51,22 +51,29 @@ export default function Journal() {
             {currentArticles.map((article) => (
               <Link key={article.id} href={`/blog/${article.slug}`}>
                 <article className="group cursor-pointer">
-                  <div className="border-b border-border pb-16">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                      {/* Content */}
-                      <div className="lg:col-span-8">
-                        <div className="mb-6">
-                          <p className="text-sm text-muted-foreground uppercase tracking-wider">
-                            {new Date(article.publishedAt).toLocaleDateString(
-                              i18n.language,
-                              {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              },
-                            )}
-                          </p>
-                        </div>
+                  <div className="border-b border-border">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                      {/* Image - Above on mobile, right on desktop */}
+                      <div className="lg:col-span-4 flex items-center order-1 lg:order-2 mt-6 lg:mt-0">
+                        <img
+                          src={article.imageUrl}
+                          alt={article.title}
+                          className="w-full h-24 lg:h-32 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+
+                      {/* Content - Below on mobile, left on desktop */}
+                      <div className="lg:col-span-8 order-2 lg:order-1">
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                          {new Date(article.publishedAt).toLocaleDateString(
+                            i18n.language,
+                            {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            },
+                          )}
+                        </p>
 
                         <h2 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
                           {article.title}
@@ -76,18 +83,11 @@ export default function Journal() {
                           {article.excerpt}
                         </p>
 
-                        <span className="text-primary font-medium hover:underline text-sm">
-                          {t("readArticle")}
-                        </span>
-                      </div>
-
-                      {/* Image */}
-                      <div className="lg:col-span-4">
-                        <img
-                          src={article.imageUrl}
-                          alt={article.title}
-                          className="w-full h-40 lg:h-56 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
-                        />
+                        <div className="text-right">
+                          <span className="text-primary font-medium hover:underline text-sm">
+                            {t("readArticle")}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -153,7 +153,7 @@ export default function Journal() {
                         {article.excerpt}
                       </p>
                     </div>
-                    <span className="text-sm text-muted-foreground mt-2 md:mt-0">
+                    <span className="text-sm text-muted-foreground mt-2 md:mt-0 whitespace-nowrap">
                       {new Date(article.publishedAt).toLocaleDateString(
                         i18n.language,
                         { year: "numeric", month: "short", day: "numeric" },

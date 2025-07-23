@@ -54,10 +54,10 @@ export default function About() {
             {/* taze, sağlıklı */}
             <div className="bg-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
                   Taze, Sağlıklı
                 </h3>
-                <p className="text-base mb-6">
+                <p className="text-sm mb-6">
                   Sehir içi sağlıklı tarım konseptiyle üretim modelinde ürünler
                   uzun nakliye süreçlerine, soğuk hava depolarına girmek yerine
                   hasat edildikten kısa süre sonra sofralara ulaşır. Kökleriyle
@@ -259,7 +259,7 @@ export default function About() {
             {/* güvenli */}
             <div className="bg-gray-100 rounded-2xl p-8 flex flex-col justify-between h-full">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
                   Güvenli
                 </h3>
                 <p className="text-base mb-6">
@@ -457,7 +457,7 @@ export default function About() {
             {/* lezzetli */}
             <div className="bg-gray-100 rounded-2xl p-8 flex flex-col justify-between h-full">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
                   Lezzetli
                 </h3>
                 <p className="text-base mb-6">
@@ -932,7 +932,7 @@ export default function About() {
             {/* çevre dostu */}
             <div className="bg-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
                   Çevre Dostu
                 </h3>
                 <p className="text-base mb-6">
@@ -1170,7 +1170,7 @@ export default function About() {
       {/* Features Grid */}
       <section className="py-10 sm:py-20 bg-muted/50">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             <div className="text-center">
               <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl">🌱</span>

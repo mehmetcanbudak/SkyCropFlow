@@ -42,7 +42,9 @@ export default function HeroSection() {
               <span className="font-semibold block mb-2">
                 {t("hero_description").split(". ")[0] + (t("hero_description").includes(".") ? "." : "")}
               </span>
-              {t("hero_description").split(". ").slice(1).join(". ")}
+              <span className="text-sm sm:text-base text-muted-foreground">
+                {t("hero_description").split(". ").slice(1).join(". ")}
+              </span>
             </p>
             <div className="flex justify-center mt-4 md:mt-6">
               <Link href="/shop">
@@ -69,7 +71,7 @@ export default function HeroSection() {
               <img
                 src={product.imageUrl}
                 alt={product.name}
-                className="rounded-full shadow-lg w-24 h-24 xs:w-32 xs:h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover border-4 border-white mb-2 sm:mb-4"
+                className="rounded-full shadow-sm hover:shadow-lg transition-all duration-300 w-24 h-24 xs:w-32 xs:h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover border-2 border-gray-100 mb-2 sm:mb-4"
               />
               <span className="font-semibold text-xs xs:text-sm sm:text-base md:text-lg text-foreground text-center">
                 {product.name}

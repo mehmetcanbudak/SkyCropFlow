@@ -84,13 +84,15 @@ export default function ProductCard({
 
   return (
     <Link href={`/products/${product.slug}`} className="block">
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
-        <div className="relative">
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow h-full flex flex-col">
+        {/* Product Image Container - Fixed Aspect Ratio */}
+        <div className="relative aspect-square overflow-hidden">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-32 xs:h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
+          {/* Badges */}
           {(product.isNewArrival || product.isBestseller) && (
             <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
               {product.isNewArrival && (
@@ -112,35 +114,44 @@ export default function ProductCard({
             </div>
           )}
         </div>
-        <div className="p-4 sm:p-6">
-          <h4 className="font-bold text-base sm:text-lg text-foreground mb-1 sm:mb-2">
+        
+        {/* Product Info - Consistent Height */}
+        <div className="p-4 sm:p-6 flex flex-col flex-1">
+          {/* Product Title */}
+          <h4 className="font-bold text-base sm:text-lg text-foreground mb-1 sm:mb-2 line-clamp-2">
             {product.name}
           </h4>
+          
+          {/* Flavor Info */}
           {product.flavor && (
             <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-4">
               Flavor: {product.flavor}
             </p>
           )}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 sm:gap-2">
-              <p className="text-lg sm:text-xl font-bold text-primary">
-                {formatPrice(product.price)}
-              </p>
-              {product.originalPrice && (
-                <p className="text-xs sm:text-sm text-muted-foreground line-through">
-                  {formatPrice(product.originalPrice)}
+          
+          {/* Price and Action Section - Pushed to Bottom */}
+          <div className="mt-auto pt-2 sm:pt-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <p className="text-lg sm:text-xl font-bold text-primary">
+                  {formatPrice(product.price)}
                 </p>
-              )}
+                {product.originalPrice && (
+                  <p className="text-xs sm:text-sm text-muted-foreground line-through">
+                    {formatPrice(product.originalPrice)}
+                  </p>
+                )}
+              </div>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleAddToCart}
+                disabled={!product.inStock}
+              >
+                <ShoppingCart className="h-3 w-3 mr-1" />
+                Add to cart
+              </Button>
             </div>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={handleAddToCart}
-              disabled={!product.inStock}
-            >
-              <ShoppingCart className="h-3 w-3 mr-1" />
-              Add to cart
-            </Button>
           </div>
         </div>
       </div>

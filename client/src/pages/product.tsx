@@ -69,11 +69,11 @@ export default function ProductPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
-          <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden">
+          <div className="aspect-[3/1] sm:aspect-[2/1] lg:aspect-square bg-gray-50 rounded-lg overflow-hidden max-w-sm sm:max-w-none mx-auto sm:mx-0">
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain sm:object-cover"
             />
           </div>
 
