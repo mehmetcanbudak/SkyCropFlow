@@ -6,6 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import bgPattern from '../assets/bgful.jpg';
+import bgImage from '../assets/bgtopprod.jpg';
+import HeroBanner from "@/components/hero-banner";
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -42,13 +45,18 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
+    <div
+      className="flex-1 flex flex-col min-h-screen"
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'cover',
+      }}
+    >
+      <HeroBanner title={t("contact")} visible={true} showText={false} height="small" />
       <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-16">
-          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
-            {t("contact")}
-          </h1>
           <p className="text-xs sm:text-sm text-muted-foreground max-w-3xl mx-auto">
             {t("contact_subtitle")}
           </p>

@@ -1,63 +1,82 @@
 import { useTranslation } from "react-i18next";
 import skycropsImg from "@/assets/skycrops.png";
+import bgPattern from '../assets/bgful.jpg';
+import bgImage from '../assets/bgtopprod.jpg';
+import HeroBanner from "@/components/hero-banner";
 
 export default function About() {
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen">
+    <div 
+      className="flex-1 flex flex-col min-h-screen"
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'cover',
+      }}
+    >
+      <HeroBanner title={t("about_header")} visible={true} showText={false} height="small" />
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-10 sm:pb-16">
-        <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">
+        <div className="flex justify-center">
+          <div className="text-center mb-6 sm:mb-8 bg-white/95 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-gray-100/50 max-w-3xl relative overflow-hidden">
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-green-50/30 pointer-events-none"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
             {t("about_header")}
           </h1>
-          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-medium">
             {t("about_hero")}
           </p>
+            </div>
+          </div>
         </div>
       </div>
       {/* Hero Section */}
-      <section className="relative w-full min-h-[220px] sm:min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-primary/10 to-accent/10 p-0 mt-4 sm:mt-8">
+      <section className="relative w-full min-h-[220px] sm:min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 to-green-50/80 p-0 mt-4 sm:mt-8 rounded-2xl mx-4 sm:mx-8 backdrop-blur-sm border border-white/20 shadow-xl">
         {/* Image */}
         <img
           src={skycropsImg}
           alt={t("about_hero_image_alt")}
-          className="w-full h-[180px] xs:h-[240px] sm:h-[400px] md:h-[500px] object-cover object-center"
+          className="w-full h-[180px] xs:h-[240px] sm:h-[400px] md:h-[500px] object-cover object-center rounded-2xl"
         />
         {/* Desktop: Text over image */}
         <div className="hidden md:flex absolute inset-0 items-center justify-end px-2 sm:px-4 md:px-16 mt-4 sm:mt-12">
-          <div className="max-w-2xl text-left text-black">
-            <h1 className="text-2xl sm:text-5xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight text-center">
+          <div className="max-w-2xl text-left text-black bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
+            <h1 className="text-2xl sm:text-5xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight text-center bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
               {t("about_fresh_veggies_title")}
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
               Skycrops is a vertical farming facility opening the doors to healthy living and fresh flavors. Our nutritious greens, grown indoors away from the negative effects of the outside world, bring taste and freshness to your table.<br /><br />By applying the farming methods of the future today, Skycrops aims to bring you natural and fresh alternatives for a healthy life. The key to healthy living is hidden in Skycrops&#39; greens.
             </p>
           </div>
         </div>
         {/* Mobile: Text below image */}
-        <div className="block md:hidden w-full px-2 sm:px-4 py-4 sm:py-8 bg-white/80">
+        <div className="block md:hidden w-full px-2 sm:px-4 py-4 sm:py-8 bg-white/90 backdrop-blur-sm rounded-2xl mx-4 mb-4">
           <div className="max-w-2xl text-left text-black">
-            <h1 className="text-xl sm:text-4xl font-extrabold mb-2 sm:mb-4 leading-tight text-center">
+            <h1 className="text-xl sm:text-4xl font-extrabold mb-2 sm:mb-4 leading-tight text-center bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
               {t("about_fresh_veggies_title")}
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
               Skycrops is a vertical farming facility opening the doors to healthy living and fresh flavors. Our nutritious greens, grown indoors away from the negative effects of the outside world, bring taste and freshness to your table.<br /><br />By applying the farming methods of the future today, Skycrops aims to bring you natural and fresh alternatives for a healthy life. The key to healthy living is hidden in Skycrops&#39; greens.
             </p>
           </div>
         </div>
       </section>
       {/* Philosophy Section - Updated to 2x2 Grid */}
-      <section className="py-10 sm:py-20 bg-white">
+      <section className="py-10 sm:py-20">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {/* taze, sağlıklı */}
-            <div className="bg-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full shadow-xl border border-blue-200/50 hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-center bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                   Taze, Sağlıklı
                 </h3>
-                <p className="text-sm mb-6">
+                <p className="text-base text-gray-700 leading-relaxed">
                   Sehir içi sağlıklı tarım konseptiyle üretim modelinde ürünler
                   uzun nakliye süreçlerine, soğuk hava depolarına girmek yerine
                   hasat edildikten kısa süre sonra sofralara ulaşır. Kökleriyle
@@ -67,10 +86,10 @@ export default function About() {
                   toprak ve zararlılara maruz kalmaz. Temizlenmesi zahmetsizdir.
                 </p>
               </div>
-              <div className="flex gap-8 mt-auto justify-center">
+              <div className="flex gap-8 mt-8 justify-center">
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -162,7 +181,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -194,7 +213,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -256,26 +275,24 @@ export default function About() {
                 </div>
               </div>
             </div>
-            {/* güvenli */}
-            <div className="bg-gray-100 rounded-2xl p-8 flex flex-col justify-between h-full">
+            {/* Güvenli */}
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 flex flex-col justify-between h-full shadow-xl border border-green-200/50 hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-center bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
                   Güvenli
                 </h3>
-                <p className="text-base mb-6">
-                  Skycrops'ta ürünleri, dış dünyanın negatif etkilerine kapalı
-                  üretim ortamında, optimum koşullarda gerçekleştirdiğimiz için
-                  hiç bir tarımsal ilaç ve hormon kullanmıyoruz. Özenle
-                  seçtiğimiz tohumlardan filizlendirdiğimiz bitkiler büyümeleri
-                  için gerekli besinler dışında hiçbir yabancı maddeye maruz
-                  kalmadan sağlıkla büyüyor. Bu yüzden Skycrops'ta yetişen
-                  ürünler tamamıyla güvenli!
+                <p className="text-base text-gray-700 leading-relaxed">
+                  Skycrops'ta üretim süreci tamamen kontrollü ve izlenebilir.
+                  Her aşamada kalite kontrolü yapılır ve ürünlerimiz gıda
+                  güvenliği standartlarına uygun olarak üretilir. Kapalı ortamda
+                  yetiştirilen ürünlerimiz, dış etkenlerden korunur ve
+                  sağlıklı bir şekilde sofralarınıza ulaşır.
                 </p>
               </div>
-              <div className="flex gap-8 mt-auto justify-center">
+              <div className="flex gap-8 mt-8 justify-center">
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -350,7 +367,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -422,7 +439,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -454,488 +471,13 @@ export default function About() {
                 </div>
               </div>
             </div>
-            {/* lezzetli */}
-            <div className="bg-gray-100 rounded-2xl p-8 flex flex-col justify-between h-full">
+            {/* Çevre Dostu */}
+            <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 flex flex-col justify-between h-full shadow-xl border border-emerald-200/50 hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
-                  Lezzetli
-                </h3>
-                <p className="text-base mb-6">
-                  Skycrops'ta bitkiler biyolojilerine en uygun koşullarda
-                  yetişir. İhtiyaçları olan besinleri, doğru ısı, nem ve ışık
-                  yoğunluğunda alırlar. Skycrops olarak birinci önceliğimiz
-                  "mutlu bitkiler" yetiştirmek. Yetiştirdiğimiz ve tohum
-                  aşamasında seçtiğimiz ürünler, seçkin restoran ve şefler
-                  tarafından tercih edilen, dünya genelinde en çok beğenilen ve
-                  keyifle tüketilen türlerdir.
-                </p>
-              </div>
-              <div className="flex gap-8 mt-auto justify-center">
-                <div className="flex flex-col items-center">
-                  <span
-                    className="mb-2 flex items-center justify-center"
-                    style={{ width: "56px", height: "56px" }}
-                  >
-                    <svg
-                      preserveAspectRatio="xMidYMid meet"
-                      data-bbox="34.499 30 131 139.999"
-                      viewBox="34.499 30 131 139.999"
-                      height="56"
-                      width="56"
-                      xmlns="http://www.w3.org/2000/svg"
-                      data-type="color"
-                      role="presentation"
-                      aria-hidden="true"
-                      aria-label=""
-                    >
-                      <g>
-                        <path
-                          d="M42.06 97.867c-.077-1.628-.65-2.973-2.247-3.64-1.574-.658-2.84-.096-3.906 1.112a5.377 5.377 0 0 1-.487.467c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746.001-.081.009-.25.001-.418z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M66.045 82.814c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M107.016 30.249c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.58-.352 4.002 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.002-1.018-4.003-2.277-4.564z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M54.63 98.087c-1.905.204-2.851 1.493-3.397 3.095-.522 1.531.478 2.72 1.364 3.752.899 1.048 2.155 1.374 3.534.774 1.479-.644 2.324-1.917 2.324-3.725-.043-.254-.116-.64-.174-1.029-.293-1.944-1.755-3.07-3.651-2.867z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M67.768 95.949c-.266.21-.53.424-.781.652-1.256 1.141-1.657 2.503-1.016 3.965.651 1.485 1.803 2.451 3.454 2.649.415.05.921-.078 1.284-.294 1.462-.872 2.188-2.223 2.369-4.316-.202-.427-.492-1.218-.924-1.922-1.144-1.865-2.663-2.098-4.386-.734z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M119.13 119.533c-.295-.002-.523-.027-.745-.001-1.888.221-3.666 2.557-3.052 4.139.649 1.673 1.911 2.792 3.695 3.138 1.949.378 3.432-.679 3.977-2.537.821-2.796-1.573-4.854-3.875-4.739z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M120.72 158.559c-2.11.007-3.745 1.488-3.787 3.341-.047 2.074 1.647 4.104 3.433 4.115 2.055.013 3.667-1.484 3.662-3.381-.006-2.329-1.847-4.079-3.308-4.075z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M152.787 122.18c-1.792-.017-4.051 1.866-4.098 3.415-.051 1.685 1.695 3.691 3.283 3.771 2.327.118 3.807-.951 3.903-2.819.122-2.369-1.279-4.35-3.088-4.367z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M49.906 83.556c-1.118-.869-2.298-.774-3.482-.16-1.293.67-2.033 1.722-2.129 3.136.574 3.072 1.518 4.658 4.463 3.489.567-.225 1.14-.747 1.43-1.284.419-.775.643-1.675.837-2.546.248-1.107-.261-1.968-1.119-2.635z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M70.837 72.1c-.94-.731-2.053-1.118-3.172-.55-1.066.541-1.594 1.567-1.746 2.757-.028.223-.007.452-.008.678.019 1.902.02 1.901 1.778 2.811.201.104.38.248.581.351 1.435.739 2.684.582 3.546-.398 1.474-1.675 1.127-3.216.425-4.185a7.354 7.354 0 0 0-1.404-1.464z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M66.199 53.283c-2.427-.074-3.943.652-4.956 2.24-.342.535-.632 1.302-.526 1.886.297 1.636.968 3.172 2.603 3.914 1.54.7 2.825-.145 4.068-.951.187-.121.371-.267.512-.438 1.036-1.261 1.863-2.689 1.282-4.322-.543-1.522-1.682-2.547-2.983-2.329z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M105.844 54.823c-1.399-1.316-3.324-1.38-4.718-.088-.57.529-1.024 1.198-1.464 1.848-.863 1.275-.75 2.487.173 3.744.779 1.061 1.864 1.149 2.773 1.269 1.381.062 2.431-.251 3.54-.983 1.602-1.057 1.941-3.181.732-4.676a11.255 11.255 0 0 0-1.036-1.114z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M140.613 149.705c-1.267.969-2.277 2.282-3.355 3.485-.144.161-.064.544-.051.823.108 2.328 2.48 3.626 4.942 3.865.776-.209 1.688-.254 2.227-1.176 1.055-1.807.822-4.648-.567-6.212-.833-.94-2.283-1.484-3.196-.785z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M81.019 157.681c-.077-1.628-.65-2.973-2.247-3.641-1.574-.658-2.84-.096-3.906 1.112a5.233 5.233 0 0 1-.487.466c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746 0-.08.009-.249.001-.417z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M53.382 113.325c-1.005.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.585 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.702-2.984-4.132-5.042-2.53z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M114.314 110.994c-.148.007-.447-.039-.706.043-1.773.559-3.038 1.762-3.673 3.45-.233.62-.008 1.584.332 2.216 1.239 2.304 4.155 2.262 6.051.999 1.426-.949 2.024-2.541 1.571-4.104-.376-1.3-2.001-2.526-3.575-2.604z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M93.733 127.741c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M93.253 162.668c-1.514-.125-2.824.187-3.881 1.514-1.356 1.704-1.418 2.758-.035 4.407.877 1.046 1.92 1.509 3.178 1.393.242.001.411.011.58.002 2.09-.103 3.236-1.306 3.312-3.472.075-2.187-1.11-3.675-3.154-3.844z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M86.899 77.002a8.512 8.512 0 0 0-2.686 2.256c-1.334 1.718-.706 3.711 1.326 4.527.767.308 1.624.393 2.642.626.612-.263 1.372-.458 1.978-.876 1.396-.964 1.467-2.549 1.25-3.953-.364-2.359-2.58-3.593-4.51-2.58z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M89.013 98.181c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.58-.352 4.003 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.002-1.018-4.003-2.277-4.565z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M123.66 51.696c-2.409.07-4.434 2.573-4.406 4.011.037 1.937 2.101 3.746 4.337 3.728 2.232-.119 3.362-1.416 3.493-4.147.081-1.693-1.836-3.638-3.424-3.592z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M87.364 35.407c-1.905.204-2.851 1.492-3.397 3.095-.522 1.531.478 2.72 1.364 3.752.899 1.048 2.155 1.374 3.534.774 1.478-.644 2.324-1.917 2.324-3.725-.043-.254-.116-.64-.174-1.029-.293-1.945-1.755-3.07-3.651-2.867z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M55.316 127.707c-1.792-.149-3.781 1.77-3.816 3.753-.03 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.153-1.158-4.137-3.175-4.305z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M152.241 104.098c-1.638-.082-3.745 1.738-3.898 3.367-.174 1.853 1.632 4.348 3.22 4.448 1.929.121 3.736-1.816 3.88-4.16.118-1.922-1.318-3.561-3.202-3.655z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M97.381 82.527c-1.885.014-3.962 2.04-4.021 3.923-.061 1.945 1.512 3.53 3.519 3.547 2.132.135 3.572-1.723 3.738-4.199.108-1.622-1.627-3.283-3.236-3.271z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M80.846 84.955c-1.864-.117-3.848 1.952-3.931 4.098-.061 1.575 1.704 3.589 3.182 3.63 1.93.054 3.887-1.996 3.93-4.115.033-1.626-1.63-3.516-3.181-3.613z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M108.361 145.655c-1.792-.017-4.051 1.866-4.098 3.415-.051 1.685 1.695 3.691 3.283 3.771 2.327.118 3.808-.951 3.903-2.819.121-2.369-1.28-4.35-3.088-4.367z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M118.702 85.007c-1.403-.192-2.376.481-3.094 1.605-.784 1.228-.898 2.509-.273 3.781 2.035 2.371 3.646 3.271 5.609.785.378-.479.613-1.218.595-1.828-.025-.881-.282-1.772-.549-2.624-.341-1.081-1.212-1.572-2.288-1.719z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M101.96 137.032c-.94-.731-2.053-1.119-3.172-.55-1.066.541-1.594 1.567-1.746 2.757-.028.223-.007.452-.008.678.019 1.902.02 1.901 1.778 2.811.201.104.38.248.581.351 1.435.739 2.684.582 3.546-.398 1.474-1.675 1.127-3.216.425-4.185a7.327 7.327 0 0 0-1.404-1.464z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M83.697 51.598c-.503.511-.884 1.164-1.233 1.8-.937 1.712.171 4.563 2.817 4.285.849.085 1.621-.135 2.122-.97.734-1.223.942-2.57.615-3.916-.503-2.069-2.839-2.702-4.321-1.199z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M85.362 112.517c-1.792-.149-3.781 1.77-3.816 3.753-.03 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.153-1.158-4.137-3.175-4.305z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M137.112 117.856c-2.427-.074-3.943.652-4.956 2.24-.341.535-.632 1.302-.526 1.886.297 1.636.968 3.172 2.603 3.914 1.541.7 2.825-.145 4.068-.951.187-.121.371-.267.512-.438 1.036-1.261 1.863-2.689 1.282-4.322-.544-1.522-1.682-2.547-2.983-2.329z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M139.027 105.303c-1.399-1.316-3.324-1.381-4.719-.088-.57.529-1.024 1.198-1.464 1.848-.863 1.275-.75 2.487.173 3.744.779 1.061 1.864 1.149 2.773 1.269 1.381.062 2.431-.251 3.54-.983 1.602-1.057 1.941-3.181.732-4.676a11.236 11.236 0 0 0-1.035-1.114z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M102.223 90.156c-2.089-.25-4.403 2.269-4.444 4.251-.04 1.928 2.107 4.146 4.144 4.16 2.203.015 3.501-1.929 3.581-4.148.077-2.141-.916-4.356-3.281-4.263z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M57.96 66.098c-1.267.969-2.277 2.282-3.355 3.485-.144.161-.064.544-.051.823.108 2.328 2.48 3.626 4.942 3.865.776-.209 1.689-.254 2.227-1.176 1.055-1.807.822-4.648-.567-6.212-.834-.939-2.283-1.484-3.196-.785z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M96.164 149.622c-2.331.778-3.695 2.34-3.506 4.015.238 2.109 2.4 4.076 4.854 4.124.231-.095.791-.225 1.237-.526 1.731-1.167 2.22-3.904 1.109-5.935-.73-1.336-2.419-2.103-3.694-1.678z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M99.616 117.301c-.077-1.628-.65-2.973-2.247-3.641-1.574-.658-2.84-.096-3.906 1.112a5.244 5.244 0 0 1-.487.467c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746 0-.08.009-.249.001-.417z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M57.065 39.798c-1.004.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.586 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.702-2.984-4.132-5.042-2.53z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M152.661 76.746c-.148.007-.447-.039-.706.043-1.773.559-3.038 1.762-3.673 3.451-.233.62-.008 1.584.332 2.216 1.239 2.304 4.155 2.262 6.051.999 1.426-.949 2.024-2.541 1.571-4.104-.376-1.3-2.001-2.527-3.575-2.605z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M118.346 133.066c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M111.805 44.129c-1.514-.125-2.824.187-3.881 1.514-1.356 1.704-1.419 2.758-.035 4.407.877 1.046 1.92 1.509 3.178 1.393.242.001.411.011.58.002 2.09-.103 3.236-1.306 3.312-3.472.075-2.187-1.11-3.675-3.154-3.844z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M139.68 58.124a8.512 8.512 0 0 0-2.686 2.256c-1.334 1.718-.707 3.711 1.326 4.527.767.308 1.624.393 2.642.626.612-.263 1.372-.458 1.978-.876 1.396-.964 1.467-2.549 1.25-3.953-.363-2.359-2.579-3.593-4.51-2.58z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M108.475 125.414c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.58-.352 4.003 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.002-1.018-4.003-2.277-4.565z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M137.677 92.438c-2.409.07-4.434 2.573-4.406 4.011.037 1.937 2.101 3.746 4.337 3.728 2.232-.119 3.362-1.416 3.493-4.147.081-1.693-1.836-3.638-3.424-3.592z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M130.002 49.371c-.266.21-.53.424-.781.652-1.256 1.14-1.657 2.503-1.016 3.965.651 1.485 1.803 2.451 3.454 2.649.415.05.921-.078 1.284-.294 1.462-.872 2.188-2.223 2.369-4.316-.202-.428-.492-1.218-.924-1.922-1.144-1.865-2.663-2.098-4.386-.734z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M118.243 66.669c-1.792-.149-3.781 1.77-3.816 3.753-.031 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.153-1.158-4.137-3.175-4.305z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M42.007 124.409c-1.744.055-3.689 1.966-3.706 3.539-.017 1.614 1.999 4.226 3.773 4.096 2.003-.146 3.717-1.69 3.698-3.633-.02-2.127-1.84-4.062-3.765-4.002z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M112.458 100.974c-1.416-.829-4.124-.187-5.011 1.188-1.009 1.564-.557 4.611.806 5.432 1.656.998 4.152.113 5.361-1.9.991-1.649.472-3.767-1.156-4.72z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M81.093 124.11c-1.864-.117-3.848 1.952-3.931 4.098-.061 1.575 1.704 3.589 3.182 3.63 1.93.054 3.887-1.996 3.93-4.115.033-1.626-1.63-3.516-3.181-3.613z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M130.484 73.731c-.503.511-.885 1.164-1.233 1.8-.937 1.712.171 4.563 2.817 4.285.849.085 1.621-.135 2.122-.97.734-1.223.942-2.57.615-3.916-.503-2.069-2.839-2.702-4.321-1.199z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M42.617 57.387c-2.089-.25-4.403 2.269-4.444 4.251-.04 1.928 2.107 4.146 4.144 4.16 2.203.015 3.501-1.929 3.581-4.148.077-2.141-.916-4.356-3.281-4.263z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M73.108 141.084c-.077-1.628-.65-2.973-2.247-3.641-1.574-.658-2.84-.096-3.906 1.112a5.377 5.377 0 0 1-.487.467c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746 0-.08.009-.249.001-.417z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M85.507 155.567c-1.005.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.585 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.703-2.984-4.133-5.042-2.53z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M127.432 140.068c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M110.265 77.707c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.58-.352 4.003 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.003-1.019-4.004-2.277-4.565z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M92.482 66.824c-.266.21-.53.424-.781.652-1.256 1.14-1.657 2.503-1.016 3.965.651 1.485 1.803 2.452 3.454 2.649.415.05.921-.078 1.284-.294 1.462-.872 2.188-2.223 2.369-4.316-.202-.428-.492-1.218-.924-1.922-1.144-1.865-2.663-2.098-4.386-.734z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M125.884 98.365c-.295-.002-.523-.027-.745-.001-1.888.221-3.666 2.557-3.052 4.139.649 1.673 1.911 2.792 3.695 3.138 1.949.378 3.432-.679 3.977-2.537.821-2.797-1.574-4.855-3.875-4.739z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M77.231 108.906c-1.744.055-3.689 1.966-3.706 3.539-.017 1.614 1.999 4.226 3.773 4.096 2.003-.146 3.717-1.69 3.698-3.633-.02-2.127-1.841-4.062-3.765-4.002z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M89.062 141.944c-1.638-.082-3.745 1.738-3.898 3.367-.174 1.853 1.632 4.348 3.22 4.448 1.929.121 3.736-1.816 3.88-4.16.118-1.922-1.318-3.561-3.202-3.655z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M131.351 127.082c-2.11.007-3.745 1.488-3.787 3.341-.047 2.074 1.647 4.104 3.433 4.115 2.055.013 3.667-1.484 3.662-3.381-.006-2.33-1.848-4.08-3.308-4.075z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M162.228 86.542c-1.792-.149-3.781 1.77-3.816 3.753-.03 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.153-1.158-4.137-3.175-4.305z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M64.281 118.652c-1.005.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.585 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.702-2.984-4.132-5.042-2.53z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                  <span className="text-base font-bold leading-tight text-center">
-                    Seçilmiş
-                    <br />
-                    Tohumlar
-                  </span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span
-                    className="mb-2 flex items-center justify-center"
-                    style={{ width: "56px", height: "56px" }}
-                  >
-                    <svg
-                      preserveAspectRatio="xMidYMid meet"
-                      data-bbox="32.445 32.445 135.109 135.11"
-                      viewBox="32.445 32.445 135.109 135.11"
-                      height="56"
-                      width="56"
-                      xmlns="http://www.w3.org/2000/svg"
-                      data-type="color"
-                      role="presentation"
-                      aria-hidden="true"
-                      aria-label=""
-                    >
-                      <g>
-                        <path
-                          d="M100.002 32.445c-37.253 0-67.557 30.304-67.557 67.555s30.304 67.555 67.557 67.555c37.248 0 67.552-30.304 67.552-67.555s-30.303-67.555-67.552-67.555zm0 123.164c-30.663 0-55.609-24.946-55.609-55.609s24.946-55.609 55.609-55.609S155.611 69.337 155.611 100s-24.946 55.609-55.609 55.609z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          fill="#585857"
-                          d="M88.639 87.624a8.582 8.582 0 1 1-17.164 0 8.582 8.582 0 0 1 17.164 0z"
-                          data-color="1"
-                        ></path>
-                        <path
-                          fill="#585857"
-                          d="M128.528 87.624a8.582 8.582 0 1 1-17.164 0 8.582 8.582 0 0 1 17.164 0z"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M141.504 98.707a4.306 4.306 0 0 0-4.304 4.308c0 20.512-16.693 37.201-37.203 37.201s-37.194-16.688-37.194-37.201a4.307 4.307 0 1 0-8.616 0c0 25.264 20.551 45.817 45.811 45.817 25.264 0 45.815-20.553 45.815-45.817a4.307 4.307 0 0 0-4.309-4.308z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                  <span className="text-base font-bold leading-tight text-center">
-                    Mutlu
-                    <br />
-                    Bitkiler
-                  </span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span
-                    className="mb-2 flex items-center justify-center"
-                    style={{ width: "56px", height: "56px" }}
-                  >
-                    <svg
-                      preserveAspectRatio="xMidYMid meet"
-                      data-bbox="20.001 22.001 159.999 155.999"
-                      viewBox="20.001 22.001 159.999 155.999"
-                      height="56"
-                      width="56"
-                      xmlns="http://www.w3.org/2000/svg"
-                      data-type="color"
-                      role="presentation"
-                      aria-hidden="true"
-                      aria-label=""
-                    >
-                      <g>
-                        <path
-                          d="M69.148 107.4c-.332 0-.669-.048-1.003-.15-11.759-3.576-19.659-14.282-19.659-26.64 0-15.345 12.42-27.829 27.687-27.829 10.629 0 20.449 6.237 25.016 15.891a3.486 3.486 0 0 1-1.639 4.635 3.454 3.454 0 0 1-4.612-1.648c-3.426-7.242-10.792-11.921-18.765-11.921-11.45 0-20.765 9.363-20.765 20.872 0 9.125 6.062 17.342 14.741 19.981a3.482 3.482 0 0 1 2.311 4.337 3.467 3.467 0 0 1-3.312 2.472z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M81.58 46.164a3.476 3.476 0 0 1-3.428-3.989l2.536-17.206a3.464 3.464 0 0 1 3.931-2.931 3.476 3.476 0 0 1 2.917 3.951L85 43.194a3.469 3.469 0 0 1-3.42 2.97z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M56.067 51.415a3.455 3.455 0 0 1-2.952-1.658l-9.06-14.819a3.489 3.489 0 0 1 1.136-4.785 3.45 3.45 0 0 1 4.76 1.142l9.06 14.819a3.489 3.489 0 0 1-1.136 4.785c-.564.35-1.19.516-1.808.516z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M39.88 71.921c-.362 0-.731-.058-1.094-.179l-16.417-5.498a3.483 3.483 0 0 1-2.19-4.4 3.456 3.456 0 0 1 4.377-2.201l16.417 5.498a3.483 3.483 0 0 1 2.19 4.4 3.465 3.465 0 0 1-3.283 2.38z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M24.502 104.481a3.462 3.462 0 0 1-3.219-2.2 3.484 3.484 0 0 1 1.946-4.514l16.092-6.395a3.455 3.455 0 0 1 4.491 1.956 3.484 3.484 0 0 1-1.946 4.514l-16.092 6.395a3.433 3.433 0 0 1-1.272.244z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M49.634 132.963a3.435 3.435 0 0 1-1.645-.42 3.487 3.487 0 0 1-1.396-4.715l8.238-15.296a3.451 3.451 0 0 1 4.691-1.403 3.487 3.487 0 0 1 1.396 4.715L52.68 131.14a3.457 3.457 0 0 1-3.046 1.823z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M104.478 58.623a3.445 3.445 0 0 1-2.591-1.17 3.492 3.492 0 0 1 .293-4.911L115.126 41a3.45 3.45 0 0 1 4.886.294 3.492 3.492 0 0 1-.293 4.911l-12.946 11.542a3.437 3.437 0 0 1-2.295.876z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M128.09 178c-28.623 0-51.91-23.408-51.91-52.18s23.287-52.179 51.91-52.179S180 97.049 180 125.82 156.713 178 128.09 178zm0-97.402c-24.806 0-44.988 20.286-44.988 45.222s20.182 45.222 44.988 45.222 44.988-20.287 44.988-45.222-20.181-45.222-44.988-45.222z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                        <path
-                          d="M145.391 129.31h-17.305a3.47 3.47 0 0 1-3.461-3.479V94.524c0-1.921 1.55-3.479 3.461-3.479s3.461 1.557 3.461 3.479v27.829h13.844c1.911 0 3.461 1.557 3.461 3.479s-1.55 3.478-3.461 3.478z"
-                          fill="#585857"
-                          data-color="1"
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                  <span className="text-base font-bold leading-tight text-center">
-                    Mevsiminde
-                    <br />
-                    Gibi
-                  </span>
-                </div>
-              </div>
-            </div>
-            {/* çevre dostu */}
-            <div className="bg-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-center">
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-center bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
                   Çevre Dostu
                 </h3>
-                <p className="text-base mb-6">
+                <p className="text-base text-gray-700 leading-relaxed">
                   Skycrops'ta en büyük önceliğimiz doğaya saygı ve
                   sürdürülebilirlik. Geleneksel tarım yöntemlerine göre %97'ye
                   varan oranlarda daha az su tüketiyoruz. Skycrops, enerjisinin
@@ -945,10 +487,10 @@ export default function About() {
                   pestisitlerle toprağı kirletmiyoruz.
                 </p>
               </div>
-              <div className="flex gap-8 mt-auto justify-center">
+              <div className="flex gap-8 mt-8 justify-center">
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -966,46 +508,46 @@ export default function About() {
                       <g>
                         <path
                           d="M82.47 142.013c-12.538 0-23.537-10.965-23.537-23.464 0-9.73 5.557-16.14 10.929-22.339 4.386-5.058 8.529-9.839 9.718-16.318a2.94 2.94 0 0 1 2.895-2.406 2.94 2.94 0 0 1 2.895 2.406c1.189 6.479 5.33 11.26 9.713 16.318 5.371 6.198 10.924 12.609 10.924 22.339 0 12.5-10.998 23.464-23.537 23.464zm.006-52.937c-2.202 4.096-5.213 7.57-8.161 10.97-4.884 5.634-9.497 10.956-9.497 18.503 0 9.375 8.249 17.598 17.653 17.598s17.653-8.223 17.653-17.598c0-7.547-4.611-12.869-9.491-18.503-2.948-3.4-5.956-6.874-8.157-10.97z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M132.486 130.281c-9.569 0-17.653-8.06-17.653-17.598 0-7.765 4.665-13.133 8.782-17.87 2.717-3.128 5.284-6.081 6.005-9.189a2.939 2.939 0 0 1 2.866-2.271c1.369 0 2.559.942 2.866 2.271.721 3.108 3.288 6.061 6.005 9.189 4.117 4.738 8.782 10.105 8.782 17.87 0 9.538-8.084 17.598-17.653 17.598zm0-37.138c-1.313 1.931-2.882 3.738-4.425 5.511-3.777 4.348-7.344 8.453-7.344 14.029 0 6.25 5.499 11.732 11.768 11.732 6.269 0 11.768-5.482 11.768-11.732 0-5.577-3.567-9.681-7.344-14.029-1.541-1.773-3.11-3.581-4.423-5.511z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M108.949 92.152c-7.699 0-14.711-6.989-14.711-14.665 0-6.078 4.022-11.858 7.571-16.959 1.952-2.807 3.797-5.456 4.304-7.287.352-1.272 1.513-2.151 2.836-2.151s2.484.879 2.836 2.151c.507 1.83 2.352 4.48 4.304 7.287 3.548 5.101 7.571 10.881 7.571 16.959 0 7.676-7.012 14.665-14.711 14.665zm0-31.671c-.715 1.106-1.503 2.234-2.304 3.388-3.057 4.394-6.522 9.375-6.522 13.617 0 3.961 4.073 8.799 8.826 8.799s8.826-4.838 8.826-8.799c0-4.242-3.465-9.223-6.522-13.617-.801-1.153-1.588-2.282-2.304-3.388z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M166.718 120.505l-5.629-1.713a58.673 58.673 0 0 0 1.085-3.973c3.557-15.358.902-31.175-7.475-44.54-8.378-13.365-21.474-22.679-36.878-26.223l1.323-5.717c16.934 3.898 31.335 14.135 40.545 28.832 9.21 14.694 12.129 32.083 8.219 48.965a63.587 63.587 0 0 1-1.19 4.369z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M42.291 120.511a64.646 64.646 0 0 1-1.185-33.555c5.64-24.349 24.324-42.979 48.762-48.621l1.327 5.717c-22.231 5.13-39.226 22.075-44.354 44.222a58.788 58.788 0 0 0 1.076 30.519l-5.626 1.718z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M104.395 166.4c-4.841 0-9.711-.538-14.525-1.647-12.709-2.927-24.106-9.484-32.957-18.964l4.307-3.999c8.048 8.622 18.413 14.585 29.974 17.246 20.514 4.726 42.195-1.89 56.595-17.257l4.298 4.004c-12.448 13.284-29.857 20.617-47.692 20.617z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M46.029 124.647L30.4 109.458l4.109-4.199 9.669 9.398 5.662-12.219 5.341 2.457-9.152 19.752z"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M148.437 161.568l-5.704-1.444 3.329-13.047-13.447 1.224-.534-5.844 21.736-1.973-5.38 21.084z"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M126.261 57.276L113.68 39.5l21.008-5.9 1.595 5.648-12.998 3.649 7.783 10.999-4.807 3.38z"
                           data-color="1"
                         ></path>
@@ -1020,7 +562,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -1037,52 +579,52 @@ export default function About() {
                     >
                       <g>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M88.319 29.204v20.65h-5.883v-20.65h5.883z"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M111.85 29.197v20.65h-5.883v-20.65h5.883z"
                           data-color="1"
                         ></path>
                         <path
                           d="M100.1 94.1l-5.883.002c-9.732.003-17.651-7.934-17.654-17.695l-.003-10.334c-2.103-1.728-5.884-5.506-5.886-10.315l-.003-8.85 52.946-.016.003 8.85c.001 4.808-3.778 8.589-5.88 10.318l.003 10.334c.003 9.761-7.911 17.703-17.643 17.706zM76.557 52.807l.001 2.95c.001 2.754 3.615 5.749 4.584 6.4l1.301.875.004 13.373c.002 6.508 5.282 11.798 11.769 11.797l5.883-.002c6.489-.002 11.764-5.296 11.762-11.803l-.004-13.373 1.301-.876c1.183-.807 4.581-3.729 4.58-6.403l-.001-2.95-41.18.012z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M100.111 91.151v79.65h-5.883v-79.65h5.883z"
                           data-color="1"
                         ></path>
                         <path
                           d="M134.548 147.449c-7.063.005-13.056-3.194-16.585-5.621l3.325-4.864c4.054 2.785 12.11 6.879 20.623 2.93 12.525-5.809 20.95-17.925 21.047-29.699-5.65.682-11.019-.334-16.239-1.323-8.196-1.565-15.932-3.035-24.637 1.949-5.152 2.946-10.337 14.093-6.669 22.87l-5.428 2.277c-5.071-12.141 2.17-26.263 9.183-30.275 10.598-6.056 20.184-4.232 28.647-2.618 5.906 1.125 11.488 2.183 17.172.758l3.228-.813.403 3.316c1.857 15.173-8.338 31.542-24.241 38.916-3.403 1.576-6.72 2.196-9.829 2.197z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M99.786 154.46l-5.22-2.718c11.844-22.86 33.316-29.873 48.993-34.994a299.301 299.301 0 0 0 5.518-1.84l1.932 5.571a311.078 311.078 0 0 1-5.627 1.877c-14.712 4.807-34.863 11.387-45.596 32.104z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M62.525 131.415a20.568 20.568 0 0 1-6.749-1.15c-14.476-4.98-24.796-18.303-24.538-31.682l.065-3.339 3.295.474c4.919.71 9.584-.683 14.523-2.162 7.198-2.154 15.352-4.599 25.13-.272 7.408 3.282 13.869 15.475 10.782 25.694l-5.631-1.71c2.388-7.906-3.456-16.783-7.529-18.585-7.791-3.449-14.241-1.523-21.071.528-4.284 1.283-8.687 2.601-13.473 2.602h-.033c1.297 9.797 9.42 19.1 20.389 22.871 7.478 2.582 13.908-1.574 17.077-4.274l3.807 4.499c-3.174 2.702-8.909 6.504-16.044 6.506z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M94.713 134.07c-10.965-16.72-28.773-20.57-41.776-23.38-1.758-.38-3.434-.742-5.004-1.113l1.351-5.745c1.535.365 3.174.719 4.894 1.09 13.996 3.027 33.162 7.169 45.449 25.909l-4.914 3.239z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M103.034 64.601v5.9H91.268v-5.9h11.766z"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M103.037 73.451v5.9H91.271v-5.9h11.766z"
                           data-color="1"
                         ></path>
@@ -1097,7 +639,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span
-                    className="mb-2 flex items-center justify-center"
+                    className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg"
                     style={{ width: "56px", height: "56px" }}
                   >
                     <svg
@@ -1115,42 +657,42 @@ export default function About() {
                       <g>
                         <path
                           d="M81.504 148.187l-4.156-4.152.367-.387c1.187-1.275 3.174-3.409 7.589-3.409h40.861c3.334-1.391 18.236-15.798 21.607-19.572 1.846-2.067 9.898-14.12 13.294-20.802-1.596-.912-4.313-1.545-7.497-.807-3.812.885-6.379 3.56-9.806 10.226a2.935 2.935 0 0 1-1.26 1.264l-13.474 6.989-2.71-5.213 12.651-6.562c3.489-6.601 7.021-10.975 13.271-12.426 6.902-1.603 12.498.975 14.78 4.046.624.839.753 1.945.343 2.905-2.865 6.692-12.892 21.698-15.204 24.289-.194.216-20.23 21.535-25.707 21.535H85.304c-1.854 0-2.392.578-3.285 1.537l-.515.539z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M120.574 128.494H97.061v-5.872h23.513c4.06 0 5.878-2.212 5.878-4.404s-1.818-4.404-5.878-4.404h-15.529c-2.079 0-3.921-1.408-6.05-3.038-1.475-1.128-3.704-2.834-4.872-2.834H79.426c-2.816 0-7.038 2.558-9.753 5.085l-11.682 11.671-4.156-4.152 11.757-11.745c3.375-3.145 8.961-6.732 13.835-6.732h14.696c3.16 0 5.969 2.149 8.446 4.044.888.68 2.232 1.707 2.725 1.855l15.281-.027c7.718 0 11.757 5.17 11.757 10.276s-4.04 10.277-11.758 10.277z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M70.609 169.6a2.933 2.933 0 0 1-2.078-.86l-35.27-35.234a2.933 2.933 0 0 1 0-4.152l14.696-14.681a2.94 2.94 0 0 1 4.156 0l35.27 35.234a2.933 2.933 0 0 1 0 4.152L72.687 168.74a2.933 2.933 0 0 1-2.078.86zm-31.114-38.17l31.113 31.082 10.54-10.529-31.113-31.082-10.54 10.529z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M53.835 139.378l-5.878-5.872 4.156-4.152 5.878 5.873-4.156 4.151z"
                           data-color="1"
                         ></path>
                         <path
-                          fill="#353F69"
+                          fill="#585857"
                           d="M88.244 105.005h-5.879v-7.444l10.867-7.237h8.49l6.516-6.509 7.151 3.573h6.075l8.817 5.872h9.145l6.739 6.733-4.156 4.152-5.017-5.012h-8.49l-8.818-5.873h-5.681l-4.606-2.299-5.241 5.235h-9.144l-6.768 4.508v4.301z"
                           data-color="1"
                         ></path>
                         <path
                           d="M89.703 83.413c-3.269 0-6.794-.594-9.931-2.414-8.335-4.833-17.242-20.876-17.616-21.555l-2.411-4.376 5 .023c.802.004 19.742.148 28.049 4.966 8.948 5.19 10.09 17.747 10.135 18.279l.181 2.172-2.028.801c-.326.129-5.425 2.104-11.379 2.104zM70.028 61.159c3.322 5.227 8.443 12.294 12.695 14.761 4.478 2.595 10.699 1.495 13.975.619-.67-3.183-2.448-8.849-6.854-11.405-4.313-2.5-13.399-3.579-19.816-3.975z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M127.531 82.749c-2.791 0-5.304-.403-7.227-.847l1.323-5.72c4.377 1.008 12.599 1.785 18.509-4.373 8.743-9.114 12.135-23.326 8.315-33.163-4.437 2.228-9.094 3.293-13.625 4.33-7.804 1.786-15.176 3.474-21.187 10.916-3.39 4.196-4.083 15.333 1.943 21.531l-4.216 4.092c-7.859-8.084-7.685-22.645-2.302-29.31 7.289-9.025 16.406-11.111 24.449-12.952 5.257-1.204 10.222-2.34 14.625-5.18l2.59-1.672 1.547 2.665c6.891 11.881 3.35 31.083-7.895 42.806-5.195 5.414-11.529 6.877-16.849 6.877z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                         <path
                           d="M111.739 90.647l-5.844-.645c2.115-19.131 14.341-28.418 25.128-36.61 2.415-1.835 4.696-3.568 6.778-5.349l3.823 4.462c-2.212 1.891-4.559 3.674-7.044 5.561-10.325 7.843-21.004 15.953-22.841 32.581z"
-                          fill="#353F69"
+                          fill="#585857"
                           data-color="1"
                         ></path>
                       </g>
@@ -1161,6 +703,130 @@ export default function About() {
                     <br />
                     Saygı
                   </span>
+                </div>
+              </div>
+            </div>
+            {/* lezzetli */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 flex flex-col justify-between h-full shadow-xl border border-blue-200/50 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <div>
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-center bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Lezzetli
+                </h3>
+                <p className="text-base text-gray-700 leading-relaxed">
+                  Skycrops'ta bitkiler biyolojilerine en uygun koşullarda
+                  yetişir. İhtiyaçları olan besinleri, doğru ısı, nem ve ışık
+                  yoğunluğunda alırlar. Skycrops olarak birinci önceliğimiz
+                  "mutlu bitkiler" yetiştirmek. Yetiştirdiğimiz ve tohum
+                  aşamasında seçtiğimiz ürünler, seçkin restoran ve şefler
+                  tarafından tercih edilen, dünya genelinde en çok beğenilen ve
+                  keyifle tüketilen türlerdir.
+                </p>
+              </div>
+              <div className="flex gap-8 mt-8 justify-center">
+                {/* Seçilmiş Tohumlar */}
+                <div className="flex flex-col items-center">
+                  <span className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg" style={{ width: '56px', height: '56px' }}>
+                    <svg preserveAspectRatio="xMidYMid meet" data-bbox="34.499 30 131 139.999" viewBox="34.499 30 131 139.999" height="40" width="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <g>
+                        <path d="M42.06 97.867c-.077-1.628-.65-2.973-2.247-3.64-1.574-.658-2.84-.096-3.906 1.112a5.377 5.377 0 0 1-.487.467c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746.001-.081.009-.25.001-.418z" fill="#353F69"></path>
+                        <path d="M66.045 82.814c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z" fill="#353F69"></path>
+                        <path d="M107.016 30.249c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.58-.352 4.002 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.002-1.018-4.003-2.277-4.564z" fill="#353F69"></path>
+                        <path d="M54.63 98.087c-1.905.204-2.851 1.493-3.397 3.095-.522 1.531.478 2.72 1.364 3.752.899 1.048 2.155 1.374 3.534.774 1.479-.644 2.324-1.917 2.324-3.725-.043-.254-.116-.64-.174-1.029-.293-1.944-1.755-3.07-3.651-2.867z" fill="#353F69"></path>
+                        <path d="M67.768 95.949c-.266.21-.53.424-.781.652-1.256 1.141-1.657 2.503-1.016 3.965.651 1.485 1.803 2.451 3.454 2.649.415.05.921-.078 1.284-.294 1.462-.872 2.188-2.223 2.369-4.316-.202-.427-.492-1.218-.924-1.922-1.144-1.865-2.663-2.098-4.386-.734z" fill="#353F69"></path>
+                        <path d="M119.13 119.533c-.295-.002-.523-.027-.745-.001-1.888.221-3.666 2.557-3.052 4.139.649 1.673 1.911 2.792 3.695 3.138 1.949.378 3.432-.679 3.977-2.537.821-2.796-1.573-4.854-3.875-4.739z" fill="#353F69"></path>
+                        <path d="M120.72 158.559c-2.11.007-3.745 1.488-3.787 3.341-.047 2.074 1.647 4.104 3.433 4.115 2.055.013 3.667-1.484 3.662-3.381-.006-2.329-1.847-4.079-3.308-4.075z" fill="#353F69"></path>
+                        <path d="M152.787 122.18c-1.792-.017-4.051 1.866-4.098 3.415-.051 1.685 1.695 3.691 3.283 3.771 2.327.118 3.807-.951 3.903-2.819.122-2.369-1.279-4.35-3.088-4.367z" fill="#353F69"></path>
+                        <path d="M49.906 83.556c-1.118-.869-2.298-.774-3.482-.16-1.293.67-2.033 1.722-2.129 3.136.574 3.072 1.518 4.658 4.463 3.489.567-.225 1.14-.747 1.43-1.284.419-.775.643-1.675.837-2.546.248-1.107-.261-1.968-1.119-2.635z" fill="#353F69"></path>
+                        <path d="M70.837 72.1c-.94-.731-2.053-1.118-3.172-.55-1.066.541-1.594 1.567-1.746 2.757-.028.223-.007.452-.008.678.019 1.902.02 1.901 1.778 2.811.201.104.38.248.581.351 1.435.739 2.684.582 3.546-.398 1.474-1.675 1.127-3.216.425-4.185a7.354 7.354 0 0 0-1.404-1.464z" fill="#353F69"></path>
+                        <path d="M66.199 53.283c-2.427-.074-3.943.652-4.956 2.24-.342.535-.632 1.302-.526 1.886.297 1.636.968 3.172 2.603 3.914 1.54.7 2.825-.145 4.068-.951.187-.121.371-.267.512-.438 1.036-1.261 1.863-2.689 1.282-4.322-.543-1.522-1.682-2.547-2.983-2.329z" fill="#353F69"></path>
+                        <path d="M105.844 54.823c-1.399-1.316-3.324-1.38-4.718-.088-.57.529-1.024 1.198-1.464 1.848-.863 1.275-.75 2.487.173 3.744.779 1.061 1.864 1.149 2.773 1.269 1.381.062 2.431-.251 3.54-.983 1.602-1.057 1.941-3.181.732-4.676a11.255 11.255 0 0 0-1.036-1.114z" fill="#353F69"></path>
+                        <path d="M140.613 149.705c-1.267.969-2.277 2.282-3.355 3.485-.144.161-.064.544-.051.823.108 2.328 2.48 3.626 4.942 3.865.776-.209 1.688-.254 2.227-1.176 1.055-1.807.822-4.648-.567-6.212-.833-.94-2.283-1.484-3.196-.785z" fill="#353F69"></path>
+                        <path d="M81.019 157.681c-.077-1.628-.65-2.973-2.247-3.641-1.574-.658-2.84-.096-3.906 1.112a5.233 5.233 0 0 1-.487.466c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746.001-.079.009-.248.001-.416z" fill="#353F69"></path>
+                        <path d="M53.382 113.325c-1.005.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.585 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.702-2.984-4.132-5.042-2.53z" fill="#353F69"></path>
+                        <path d="M114.314 110.994c-.148.007-.447-.039-.706.043-1.773.559-3.038 1.762-3.673 3.45-.233.62-.008 1.584.332 2.216 1.239 2.304 4.155 2.262 6.051.999 1.426-.949 2.024-2.541 1.571-4.104-.375-1.299-2.001-2.526-3.575-2.604z" fill="#353F69"></path>
+                        <path d="M93.733 127.741c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z" fill="#353F69"></path>
+                        <path d="M93.253 162.668c-1.514-.125-2.824.187-3.881 1.514-1.356 1.704-1.418 2.758-.035 4.407.877 1.046 1.92 1.509 3.178 1.393.242.001.411.011.58.002 2.09-.103 3.236-1.306 3.311-3.472.077-2.187-1.108-3.674-3.153-3.844z" fill="#353F69"></path>
+                        <path d="M86.899 77.002a8.512 8.512 0 0 0-2.686 2.256c-1.334 1.718-.706 3.711 1.326 4.527.767.308 1.624.393 2.642.626.612-.263 1.372-.458 1.978-.876 1.396-.964 1.467-2.549 1.25-3.953-.364-2.359-2.58-3.593-4.51-2.58z" fill="#353F69"></path>
+                        <path d="M89.013 98.181c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.581-.352 4.003 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.002-1.019-4.003-2.277-4.565z" fill="#353F69"></path>
+                        <path d="M123.66 51.696c-2.409.07-4.434 2.573-4.406 4.011.037 1.937 2.101 3.746 4.337 3.728 2.232-.119 3.362-1.416 3.493-4.147.081-1.693-1.836-3.638-3.424-3.592z" fill="#353F69"></path>
+                        <path d="M87.364 35.407c-1.905.204-2.851 1.492-3.397 3.095-.522 1.531.478 2.72 1.364 3.752.899 1.048 2.155 1.374 3.534.774 1.478-.644 2.324-1.917 2.324-3.725-.043-.254-.116-.64-.174-1.029-.293-1.945-1.755-3.07-3.651-2.867z" fill="#353F69"></path>
+                        <path d="M55.316 127.707c-1.792-.149-3.781 1.77-3.816 3.753-.03 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.154-1.158-4.138-3.175-4.305z" fill="#353F69"></path>
+                        <path d="M152.241 104.098c-1.638-.082-3.745 1.738-3.898 3.367-.174 1.853 1.632 4.348 3.22 4.448 1.929.121 3.736-1.816 3.88-4.16.119-1.922-1.318-3.561-3.202-3.655z" fill="#353F69"></path>
+                        <path d="M97.381 82.527c-1.885.014-3.962 2.04-4.021 3.923-.061 1.945 1.512 3.53 3.519 3.547 2.132.135 3.572-1.723 3.738-4.199.108-1.622-1.627-3.283-3.236-3.271z" fill="#353F69"></path>
+                        <path d="M80.846 84.955c-1.864-.117-3.848 1.952-3.931 4.098-.061 1.575 1.704 3.589 3.182 3.63 1.93.054 3.887-1.996 3.93-4.115.033-1.626-1.63-3.515-3.181-3.613z" fill="#353F69"></path>
+                        <path d="M108.361 145.655c-1.792-.017-4.051 1.866-4.098 3.415-.051 1.685 1.695 3.691 3.283 3.771 2.327.118 3.808-.951 3.903-2.819.121-2.369-1.28-4.35-3.088-4.367z" fill="#353F69"></path>
+                        <path d="M118.702 85.007c-1.403-.192-2.376.481-3.094 1.605-.784 1.228-.898 2.509-.273 3.781 2.035 2.371 3.646 3.271 5.609.785.378-.479.613-1.218.595-1.828-.025-.881-.282-1.772-.549-2.624-.341-1.081-1.212-1.572-2.288-1.719z" fill="#353F69"></path>
+                        <path d="M101.96 137.032c-.94-.731-2.053-1.119-3.172-.55-1.066.541-1.594 1.567-1.746 2.757-.028.223-.007.452-.008.678.019 1.902.02 1.901 1.778 2.811.201.104.38.248.581.351 1.435.739 2.684.582 3.546-.398 1.474-1.675 1.127-3.216.425-4.185a7.327 7.327 0 0 0-1.404-1.464z" fill="#353F69"></path>
+                        <path d="M83.697 51.598c-.503.511-.884 1.164-1.233 1.8-.937 1.712.171 4.563 2.817 4.285.849.085 1.621-.135 2.122-.97.734-1.223.942-2.57.615-3.916-.503-2.07-2.839-2.703-4.321-1.199z" fill="#353F69"></path>
+                        <path d="M85.362 112.517c-1.792-.149-3.781 1.77-3.816 3.753-.03 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.522-2.154-1.158-4.138-3.175-4.305z" fill="#353F69"></path>
+                        <path d="M137.112 117.856c-2.427-.074-3.943.652-4.956 2.24-.341.535-.632 1.302-.526 1.886.297 1.636.968 3.172 2.603 3.914 1.541.7 2.825-.145 4.068-.951.187-.121.371-.267.512-.438 1.036-1.261 1.863-2.689 1.282-4.322-.544-1.522-1.682-2.547-2.983-2.329z" fill="#353F69"></path>
+                        <path d="M139.027 105.303c-1.399-1.316-3.324-1.381-4.719-.088-.57.529-1.024 1.198-1.464 1.848-.863 1.275-.75 2.487.173 3.744.779 1.061 1.864 1.149 2.773 1.269 1.381.062 2.431-.251 3.54-.983 1.602-1.057 1.941-3.181.732-4.676a11.236 11.236 0 0 0-1.035-1.114z" fill="#353F69"></path>
+                        <path d="M102.223 90.156c-2.089-.25-4.403 2.269-4.444 4.251-.04 1.928 2.107 4.146 4.144 4.16 2.203.015 3.501-1.929 3.581-4.148.077-2.141-.916-4.357-3.281-4.263z" fill="#353F69"></path>
+                        <path d="M57.96 66.098c-1.267.969-2.277 2.282-3.355 3.485-.144.161-.064.544-.051.823.108 2.328 2.48 3.626 4.942 3.865.776-.209 1.689-.254 2.227-1.176 1.055-1.807.822-4.648-.567-6.212-.834-.939-2.283-1.484-3.196-.785z" fill="#353F69"></path>
+                        <path d="M96.164 149.622c-2.331.778-3.695 2.34-3.506 4.015.238 2.109 2.4 4.076 4.854 4.124.231-.095.791-.225 1.237-.526 1.731-1.167 2.22-3.904 1.109-5.935-.73-1.336-2.419-2.103-3.694-1.678z" fill="#353F69"></path>
+                        <path d="M99.616 117.301c-.077-1.628-.65-2.973-2.247-3.641-1.574-.658-2.84-.096-3.906 1.112a5.244 5.244 0 0 1-.487.467c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746 0-.08.009-.249.001-.417z" fill="#353F69"></path>
+                        <path d="M57.065 39.798c-1.004.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.586 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.702-2.984-4.132-5.042-2.53z" fill="#353F69"></path>
+                        <path d="M152.661 76.746c-.148.007-.447-.039-.706.043-1.773.559-3.038 1.762-3.673 3.451-.233.62-.008 1.584.332 2.216 1.239 2.304 4.155 2.262 6.051.999 1.426-.949 2.024-2.541 1.571-4.104-.376-1.3-2.001-2.527-3.575-2.605z" fill="#353F69"></path>
+                        <path d="M118.346 133.066c-1.768.054-4.357 1.255-4.215 3.73-.013 1.438 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.015-1.921-1.726-3.975-3.47-3.921z" fill="#353F69"></path>
+                        <path d="M111.805 44.129c-1.514-.125-2.824.187-3.881 1.514-1.356 1.704-1.419 2.758-.035 4.407.877 1.046 1.92 1.509 3.178 1.393.242.001.411.011.58.002 2.09-.103 3.236-1.306 3.312-3.472.075-2.187-1.11-3.675-3.154-3.844z" fill="#353F69"></path>
+                        <path d="M139.68 58.124a8.512 8.512 0 0 0-2.686 2.256c-1.334 1.718-.707 3.711 1.326 4.527.767.308 1.624.393 2.642.626.612-.263 1.372-.458 1.978-.876 1.396-.964 1.467-2.549 1.25-3.953-.363-2.359-2.579-3.593-4.51-2.58z" fill="#353F69"></path>
+                        <path d="M108.475 125.414c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.58-.352 4.003 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.002-1.018-4.003-2.277-4.565z" fill="#353F69"></path>
+                        <path d="M137.677 92.438c-2.409.07-4.434 2.573-4.406 4.011.037 1.937 2.101 3.746 4.337 3.728 2.232-.119 3.362-1.416 3.493-4.147.081-1.693-1.836-3.638-3.424-3.592z" fill="#353F69"></path>
+                        <path d="M130.002 49.371c-.266.21-.53.424-.781.652-1.256 1.141-1.657 2.503-1.016 3.965.651 1.485 1.803 2.452 3.454 2.649.415.05.921-.078 1.284-.294 1.462-.872 2.188-2.223 2.369-4.316-.202-.427-.492-1.218-.924-1.922-1.144-1.865-2.663-2.098-4.386-.734z" fill="#353F69"></path>
+                        <path d="M118.243 66.669c-1.792-.149-3.781 1.77-3.816 3.753-.031 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.153-1.158-4.137-3.175-4.305z" fill="#353F69"></path>
+                        <path d="M42.007 124.409c-1.744.055-3.689 1.966-3.706 3.539-.017 1.614 1.999 4.226 3.773 4.096 2.003-.146 3.717-1.69 3.698-3.633-.02-2.127-1.84-4.062-3.765-4.002z" fill="#353F69"></path>
+                        <path d="M112.458 100.974c-1.416-.829-4.124-.187-5.011 1.188-1.009 1.564-.557 4.611.806 5.432 1.656.998 4.152.113 5.361-1.9.991-1.649.472-3.767-1.156-4.72z" fill="#353F69"></path>
+                        <path d="M81.093 124.11c-1.864-.117-3.848 1.952-3.931 4.098-.061 1.575 1.704 3.589 3.182 3.63 1.93.054 3.887-1.996 3.93-4.115.033-1.626-1.63-3.515-3.181-3.613z" fill="#353F69"></path>
+                        <path d="M130.484 73.731c-.503.511-.885 1.164-1.233 1.8-.937 1.712.171 4.563 2.817 4.285.849.085 1.621-.135 2.122-.97.734-1.223.942-2.57.615-3.916-.503-2.069-2.839-2.702-4.321-1.199z" fill="#353F69"></path>
+                        <path d="M42.617 57.387c-2.089-.25-4.403 2.269-4.444 4.251-.04 1.928 2.107 4.146 4.144 4.16 2.203.015 3.501-1.929 3.581-4.148.077-2.141-.916-4.356-3.281-4.263z" fill="#353F69"></path>
+                        <path d="M73.108 141.084c-.077-1.628-.65-2.973-2.247-3.641-1.574-.658-2.84-.096-3.906 1.112a5.377 5.377 0 0 1-.487.467c-1.039.909-1.094 2.052-.679 3.237.2.572.553 1.109.919 1.6.929 1.246 2.595 1.836 3.84 1.388 1.556-.56 2.86-1.745 2.559-3.746 0-.08.009-.249.001-.417z" fill="#353F69"></path>
+                        <path d="M85.507 155.567c-1.005.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.585 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.703-2.984-4.133-5.042-2.53z" fill="#353F69"></path>
+                        <path d="M127.432 140.068c-1.768.054-4.357 1.255-4.215 3.73-.013 1.437 1.828 4.053 3.162 4.409.359.096.802.075 1.156-.044 1.607-.541 3.385-1.938 3.367-4.174-.016-1.921-1.726-3.975-3.47-3.921z" fill="#353F69"></path>
+                        <path d="M110.265 77.707c-1.59-.709-2.688.232-3.785 1.145-.214.178-.38.415-.558.633-1.098 1.337-1.304 2.581-.352 4.003 1.197 1.787 2.873 2.717 4.543 1.841 1.423-.747 2.427-1.833 2.429-3.057.118-2.003-1.019-4.004-2.277-4.565z" fill="#353F69"></path>
+                        <path d="M92.482 66.824c-.266.21-.53.424-.781.652-1.256 1.14-1.657 2.503-1.016 3.965.651 1.485 1.803 2.452 3.454 2.649.415.05.921-.078 1.284-.294 1.462-.872 2.188-2.223 2.369-4.316-.202-.428-.492-1.218-.924-1.922-1.144-1.865-2.663-2.098-4.386-.734z" fill="#353F69"></path>
+                        <path d="M125.884 98.365c-.295-.002-.523-.027-.745-.001-1.888.221-3.666 2.557-3.052 4.139.649 1.673 1.911 2.792 3.695 3.138 1.949.378 3.432-.679 3.977-2.537.821-2.797-1.574-4.855-3.875-4.739z" fill="#353F69"></path>
+                        <path d="M77.231 108.906c-1.744.055-3.689 1.966-3.706 3.539-.017 1.614 1.999 4.226 3.773 4.096 2.003-.146 3.717-1.69 3.698-3.633-.02-2.127-1.841-4.062-3.765-4.002z" fill="#353F69"></path>
+                        <path d="M89.062 141.944c-1.638-.082-3.745 1.738-3.898 3.367-.174 1.853 1.632 4.348 3.22 4.448 1.929.121 3.736-1.816 3.88-4.16.118-1.922-1.318-3.561-3.202-3.655z" fill="#353F69"></path>
+                        <path d="M131.351 127.082c-2.11.007-3.745 1.488-3.787 3.341-.047 2.074 1.647 4.104 3.433 4.115 2.055.013 3.667-1.484 3.662-3.381-.006-2.33-1.848-4.08-3.308-4.075z" fill="#353F69"></path>
+                        <path d="M162.228 86.542c-1.792-.149-3.781 1.77-3.816 3.753-.03 1.731 1.879 4.222 3.521 4.508.342.059.769-.09 1.093-.263 1.469-.784 2.004-2.153 2.377-3.693.523-2.153-1.158-4.137-3.175-4.305z" fill="#353F69"></path>
+                        <path d="M64.281 118.652c-1.005.782-1.592 1.689-2.026 2.805-.56 1.441-.212 2.615.866 3.691 1.051 1.05 2.183 1.516 3.665 1.051 1.796-.563 2.503-1.585 2.538-3.833.002-.395.054-.797-.001-1.184-.385-2.702-2.984-4.132-5.042-2.53z" fill="#353F69"></path>
+                      </g>
+                    </svg>
+                  </span>
+                  <span className="text-base font-bold leading-tight text-center">Seçilmiş<br />Tohumlar</span>
+                </div>
+                {/* Mutlu Bitkiler */}
+                <div className="flex flex-col items-center">
+                  <span className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg" style={{ width: '56px', height: '56px' }}>
+                    <svg preserveAspectRatio="xMidYMid meet" viewBox="32.445 32.445 135.109 135.11" height="40" width="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <g>
+                        <path d="M100.002 32.445c-37.253 0-67.557 30.304-67.557 67.555s30.304 67.555 67.557 67.555c37.248 0 67.552-30.304 67.552-67.555s-30.303-67.555-67.552-67.555zm0 123.164c-30.663 0-55.609-24.946-55.609-55.609s24.946-55.609 55.609-55.609S155.611 69.337 155.611 100s-24.946 55.609-55.609 55.609z" fill="#353F69"></path>
+                        <path fill="#353F69" d="M88.639 87.624a8.582 8.582 0 1 1-17.164 0 8.582 8.582 0 0 1 17.164 0z"></path>
+                        <path fill="#353F69" d="M128.528 87.624a8.582 8.582 0 1 1-17.164 0 8.582 8.582 0 0 1 17.164 0z"></path>
+                        <path d="M141.504 98.707a4.306 4.306 0 0 0-4.304 4.308c0 20.512-16.693 37.201-37.203 37.201s-37.194-16.688-37.194-37.201a4.307 4.307 0 1 0-8.616 0c0 25.264 20.551 45.817 45.811 45.817 25.264 0 45.815-20.553 45.815-45.817a4.307 4.307 0 0 0-4.309-4.308z" fill="#353F69"></path>
+                      </g>
+                    </svg>
+                  </span>
+                  <span className="text-base font-bold leading-tight text-center">Mutlu<br />Bitkiler</span>
+                </div>
+                {/* Mevsiminde Gibi */}
+                <div className="flex flex-col items-center">
+                  <span className="mb-2 flex items-center justify-center bg-white rounded-full shadow-lg" style={{ width: '56px', height: '56px' }}>
+                    <svg preserveAspectRatio="xMidYMid meet" viewBox="20.001 22.001 159.999 155.999" height="40" width="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <g>
+                        <path d="M69.148 107.4c-.332 0-.669-.048-1.003-.15-11.759-3.576-19.659-14.282-19.659-26.64 0-15.345 12.42-27.829 27.687-27.829 10.629 0 20.449 6.237 25.016 15.891a3.486 3.486 0 0 1-1.639 4.635 3.454 3.454 0 0 1-4.612-1.648c-3.426-7.242-10.792-11.921-18.765-11.921-11.45 0-20.765 9.363-20.765 20.872 0 9.125 6.062 17.342 14.741 19.981a3.482 3.482 0 0 1 2.311 4.337 3.467 3.467 0 0 1-3.312 2.472z" fill="#353F69"></path>
+                        <path d="M81.58 46.164a3.476 3.476 0 0 1-3.428-3.989l2.536-17.206a3.464 3.464 0 0 1 3.931-2.931 3.476 3.476 0 0 1 2.917 3.951L85 43.194a3.469 3.469 0 0 1-3.42 2.97z" fill="#353F69"></path>
+                        <path d="M56.067 51.415a3.455 3.455 0 0 1-2.952-1.658l-9.06-14.819a3.489 3.489 0 0 1 1.136-4.785 3.45 3.45 0 0 1 4.76 1.142l9.06 14.819a3.489 3.489 0 0 1-1.136 4.785c-.564.35-1.19.516-1.808.516z" fill="#353F69"></path>
+                        <path d="M39.88 71.921c-.362 0-.731-.058-1.094-.179l-16.417-5.498a3.483 3.483 0 0 1-2.19-4.4 3.456 3.456 0 0 1 4.377-2.201l16.417 5.498a3.483 3.483 0 0 1 2.19 4.4 3.465 3.465 0 0 1-3.283 2.38z" fill="#353F69"></path>
+                        <path d="M24.502 104.481a3.462 3.462 0 0 1-3.219-2.2 3.484 3.484 0 0 1 1.946-4.514l16.092-6.395a3.455 3.455 0 0 1 4.491 1.956 3.484 3.484 0 0 1-1.946 4.514l-16.092 6.395a3.433 3.433 0 0 1-1.272.244z" fill="#353F69"></path>
+                        <path d="M49.634 132.963a3.435 3.435 0 0 1-1.645-.42 3.487 3.487 0 0 1-1.396-4.715l8.238-15.296a3.451 3.451 0 0 1 4.691-1.403 3.487 3.487 0 0 1 1.396 4.715L52.68 131.14a3.457 3.457 0 0 1-3.046 1.823z" fill="#353F69"></path>
+                        <path d="M104.478 58.623a3.445 3.445 0 0 1-2.591-1.17 3.492 3.492 0 0 1 .293-4.911L115.126 41a3.45 3.45 0 0 1 4.886.294 3.492 3.492 0 0 1-.293 4.911l-12.946 11.542a3.437 3.437 0 0 1-2.295.876z" fill="#353F69"></path>
+                        <path d="M128.09 178c-28.623 0-51.91-23.408-51.91-52.18s23.287-52.179 51.91-52.179S180 97.049 180 125.82 156.713 178 128.09 178zm0-97.402c-24.806 0-44.988 20.286-44.988 45.222s20.182 45.222 44.988 45.222 44.988-20.287 44.988-45.222-20.181-45.222-44.988-45.222z" fill="#353F69"></path>
+                        <path d="M145.391 129.31h-17.305a3.47 3.47 0 0 1-3.461-3.479V94.524c0-1.921 1.55-3.479 3.461-3.479s3.461 1.557 3.461 3.479v27.829h13.844c1.911 0 3.461 1.557 3.461 3.479s-1.55 3.478-3.461 3.478z" fill="#353F69"></path>
+                      </g>
+                    </svg>
+                  </span>
+                  <span className="text-base font-bold leading-tight text-center">Mevsiminde<br />Gibi</span>
                 </div>
               </div>
             </div>
@@ -1210,3 +876,4 @@ export default function About() {
     </div>
   );
 }
+

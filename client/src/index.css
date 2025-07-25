@@ -54,12 +54,14 @@
 
   body {
     @apply text-foreground;
+    background-color: #f8fafc; /* Light gray background to prevent white flash */
   }
 
   /* Remove the old radial gradient overlay for a cleaner look */
 
   html {
     scroll-behavior: smooth;
+    background-color: #f8fafc; /* Light gray background to prevent white flash */
   }
 }
 
@@ -67,6 +69,7 @@ html, body {
   font-family: 'Univers Next', sans-serif;
   font-weight: 400;
   color: #1C1C1C;
+  background-color: #f8fafc; /* Light gray background to prevent white flash */
 }
 
 @layer utilities {
@@ -256,7 +259,7 @@ html, body {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
   .product-card__info {
     padding: 0.5rem 0;
   }
@@ -291,6 +294,9 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .collection-toolbar__button-container {
@@ -299,7 +305,7 @@ html, body {
 
 .collection-toolbar__button {
   background: white;
-  border: 1px solid #d1d5db;
+  border: none;
   border-radius: 0.25rem;
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
@@ -394,11 +400,10 @@ html, body {
   background-color: #f3f4f6;
 }
 
-/* Responsive adjustments for toolbar */
-@media (max-width: 768px) {
+  /* Responsive adjustments for toolbar */
+@media (max-width: 1280px) {
   .collection-toolbar__button-list {
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    flex-wrap: nowrap !important;
   }
   
   .collection-toolbar__button {

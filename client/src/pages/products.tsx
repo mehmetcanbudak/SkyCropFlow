@@ -5,7 +5,8 @@ import { ChevronDown } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import type { Product, Category } from "@shared/schema";
 import { useTranslation } from "react-i18next";
-import bgImage from "../assets/bgtopprod.jpg";
+import { BREAKPOINTS } from "@/lib/breakpoints";
+import HeroBanner from "@/components/hero-banner";
 
 export default function Products() {
   const { t } = useTranslation();
@@ -13,11 +14,12 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   // Set filter open by default on larger screens
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) { // md breakpoint
+      if (window.innerWidth >= BREAKPOINTS.lg) { // Desktop breakpoint
         setIsFilterOpen(true);
       } else {
         setIsFilterOpen(false);
@@ -105,44 +107,20 @@ export default function Products() {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
-      {/* Hero Banner Section */}  
-       {/* <section className="relative w-full h-64 sm:h-80 md:h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-primary/20 to-secondary/20"></section>
- */}
-      <section className="relative w-full h-64 sm:h-80 md:h-96 flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-          backgroundImage: `url(${bgImage})`,
-          transform: 'translateZ(0)',
-          filter: "brightness(0.8) contrast(1) saturate(0.5) sepia(0)"
-        }}></div>
-        <div className="relative z-10 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white uppercase tracking-wider">
-            Tüm Ürünler
-          </h1>
-        </div>
-      </section>
+    <div className="flex-1 flex flex-col min-h-screen">
+      <HeroBanner title="Tüm Ürünler" visible={true} />
 
-      <div className="w-full px-2 sm:px-4 md:px-6 lg:px-8 py-32" style={{
+      <div className="w-full px-2 sm:px-4 md:px-6 lg:px-8 py-8" style={{
         marginLeft: "0px",
         marginRight: "0px",
         paddingBottom: "32px",
         paddingTop: "0px"
       }}>
-        <div className="collection-toolbar border-b border-gray-200 mb-4">
+        <div className="collection-toolbar border-b border-gray-200">
           <div className="collection-toolbar__button-list flex items-center justify-between px-8">
             <div className="collection-toolbar__layout-switch-list flex items-center gap-1">
               <div className="sm:hidden flex items-center gap-1">
-                <button type="button" className="collection-toolbar__button p-1 hover:bg-gray-100 rounded" aria-label="Switch to larger product images">
-                  <svg role="presentation" width="16" viewBox="0 0 18 18" fill="none">
-                    <path fill="currentColor" d="M0 0h18v18H0z"></path>
-                  </svg>
-                </button>
-                <button type="button" className="collection-toolbar__button p-1 hover:bg-gray-100 rounded bg-gray-100" aria-label="Switch to smaller product images">
-                  <svg role="presentation" width="16" viewBox="0 0 18 18" fill="none">
-                    <path fill="currentColor" d="M0 0h8v8H0zM0 10h8v8H0zM10 0h8v8h-8zM10 10h8v8h-8z"></path>
-                  </svg>
-                </button>
+                {/* Mobile layout icons removed */}
               </div>
               <div className="sm-max:hidden flex items-center gap-1">
                 <button type="button" className="collection-toolbar__button p-1 hover:bg-gray-100 rounded" aria-label="Switch to larger product images">
@@ -162,29 +140,65 @@ export default function Products() {
                 </button>
               </div>
             </div>
-            <p className="collection-toolbar__products-count text-sm text-gray-600">
+            <p className="collection-toolbar__products-count text-sm text-gray-600 hidden sm:block">
               {filteredProducts.length} ürün
             </p>
             <div className="flex items-center gap-4">
               <div className="collection-toolbar__button-container">
                 <button type="button" className="collection-toolbar__button heading text-xxs px-3 py-1 hover:bg-gray-50 flex items-center gap-1">
-                  <span>Şuna göre sırala:</span>
+                  <span className="sm:hidden">Sırala</span>
+                  <span className="hidden sm:inline">Şuna göre sırala:</span>
                   <svg aria-hidden="true" focusable="false" fill="none" width="10" className="icon icon-chevron-down" viewBox="0 0 10 10">
                     <path d="m1 3 4 4 4-4" stroke="currentColor" strokeLinecap="square"></path>
                   </svg>
                 </button>
               </div>
-              <div className="collection-toolbar__button-container md:hidden">
-                <button type="button" className="collection-toolbar__button heading text-xxs px-3 py-1 hover:bg-gray-50">
-                  Filtre
+              <div className="collection-toolbar__button-container sm:hidden">
+                <button 
+                  type="button" 
+                  className="collection-toolbar__button heading text-xxs px-3 py-1 hover:bg-gray-50 flex items-center gap-1"
+                  onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                >
+                  <span>Filtre</span>
+                  <svg aria-hidden="true" focusable="false" fill="none" width="10" className="icon icon-chevron-down" viewBox="0 0 10 10" style={{ transform: isMobileFilterOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
+                    <path d="m1 3 4 4 4-4" stroke="currentColor" strokeLinecap="square"></path>
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-64 p-2 sm:p-4 md:p-8 border-b md:border-b-0 md:border-r border-gray-100 md:sticky md:top-20 md:h-fit md:self-start">
+        {/* Mobile Filter Dropdown */}
+        {isMobileFilterOpen && (
+          <div className="sm:hidden border-b border-gray-200 bg-white">
+            <div className="p-4">
+              <div className="mb-4">
+                <h3 className="font-medium text-gray-900 uppercase tracking-wider text-xs mb-3">Ürün Türü</h3>
+              </div>
+              <div className="space-y-2">
+                <button className="block w-full text-left text-sm py-2 px-3 transition-colors text-gray-900 font-medium bg-gray-50 rounded">
+                  Tüm Ürünler
+                </button>
+                <button className="block w-full text-left text-sm py-2 px-3 transition-colors capitalize text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded">
+                  Paketler
+                </button>
+                <button className="block w-full text-left text-sm py-2 px-3 transition-colors capitalize text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded">
+                  Yeşillikler
+                </button>
+                <button className="block w-full text-left text-sm py-2 px-3 transition-colors capitalize text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded">
+                  Baharatlar
+                </button>
+                <button className="block w-full text-left text-sm py-2 px-3 transition-colors capitalize text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded">
+                  Fideler
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="flex flex-col sm:flex-row">
+          <div className="hidden sm:block w-full sm:w-64 p-2 sm:p-4 lg:p-8 border-b sm:border-b-0 sm:border-r border-gray-100 sm:sticky sm:top-20 sm:h-fit sm:self-start">
             <div className="mb-4 sm:mb-6">
               <button className="flex items-center justify-between w-full text-left font-medium text-gray-900 uppercase tracking-wider text-xs sm:text-sm">
                 Ürün Türü
@@ -212,8 +226,8 @@ export default function Products() {
             </div>
           </div>
 
-          <div className="flex-1 p-2 sm:p-4 md:p-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="flex-1 p-2 sm:p-4 lg:p-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="h-full group">
                   <TeaflowProductCard

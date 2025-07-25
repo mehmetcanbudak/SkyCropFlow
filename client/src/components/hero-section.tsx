@@ -29,7 +29,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-secondary/20 to-primary/20 overflow-hidden pt-16 sm:pt-20">
+    <section className="relative overflow-hidden pt-16 sm:pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">

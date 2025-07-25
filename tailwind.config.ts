@@ -5,6 +5,12 @@ export default {
   darkMode: ["class"],
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screens: {
+      'xs': '320px',
+      'sm': '768px',  // Mobile breakpoint
+      'md': '1024px',
+      'lg': '1280px', // Desktop breakpoint
+    },
     extend: {
       borderRadius: {
         lg: "var(--radius)",

@@ -16,6 +16,9 @@ import type {
 } from "@shared/schema";
 import { useTranslation } from "react-i18next";
 import { useRef } from "react";
+import bgPattern from '../assets/bgful.jpg';
+import bgImage from '../assets/bgtopprod.jpg';
+import HeroBanner from "@/components/hero-banner";
 
 interface ArticleFormData {
   title: string;
@@ -155,20 +158,27 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
+    <div
+      className="flex-1 flex flex-col min-h-screen"
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'cover',
+      }}
+    >
+      <HeroBanner title={t("admin_panel_title")} visible={true} showText={false} height="small" />
       <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8">
         <div className="text-center mb-10 sm:mb-16">
-          <h1 className="text-3xl sm:text-5xl font-bold text-foreground mb-4 sm:mb-6">{t("admin_panel_title")}</h1>
         </div>
 
         <Tabs defaultValue="articles" className="space-y-6">
-          <TabsList>
+          <TabsList className="bg-white rounded-xl shadow-lg border border-gray-100">
             <TabsTrigger value="articles">{t("articles_tab")}</TabsTrigger>
             <TabsTrigger value="products">{t("products_tab")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="articles" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-white rounded-xl p-6 shadow-lg border border-gray-100">
               <h2 className="text-2xl font-semibold">
                 {t("manage_articles_title")}
               </h2>
@@ -188,6 +198,7 @@ export default function AdminPage() {
                     type: "blog",
                   } as Article)
                 }
+                className="hover:bg-primary/90 transition-colors"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 {t("new_article_button")}
@@ -195,20 +206,22 @@ export default function AdminPage() {
             </div>
 
             {editingArticle && (
-              <ArticleForm
-                article={editingArticle.id ? editingArticle : null}
-                onSubmit={handleArticleSubmit}
-                onCancel={() => setEditingArticle(null)}
-                isLoading={
-                  createArticleMutation.isPending ||
-                  updateArticleMutation.isPending
-                }
-              />
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                <ArticleForm
+                  article={editingArticle.id ? editingArticle : null}
+                  onSubmit={handleArticleSubmit}
+                  onCancel={() => setEditingArticle(null)}
+                  isLoading={
+                    createArticleMutation.isPending ||
+                    updateArticleMutation.isPending
+                  }
+                />
+              </div>
             )}
 
             <div className="grid gap-4">
               {articles.map((article) => (
-                <Card key={article.id}>
+                <Card key={article.id} className="bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                   <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                       {article.title}
@@ -217,6 +230,7 @@ export default function AdminPage() {
                           variant="outline"
                           size="sm"
                           onClick={() => setEditingArticle(article)}
+                          className="hover:bg-primary hover:text-white transition-colors"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -233,6 +247,7 @@ export default function AdminPage() {
                             }
                           }}
                           disabled={deleteArticleMutation.isPending}
+                          className="hover:bg-destructive/90 transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -240,8 +255,8 @@ export default function AdminPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">{article.excerpt}</p>
-                    <p className="text-sm text-muted-foreground mt-2">
+                    <p className="text-muted-foreground leading-relaxed">{article.excerpt}</p>
+                    <p className="text-sm text-muted-foreground mt-2 font-medium">
                       {t("published_date")}: {article.publishedAt}
                     </p>
                   </CardContent>
@@ -251,7 +266,7 @@ export default function AdminPage() {
           </TabsContent>
 
           <TabsContent value="products" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-white rounded-xl p-6 shadow-lg border border-gray-100">
               <h2 className="text-2xl font-semibold">
                 {t("manage_products_title")}
               </h2>
@@ -264,14 +279,12 @@ export default function AdminPage() {
                     description: "",
                     category: "",
                     imageUrl: "",
-                    originalPrice: null,
-                    flavor: null,
-                    isNewArrival: null,
-                    isBestseller: null,
-                    inStock: null,
-                    featured: null,
+                    featured: false,
+                    isBestseller: false,
+                    inStock: true,
                   } as Product)
                 }
+                className="hover:bg-primary/90 transition-colors"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 {t("new_product_button")}
@@ -279,20 +292,22 @@ export default function AdminPage() {
             </div>
 
             {editingProduct && (
-              <ProductForm
-                product={editingProduct.id ? editingProduct : null}
-                onSubmit={handleProductSubmit}
-                onCancel={() => setEditingProduct(null)}
-                isLoading={
-                  createProductMutation.isPending ||
-                  updateProductMutation.isPending
-                }
-              />
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                <ProductForm
+                  product={editingProduct.id ? editingProduct : null}
+                  onSubmit={handleProductSubmit}
+                  onCancel={() => setEditingProduct(null)}
+                  isLoading={
+                    createProductMutation.isPending ||
+                    updateProductMutation.isPending
+                  }
+                />
+              </div>
             )}
 
             <div className="grid gap-4">
               {products.map((product) => (
-                <Card key={product.id}>
+                <Card key={product.id} className="bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                   <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                       {product.name}
@@ -301,6 +316,7 @@ export default function AdminPage() {
                           variant="outline"
                           size="sm"
                           onClick={() => setEditingProduct(product)}
+                          className="hover:bg-primary hover:text-white transition-colors"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -317,6 +333,7 @@ export default function AdminPage() {
                             }
                           }}
                           disabled={deleteProductMutation.isPending}
+                          className="hover:bg-destructive/90 transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -324,11 +341,19 @@ export default function AdminPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">{product.description}</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      {t("price")}: ${(product.price / 100).toFixed(2)} |{" "}
-                      {t("category")}: {product.category}
-                    </p>
+                    <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+                    <div className="flex gap-2 mt-2">
+                      <span className="text-sm font-medium text-primary">
+                        {Number(product.price / 100).toLocaleString("tr-TR", {
+                          style: "currency",
+                          currency: "TRY",
+                          minimumFractionDigits: 2,
+                        })}
+                      </span>
+                      <span className="text-sm text-muted-foreground capitalize">
+                        {product.category}
+                      </span>
+                    </div>
                   </CardContent>
                 </Card>
               ))}

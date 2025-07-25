@@ -24,7 +24,7 @@ function Router() {
     window.scrollTo(0, 0);
   }, [location]);
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative bg-slate-50">
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">

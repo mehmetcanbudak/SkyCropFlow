@@ -16,21 +16,20 @@ export default function Navbar() {
   const [location] = useLocation();
   const { t, i18n } = useTranslation();
   const [showBanner, setShowBanner] = useState(true);
+  const [headerTransparent, setHeaderTransparent] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (window.scrollY < 20) {
+        setHeaderTransparent(true);
+      } else {
+        setHeaderTransparent(false);
+      }
       if (window.scrollY > 0) {
         setShowBanner(false);
       } else {
         setShowBanner(true);
       }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
       if (window.scrollY === 0) {
         setShowHeader(true);
       } else {
@@ -49,24 +48,7 @@ export default function Navbar() {
     { href: "/contact", label: t("contact") },
   ];
 
-  // Minimal menu button at top left when header is hidden
 
-  // CSS variables for header styling
-  const headerStyle: React.CSSProperties = {
-    position: "sticky",
-    top: 0,
-    zIndex: 50,
-    // CSS variables for grid and padding
-    // These will be overridden by media queries in a style tag below
-    // but provide base values for SSR/JS
-    // These match the Shopify example
-    // Use camelCase for React style keys
-    // @ts-ignore
-    '--header-padding-block': '1rem',
-    '--header-logo-width': '90px',
-    background: 'white',
-    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.03)',
-  };
 
   return (
     <>
@@ -82,11 +64,19 @@ export default function Navbar() {
           min-height: 72px;
           padding-top: 1.6rem;
           padding-bottom: 1.6rem;
-          background: white;
-          box-shadow: 0 1px 2px 0 rgba(0,0,0,0.03);
           position: sticky;
           top: 0;
           z-index: 50;
+          transition: all 0.3s ease;
+        }
+        .custom-header.transparent {
+          background: transparent;
+          box-shadow: none;
+          border-bottom: none;
+        }
+        .custom-header.opaque {
+          background: white;
+          box-shadow: 0 1px 2px 0 rgba(0,0,0,0.03);
           border-bottom: 1px solid #e5e7eb;
         }
         .custom-header-logo-nav {
@@ -107,7 +97,6 @@ export default function Navbar() {
           letter-spacing: 2.16px;
           font-weight: 400;
           text-transform: uppercase;
-          color: #1C1C1C;
         }
         .custom-header-actions {
           display: flex;
@@ -115,7 +104,7 @@ export default function Navbar() {
           justify-content: flex-end;
           gap: 0.5rem;
         }
-        @media (max-width: 639px) {
+        @media (max-width: 1280px) {
           .custom-header {
             padding: 0 1rem;
             min-height: 56px;
@@ -130,6 +119,19 @@ export default function Navbar() {
           }
           .custom-header-actions {
             gap: 0.25rem;
+          }
+          .custom-header-actions button,
+          .custom-header-actions a {
+            padding-left: 4px !important;
+            padding-right: 4px !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .custom-header-nav {
+            gap: 0.5rem;
+          }
+          .custom-header-nav a {
+            letter-spacing: 1px;
           }
         }
       `}</style>
@@ -149,7 +151,7 @@ export default function Navbar() {
               padding-left: 0;
               padding-right: 0;
             }
-            @media (min-width: 999px) {
+            @media (min-width: 768px) {
               .announcement-bar {
                 font-size: 0.6875rem;
               }
@@ -160,20 +162,23 @@ export default function Navbar() {
           </div>
         </aside>
       )}
-      <nav style={{...headerStyle, top: showBanner ? '32px' : '0'}} className="custom-header">
-        {/* Logo and Nav (left) */}
-        <div className="custom-header-logo-nav">
-          {/* Sidebar (hamburger) icon for mobile - top left */}
+      <nav 
+        className={`custom-header ${headerTransparent ? 'transparent' : 'opaque'}`}
+        style={{top: showBanner ? '32px' : '0'}}
+      >
+        {/* Left side - Hamburger (mobile) and Logo (desktop) */}
+        <div className="flex items-center">
+          {/* Sidebar (hamburger) icon for mobile - left */}
           <button
-            className="flex xl:hidden items-center justify-center mr-2 p-2 rounded hover:bg-gray-100"
+            className="flex sm:hidden items-center justify-center p-2 rounded hover:bg-gray-100"
             aria-label="Menüyü Aç"
             onClick={() => setShowSidebar(true)}
-            style={{ position: 'absolute', left: 0, top: 0, height: '100%' }}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className={`h-6 w-6 ${headerTransparent ? 'text-white' : ''}`} />
           </button>
-          {/* Logo: left on md+, centered on mobile, always same size */}
-          <h1 className="header__logo m-0 p-0 items-center hidden xl:flex xl:items-center" style={{padding: '0 0.5rem'}}>
+          
+          {/* Logo: left on desktop, centered on mobile */}
+          <h1 className="header__logo m-0 p-0 items-center hidden sm:flex sm:items-center" style={{padding: '0 0.5rem'}}>
             <Link href="/" className="flex items-center">
               <span className="sr-only">Skycrops</span>
               <img
@@ -182,11 +187,13 @@ export default function Navbar() {
                 width={120}
                 height={40}
                 className="header__logo-image block"
-                style={{ width: '120px', height: 'auto', display: 'block' }}
+                style={{ width: '120px', height: 'auto', display: 'block', filter: headerTransparent ? 'brightness(0) invert(1)' : 'none', transition: 'filter 0.3s' }}
               />
             </Link>
           </h1>
-          <h1 className="header__logo m-0 p-0 flex xl:hidden items-center absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2" style={{width: '120px', height: '40px'}}>
+          
+          {/* Centered logo for mobile */}
+          <h1 className="header__logo m-0 p-0 flex sm:hidden items-center absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2" style={{width: '120px', height: '40px'}}>
             <Link href="/" className="flex items-center w-full justify-center">
               <span className="sr-only">Skycrops</span>
               <img
@@ -195,16 +202,20 @@ export default function Navbar() {
                 width={120}
                 height={40}
                 className="header__logo-image block"
-                style={{ width: '120px', height: 'auto', display: 'block' }}
+                style={{ width: '120px', height: 'auto', display: 'block', filter: headerTransparent ? 'brightness(0) invert(1)' : 'none', transition: 'filter 0.3s' }}
               />
             </Link>
           </h1>
-          <nav className="custom-header-nav hidden xl:flex xl:items-center !m-0 !p-0">
+        </div>
+        
+        {/* Center - Navigation links (desktop only) */}
+        <div className="hidden sm:flex sm:items-center" style={{paddingLeft: '2rem'}}>
+          <nav className="custom-header-nav !m-0 !p-0">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-base tracking-widest font-normal transition-colors hover:text-primary ${location === item.href ? "text-primary" : "text-muted-foreground"}`}
+                className={`text-base tracking-widest font-normal transition-colors ${headerTransparent ? 'text-white' : 'text-muted-foreground hover:text-primary'} ${location === item.href ? (headerTransparent ? 'underline underline-offset-4' : 'text-primary underline underline-offset-4') : ''}`}
               >
                 {item.label}
               </Link>
@@ -213,16 +224,16 @@ export default function Navbar() {
         </div>
         {/* Actions (right) */}
         <div className="custom-header-actions">
-          <div className="relative">
+          <div className="relative hidden sm:block">
             <button
-              className="flex items-center gap-1 px-2 py-1 rounded-md bg-white text-foreground hover:bg-gray-50 transition-all text-xs tracking-widest"
+              className={`flex items-center gap-1 px-2 py-1 rounded-md ${headerTransparent ? 'bg-transparent text-white hover:bg-white/10' : 'bg-white text-foreground hover:bg-gray-50'} transition-all text-xs tracking-widest`}
               id="lang-menu-btn"
               aria-haspopup="listbox"
               aria-expanded={showLangMenu ? "true" : "false"}
               onClick={() => setShowLangMenu((v: boolean) => !v)}
             >
               {i18n.language === "tr" ? "TÜRKÇE" : "ENGLISH"}
-              <ChevronDown className="h-4 w-4" />
+              <ChevronDown className={`h-4 w-4 ${headerTransparent ? 'text-white' : ''}`} />
             </button>
             {showLangMenu && (
               <div className="absolute right-0 mt-2 w-24 bg-white border rounded shadow z-10">
@@ -251,8 +262,8 @@ export default function Navbar() {
           </div>
           {/* User icon button */}
           <Link href="/login" aria-label="Login">
-            <Button variant="ghost" size="sm" type="button">
-              <User className="h-5 w-5" />
+            <Button variant="ghost" size="sm" type="button" className="px-0.5 lg:px-1">
+              <User className={`h-5 w-5 ${headerTransparent ? 'text-white' : ''}`} />
             </Button>
           </Link>
           {/* Search icon button */}
@@ -262,10 +273,11 @@ export default function Navbar() {
             type="button"
             aria-label="Search"
             onClick={() => setShowSearch((v) => !v)}
+            className="px-0.5 lg:px-1"
           >
-            <SearchIcon className="h-5 w-5" />
+            <SearchIcon className={`h-5 w-5 ${headerTransparent ? 'text-white' : ''}`} />
           </Button>
-          <CartButton />
+          <CartButton iconColor={headerTransparent ? 'text-white' : ''} />
         </div>
       </nav>
       {/* Search bar under header */}

@@ -6,6 +6,9 @@ import NewsletterSection from "@/components/newsletter-section";
 import type { Article } from "@shared/schema";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
+import bgPattern from '../assets/bgful.jpg';
+import bgImage from '../assets/bgtopprod.jpg';
+import HeroBanner from "@/components/hero-banner";
 
 export default function Journal() {
   const { t } = useTranslation();
@@ -36,35 +39,40 @@ export default function Journal() {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen pt-15 sm:pt-15">
+    <div
+      className="flex-1 flex flex-col min-h-screen"
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'cover',
+      }}
+    >
+      <HeroBanner title={t("blog")} visible={true} showText={false} height="small" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-5xl font-bold text-foreground mb-6 text-center">
-            {t("blog")}
-          </h1>
         </div>
 
         {/* Articles List */}
         {currentArticles.length > 0 ? (
-          <div className="space-y-20">
+          <div className="space-y-20 bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             {currentArticles.map((article) => (
               <Link key={article.id} href={`/blog/${article.slug}`}>
                 <article className="group cursor-pointer">
-                  <div className="border-b border-border">
+                  <div className="border-b border-gray-200 pb-8 last:border-b-0 last:pb-0">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                       {/* Image - Above on mobile, right on desktop */}
                       <div className="lg:col-span-4 flex items-center order-1 lg:order-2 mt-6 lg:mt-0">
                         <img
                           src={article.imageUrl}
                           alt={article.title}
-                          className="w-full h-24 lg:h-32 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-24 lg:h-32 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300 shadow-md"
                         />
                       </div>
 
                       {/* Content - Below on mobile, left on desktop */}
                       <div className="lg:col-span-8 order-2 lg:order-1">
-                        <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-medium">
                           {new Date(article.publishedAt).toLocaleDateString(
                             i18n.language,
                             {
@@ -79,13 +87,16 @@ export default function Journal() {
                           {article.title}
                         </h2>
 
-                        <p className="text-base text-muted-foreground mb-2">
+                        <p className="text-base text-muted-foreground mb-4 leading-relaxed">
                           {article.excerpt}
                         </p>
 
                         <div className="text-right">
-                          <span className="text-primary font-medium hover:underline text-sm">
+                          <span className="text-primary font-semibold hover:underline text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                             {t("readArticle")}
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
                           </span>
                         </div>
                       </div>
@@ -96,7 +107,7 @@ export default function Journal() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
+          <div className="text-center py-12 bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <p className="text-muted-foreground text-lg">{t("noArticles")}</p>
             <p className="text-muted-foreground">{t("checkBackSoon")}</p>
           </div>
@@ -105,17 +116,18 @@ export default function Journal() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center mt-16">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-lg border border-gray-100">
               {currentPage > 1 && (
                 <Button
                   variant="outline"
                   onClick={() => setCurrentPage(currentPage - 1)}
+                  className="hover:bg-primary hover:text-white transition-colors"
                 >
                   {t("previousPage")}
                 </Button>
               )}
 
-              <span className="text-muted-foreground">
+              <span className="text-muted-foreground font-medium">
                 {t("page")} {currentPage} {t("of")} {totalPages}
               </span>
 
@@ -123,6 +135,7 @@ export default function Journal() {
                 <Button
                   variant="outline"
                   onClick={() => setCurrentPage(currentPage + 1)}
+                  className="hover:bg-primary hover:text-white transition-colors"
                 >
                   {t("nextPage")}
                 </Button>
@@ -134,26 +147,26 @@ export default function Journal() {
 
       {/* Basında Biz Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
+        <div className="mb-8">
           <h2 className="text-4xl font-bold text-foreground mb-6 text-center">
             Basında Biz
           </h2>
         </div>
         {pressArticles.length > 0 ? (
-          <ul className="space-y-8">
+          <ul className="space-y-6 bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             {pressArticles.map((article) => (
               <Link key={article.id} href={`/blog/${article.slug}`}>
-                <li className="border-b border-border pb-6 group cursor-pointer hover:bg-accent/10 rounded-xl transition">
+                <li className="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0 group cursor-pointer hover:bg-gray-50 rounded-xl transition-all duration-200 p-4 -m-4">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors leading-tight">
+                      <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors leading-tight">
                         {article.title}
                       </h3>
-                      <p className="text-base text-muted-foreground mb-2">
+                      <p className="text-base text-muted-foreground mb-3 leading-relaxed">
                         {article.excerpt}
                       </p>
                     </div>
-                    <span className="text-sm text-muted-foreground mt-2 md:mt-0 whitespace-nowrap">
+                    <span className="text-sm text-muted-foreground mt-2 md:mt-0 whitespace-nowrap font-medium bg-gray-100 px-3 py-1 rounded-full">
                       {new Date(article.publishedAt).toLocaleDateString(
                         i18n.language,
                         { year: "numeric", month: "short", day: "numeric" },
@@ -165,7 +178,7 @@ export default function Journal() {
             ))}
           </ul>
         ) : (
-          <div className="text-center py-8">
+          <div className="text-center py-12 bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <p className="text-muted-foreground text-lg">
               Henüz basında bir haberimiz yok.
             </p>

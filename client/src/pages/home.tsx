@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import bundle1 from "@/assets/bundle1.png";
 import TiltedCard from "@/components/TiltedCard";
+import bgPattern from '../assets/bgful.jpg';
+import HeroBanner from "@/components/hero-banner";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -17,12 +19,22 @@ export default function Home() {
   });
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div 
+      className="flex-1 flex flex-col"
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'top center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <HeroBanner title="SkyCropFlow" visible={true} showText={false} height="small" />
       <HeroSection />
       {/* <CategorySection /> */}
 
       {/* Bundles Section */}
-      <section className="py-8 bg-muted/50">
+      <section className="py-8 bg-white/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="text-center mb-4">
             <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4 sm:mb-6 text-center">
@@ -36,7 +48,7 @@ export default function Home() {
           {/* Bundle Cards */}
           <div className="flex flex-row overflow-x-auto gap-4 md:grid md:grid-cols-3 md:gap-8 scrollbar-hide snap-x snap-mandatory pl-4 pr-4 md:pl-0 md:pr-0">
             <TiltedCard containerHeight="100%" containerWidth="100%" showMobileWarning={false} showTooltip={false}>
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 w-64 min-w-[14rem] max-w-[309px] flex-shrink-0 flex flex-col h-full mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-[309px] md:overflow-hidden">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 w-64 min-w-[14rem] max-w-[309px] flex-shrink-0 flex flex-col h-full mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-[309px] md:overflow-hidden">
                 {/* Image Container - Fixed Aspect Ratio */}
                 <div className="flex items-center justify-center w-full h-[154px]">
                   <img
@@ -99,7 +111,7 @@ export default function Home() {
 
             {/* Garden Mix Bundle */}
             <TiltedCard containerHeight="100%" containerWidth="100%" showMobileWarning={false} showTooltip={false}>
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 w-64 min-w-[14rem] max-w-[309px] flex-shrink-0 flex flex-col h-full mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-[309px] md:overflow-hidden">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 w-64 min-w-[14rem] max-w-[309px] flex-shrink-0 flex flex-col h-full mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-[309px] md:overflow-hidden">
                 {/* Image Container - Fixed Aspect Ratio */}
                 <div className="flex items-center justify-center w-full h-[154px]">
                   <img
@@ -162,7 +174,7 @@ export default function Home() {
 
             {/* Family Pack Bundle */}
             <TiltedCard containerHeight="100%" containerWidth="100%" showMobileWarning={false} showTooltip={false}>
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 w-64 min-w-[14rem] max-w-[309px] flex-shrink-0 flex flex-col h-full mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-[309px] md:overflow-hidden">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 w-64 min-w-[14rem] max-w-[309px] flex-shrink-0 flex flex-col h-full mr-4 last:mr-0 snap-center md:w-full md:min-w-0 md:max-w-[309px] md:overflow-hidden">
                 {/* Image Container - Fixed Aspect Ratio */}
                 <div className="flex items-center justify-center w-full h-[154px]">
                   <img
@@ -227,7 +239,7 @@ export default function Home() {
       </section>
 
       {/* Journal Preview */}
-      <section className="py-8 bg-muted/50">
+      <section className="py-8 bg-white/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="text-center mb-4 mt-6">
             <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-2 sm:mb-4 text-center">
@@ -240,7 +252,7 @@ export default function Home() {
               <TiltedCard key={article.id} containerHeight="100%" containerWidth="100%" showMobileWarning={false} showTooltip={false}>
                 <Link
                   href={`/blog/${article.slug}`}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 w-64 min-w-[14rem] max-w-xs flex-shrink-0 mr-4 last:mr-0 snap-center"
+                  className="bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 w-64 min-w-[14rem] max-w-xs flex-shrink-0 mr-4 last:mr-0 snap-center"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   <article>
